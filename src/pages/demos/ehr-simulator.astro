@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DemoPlayer from '../../components/DemoPlayer.astro';
+import MoonStar from '../../components/decor/MoonStar.astro';
+import WavyDivider from '../../components/decor/WavyDivider.astro';
+---
+<BaseLayout
+  title="EHR Simulator — Crestline Health"
+  description="A browser-based electronic health record simulator demonstrating an ED admission workflow with a branching allergy decision."
+>
+  <section class="relative overflow-hidden bg-paper paper-bg">
+    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+
+    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-20">
+      <a
+        href="/case-studies/crestline-health"
+        class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-6"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to the case study
+      </a>
+
+      <p class="font-display text-sm uppercase tracking-widest text-secondary-600 mb-3">
+        Crestline Health · Live Demo
+      </p>
+      <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
+        EHR Simulator — <span class="italic text-primary-600">ED Admission</span>
+      </h1>
+      <p class="mt-5 text-lg text-cocoa/70 leading-relaxed max-w-2xl">
+        A five-step emergency-department admission flow with a branching drug-allergy decision point. Built with plain HTML, CSS, and JavaScript so it packages cleanly into SCORM later.
+      </p>
+
+      <dl class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-5 text-sm">
+        <div>
+          <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Estimated time</dt>
+          <dd class="text-cocoa font-semibold">6–8 min</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Modality</dt>
+          <dd class="text-cocoa font-semibold">Code-built sim</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Audience</dt>
+          <dd class="text-cocoa font-semibold">ED nurses</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Status</dt>
+          <dd class="text-cocoa font-semibold">Prototype</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <section class="bg-cream-50 py-12 sm:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <DemoPlayer
+        src="/demos/ehr-simulator-app/index.html"
+        title="Crestline EHR Simulator — ED Admission"
+        ratio="16 / 10"
+        minHeight={680}
+      />
+
+      <div class="max-w-3xl mx-auto mt-12 text-cocoa/75 leading-relaxed">
+        <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">How it works</h2>
+        <p>
+          The simulator is a single-page app with a small state machine that gates each step on a meaningful decision — verifying identifiers, capturing vitals, resolving an allergy conflict, assigning placement, and signing off. The branching moment on step three is the one the real training needs: a penicillin-class order is proposed for a patient with anaphylaxis on file, and the learner must pick the safe path forward.
+        </p>
+
+        <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">Why build it this way</h3>
+        <p>
+          A code-built sim is cheaper to iterate than a re-authored Rise module and it produces the same xAPI data stream I'd need for Kirkpatrick Level 2. The UI is intentionally spare so the focus stays on the decision, not the chrome — the goal isn't a pixel-perfect EHR clone, it's a reliable reflex for <em>stop, check, reroute</em>.
+        </p>
+
+        <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">What's next</h3>
+        <ul class="list-disc pl-5 space-y-1 mt-2">
+          <li>Wire xAPI statements for each step transition and the branching choice (Phase 5).</li>
+          <li>Add two more scenarios (pediatric dosing; anticoagulation reversal) to reuse the engine.</li>
+          <li>Package as SCORM 1.2 for the hospital's Cornerstone LMS.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

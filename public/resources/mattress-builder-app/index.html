@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mattress Builder — Halcyon Sleep training</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app">
+    <!-- Header -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div>
+          <p class="brand__kicker">Halcyon Sleep · Partner training</p>
+          <h1 class="brand__title">Build-a-Mattress: know the layers, win the sale</h1>
+        </div>
+      </div>
+      <div class="step-indicator" id="step-indicator">
+        <span class="dot is-active" data-step="1"></span>
+        <span class="dot" data-step="2"></span>
+        <span class="dot" data-step="3"></span>
+        <span class="dot" data-step="4"></span>
+      </div>
+    </header>
+
+    <!-- Stage -->
+    <section class="stage">
+      <!-- LEFT: Mattress canvas -->
+      <div class="canvas-col">
+        <p class="canvas-label" id="canvas-label">Pick a sleeper profile to begin</p>
+        <div class="mattress" id="mattress">
+          <div class="mattress__frame"></div>
+          <!-- Layers injected by JS in order, top → bottom -->
+          <div class="mattress__stack" id="mattress-stack"></div>
+          <div class="mattress__shadow"></div>
+        </div>
+        <div class="sleeper-meta" id="sleeper-meta" hidden>
+          <span class="sleeper-meta__chip" id="sleeper-chip"></span>
+          <span class="sleeper-meta__note" id="sleeper-note"></span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Panel -->
+      <div class="panel-col">
+        <div class="panel" id="panel"></div>
+      </div>
+    </section>
+
+    <!-- Footer nav -->
+    <footer class="footer">
+      <button id="btn-back" class="btn btn--ghost" type="button" disabled>Back</button>
+      <p class="footer__hint" id="footer-hint">Pick a sleeper profile to unlock the layers.</p>
+      <button id="btn-next" class="btn btn--primary" type="button" disabled>Next</button>
+    </footer>
+  </main>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -1,17 +1,163 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import WavyDivider from '../components/decor/WavyDivider.astro';
 ---
+<BaseLayout title="Home">
+  <Hero />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <WavyDivider class="-mt-4 relative z-10" />
+
+  <!-- What I Do Differently -->
+  <section class="bg-paper py-20 sm:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in max-w-2xl mx-auto text-center mb-16">
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
+          What I do <span class="italic text-primary-600">differently</span>
+        </h2>
+        <p class="mt-4 text-lg text-cocoa/70 leading-relaxed">
+          I combine instructional design expertise with AI-assisted development
+          to build learning solutions that traditional authoring tools can't match.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-8">
+        <div class="fade-in fade-in-delay-1 text-center sm:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center mb-4 mx-auto sm:mx-0 border border-primary-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Code-Built Interactives</h3>
+          <p class="text-sm text-cocoa/70 leading-relaxed">
+            System simulators, branching scenarios, and interactive tools built with
+            real code — not locked into an authoring tool's limitations.
+          </p>
+        </div>
+
+        <div class="fade-in fade-in-delay-2 text-center sm:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-secondary-100 text-secondary-600 flex items-center justify-center mb-4 mx-auto sm:mx-0 border border-secondary-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Data-Driven Evaluation</h3>
+          <p class="text-sm text-cocoa/70 leading-relaxed">
+            Real xAPI data flowing into an LRS, visualized on a live dashboard.
+            Every learning experience is measurable.
+          </p>
+        </div>
+
+        <div class="fade-in fade-in-delay-3 text-center sm:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-accent-400/25 text-accent-700 flex items-center justify-center mb-4 mx-auto sm:mx-0 border border-accent-500/40">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">AI-Assisted Development</h3>
+          <p class="text-sm text-cocoa/70 leading-relaxed">
+            This entire portfolio was vibe-coded in Cursor. I use AI as a
+            development partner, not a replacement for design thinking.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WavyDivider flip={true} class="relative z-10" />
+
+  <!-- Case Studies -->
+  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in mb-12">
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
+          Selected <span class="italic text-primary-600">case studies</span>
+        </h2>
+        <p class="mt-3 text-lg text-cocoa/70">
+          Three projects across different industries — each demonstrating a different approach to learning design.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="fade-in fade-in-delay-1">
+          <CaseStudyCard
+            company="Meridian Financial"
+            industry="Fintech / Digital Banking"
+            challenge="Redesigned compliance onboarding for a lending product with high error rates and regulatory pressure."
+            deliverable="Rise 360 eLearning Module"
+            color="terracotta"
+            slug="meridian-financial"
+            initials="MF"
+          />
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <CaseStudyCard
+            company="Crestline Health"
+            industry="Healthcare / Hospital System"
+            challenge="Built an interactive EHR simulator to accelerate adoption of a new electronic health records system."
+            deliverable="Code-Built EHR Simulator"
+            color="avocado"
+            slug="crestline-health"
+            initials="CH"
+          />
+        </div>
+        <div class="fade-in fade-in-delay-3">
+          <CaseStudyCard
+            company="Basecamp Retail"
+            industry="Retail / E-commerce"
+            challenge="Designed a blended curriculum for a product launch across 200+ stores with 60% new hires."
+            deliverable="Blended Curriculum Design"
+            color="mustard"
+            slug="basecamp-retail"
+            initials="BR"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="bg-espresso py-16 relative overflow-hidden">
+    <!-- Mustard sun-ray burst behind the heading -->
+    <svg
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20 pointer-events-none"
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g stroke="#D9A441" stroke-width="1.25" stroke-linecap="round" fill="none">
+        {Array.from({ length: 36 }).map((_, i) => {
+          const angle = (i * 10 * Math.PI) / 180;
+          const x1 = 100 + Math.cos(angle) * 22;
+          const y1 = 100 + Math.sin(angle) * 22;
+          const x2 = 100 + Math.cos(angle) * 95;
+          const y2 = 100 + Math.sin(angle) * 95;
+          return <line x1={x1} y1={y1} x2={x2} y2={y2} />;
+        })}
+      </g>
+      <circle cx="100" cy="100" r="18" stroke="#D9A441" stroke-width="1.5" fill="none" />
+    </svg>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative">
+      <h2 class="font-display font-semibold text-2xl sm:text-3xl text-cream">
+        Want to see the learning experiences in action?
+      </h2>
+      <p class="mt-3 text-cream/80 text-lg">
+        Try the live demos — an EHR simulator, branching scenarios, and more.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/demos"
+           class="px-6 py-3 rounded-full bg-accent-500 text-espresso font-semibold retro-sheen
+                  hover:bg-accent-400 transition-colors">
+          Explore Live Demos
+        </a>
+        <a href="/dashboard"
+           class="px-6 py-3 rounded-full border border-cream/40 text-cream font-semibold
+                  hover:bg-cocoa transition-colors">
+          View Analytics Dashboard
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
