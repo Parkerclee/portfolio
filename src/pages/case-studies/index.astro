@@ -52,29 +52,41 @@ const conceptPieces = entries.filter(e => e.data.aiGenerated);
     </div>
   </section>
 
-  <!-- Concept Pieces -->
-  <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="mb-8">
-        <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Concept pieces</p>
-        <p class="text-cocoa/60 text-sm max-w-xl">Fictional companies, real methodology. Built with AI as a development partner to show the thinking — eLearning, simulators, blended design, and coaching tools — without exposing protected client work.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {conceptPieces.map((entry, i) => (
-          <div class={`fade-in fade-in-delay-${(i % 3) + 1}`}>
-            <CaseStudyCard
-              company={entry.data.company}
-              industry={entry.data.industry}
-              challenge={entry.data.challenge}
-              deliverable={entry.data.deliverable}
-              color={entry.data.color}
-              slug={entry.id}
-              initials={entry.data.initials}
-              aiGenerated={true}
-            />
-          </div>
-        ))}
-      </div>
+  <!-- Concept Pieces — collapsed by default -->
+  <section class="bg-paper border-t border-cocoa/10">
+    <div class="max-w-6xl mx-auto px-6 py-8">
+      <details class="group">
+        <summary class="flex items-center gap-2 cursor-pointer list-none select-none w-fit">
+          <svg class="w-3.5 h-3.5 text-cocoa/40 group-open:rotate-90 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5l8 7-8 7V5z"/>
+          </svg>
+          <span class="font-display text-xs uppercase tracking-widest text-cocoa/40 hover:text-cocoa/60 transition-colors">
+            Also: {conceptPieces.length} AI-generated concept pieces
+          </span>
+        </summary>
+
+        <p class="mt-3 mb-5 text-cocoa/50 text-xs max-w-lg leading-relaxed pl-6">
+          Fictional companies, real methodology — built with AI to show the thinking without exposing NDA-protected client work.
+        </p>
+
+        <ul class="pl-6 flex flex-col gap-2">
+          {conceptPieces.map(entry => (
+            <li>
+              <a
+                href={`/case-studies/${entry.id}`}
+                class="inline-flex items-center gap-2 text-sm text-cocoa/50 hover:text-primary-600 transition-colors group/link"
+              >
+                <span class="font-semibold">{entry.data.company}</span>
+                <span class="text-cocoa/30">·</span>
+                <span class="text-cocoa/40">{entry.data.deliverable}</span>
+                <svg class="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
     </div>
   </section>
 </BaseLayout>
