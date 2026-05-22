@@ -1,0 +1,436 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MoonStar from '../../components/decor/MoonStar.astro';
+import WavyDivider from '../../components/decor/WavyDivider.astro';
+---
+<BaseLayout
+  title="Compliance Scenario — Meridian Financial"
+  description="A representative branching scenario from the Meridian compliance onboarding module — decision-first, feedback-driven."
+>
+  <section class="relative overflow-hidden bg-paper paper-bg">
+    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+
+    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-20">
+      <a href="/case-studies/meridian-financial" class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to the case study
+      </a>
+
+      <p class="font-display text-sm uppercase tracking-widest text-primary-600 mb-3">
+        Meridian Financial · Representative Scenario
+      </p>
+      <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
+        Adverse Action — <span class="italic text-primary-600">decision first</span>
+      </h1>
+      <p class="mt-5 text-lg text-cocoa/70 leading-relaxed max-w-2xl">
+        A single branching moment from the Reg B chapter of the module. The full course covers four decision clusters in this format; this preview shows one. Answer first, feedback after — the content of the regulation shows up only once the learner has committed to a call.
+      </p>
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <section class="bg-cream-50 py-12 sm:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+      <!-- Rise-style scenario card -->
+      <div id="rise" class="rise">
+        <div class="rise__hd">
+          <div class="rise__brand">
+            <span class="rise__logo">MF</span>
+            <div>
+              <p class="rise__title">Meridian Compliance · Reg B Essentials</p>
+              <p class="rise__sub">Chapter 2 · Adverse Action Disclosure</p>
+            </div>
+          </div>
+          <div class="rise__progress">
+            <span class="rise__progress-dot" data-step="1"></span>
+            <span class="rise__progress-dot is-active" data-step="2"></span>
+            <span class="rise__progress-dot" data-step="3"></span>
+            <span class="rise__progress-dot" data-step="4"></span>
+            <span class="rise__progress-dot" data-step="5"></span>
+          </div>
+        </div>
+
+        <div class="rise__body">
+          <!-- Stage 1: scenario -->
+          <div id="stage-scenario" class="stage is-active">
+            <p class="rise__eyebrow">Scenario</p>
+            <h2 class="rise__h2">
+              On Tuesday morning, you denied a mortgage application.
+            </h2>
+            <p class="rise__lede">
+              The applicant, Ms. Harris, had applied twelve days ago. Credit score below threshold, DTI outside policy — a clean denial on the merits. Your teammate asks when you need to send the adverse action notice.
+            </p>
+
+            <div class="rise__chat">
+              <div class="rise__msg rise__msg--teammate">
+                <div class="rise__avatar">JC</div>
+                <div class="rise__bubble">
+                  <p><strong>Jordan · Teammate</strong></p>
+                  <p>"Does Harris need her adverse action letter today? Or do I have a window?"</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="rise__prompt">What do you tell Jordan?</p>
+
+            <div class="rise__choices">
+              <button class="rise__choice" data-correct="false" data-feedback="reg-date">
+                <span class="rise__choice-letter">A</span>
+                <span>
+                  <strong>"Today — it's 12 days since she applied."</strong>
+                  <em>ECOA says 30 days from application; the clock is running.</em>
+                </span>
+              </button>
+              <button class="rise__choice" data-correct="true" data-feedback="decision-date">
+                <span class="rise__choice-letter">B</span>
+                <span>
+                  <strong>"Within 30 days of the denial decision — so we have time, but don't wait."</strong>
+                  <em>The clock starts at the decision, not the application.</em>
+                </span>
+              </button>
+              <button class="rise__choice" data-correct="false" data-feedback="verbal">
+                <span class="rise__choice-letter">C</span>
+                <span>
+                  <strong>"Only if she asks — verbal denials don't always require the notice."</strong>
+                  <em>A written notice is required regardless of the channel.</em>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stage 2: feedback (hidden until a choice is made) -->
+          <div id="stage-feedback" class="stage">
+            <div id="feedback-content"></div>
+            <div class="rise__cta-row">
+              <button id="retryBtn" class="rise__btn rise__btn--ghost">Try again</button>
+              <button id="continueBtn" class="rise__btn rise__btn--primary">
+                Continue
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M5 12h14" stroke-linecap="round"/>
+                  <path d="M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stage 3: summary -->
+          <div id="stage-summary" class="stage">
+            <p class="rise__eyebrow">Chapter complete</p>
+            <h2 class="rise__h2">That's the pattern — decision first, rule second.</h2>
+            <p class="rise__lede">
+              In the full course, this scenario links to three more decisions in the Reg B chapter alone. Your pattern-recognition builds across cases rather than from memorizing citation numbers.
+            </p>
+            <div class="rise__recap">
+              <h3>What you practiced</h3>
+              <ul>
+                <li>Identifying the correct trigger date for the adverse action clock</li>
+                <li>Separating the rule's wording from the real-world application</li>
+                <li>Explaining your reasoning to a peer in plain language</li>
+              </ul>
+            </div>
+            <div class="rise__cta-row rise__cta-row--center">
+              <button id="restartBtn" class="rise__btn rise__btn--ghost">Restart scenario</button>
+              <a href="/case-studies/meridian-financial" class="rise__btn rise__btn--primary">
+                See the full case study
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M5 12h14" stroke-linecap="round"/>
+                  <path d="M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-6 text-center text-sm text-cocoa/55">
+        Representative interaction — styled to match a Rise 360 scenario block. The production module was authored in Articulate Rise and published with xAPI statements to SCORM Cloud.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .rise {
+      background: #fff;
+      border: 1px solid rgba(85, 56, 36, 0.15);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 20px 50px -20px rgba(85, 56, 36, 0.2);
+    }
+    .rise__hd {
+      background: linear-gradient(135deg, #C4663D 0%, #A9522F 100%);
+      color: #FBF4E2;
+      padding: 16px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .rise__brand { display: flex; align-items: center; gap: 12px; }
+    .rise__logo {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700; font-size: 15px;
+      color: #FBF4E2;
+    }
+    .rise__title { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 15px; line-height: 1.2; }
+    .rise__sub { margin: 2px 0 0; font-size: 12px; opacity: 0.8; }
+    .rise__progress { display: flex; gap: 6px; }
+    .rise__progress-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: background 160ms, transform 160ms;
+    }
+    .rise__progress-dot.is-active { background: #FBF4E2; transform: scale(1.15); }
+    .rise__progress-dot.is-done { background: #D9A441; }
+
+    .rise__body { padding: 28px 28px 32px; }
+    @media (max-width: 560px) { .rise__body { padding: 20px 18px 24px; } }
+
+    .stage { display: none; animation: rise-fade 280ms ease both; }
+    .stage.is-active { display: block; }
+    @keyframes rise-fade {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .rise__eyebrow {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #A9522F;
+      margin: 0 0 8px;
+    }
+    .rise__h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.7rem;
+      color: #553824;
+      line-height: 1.2;
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+    .rise__lede {
+      color: rgba(85, 56, 36, 0.78);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+
+    .rise__chat { margin: 20px 0 24px; }
+    .rise__msg { display: flex; align-items: flex-start; gap: 10px; max-width: 520px; }
+    .rise__msg--teammate .rise__bubble {
+      background: #FBF4E2;
+      border: 1px solid rgba(85, 56, 36, 0.12);
+      border-radius: 4px 14px 14px 14px;
+      padding: 10px 14px;
+    }
+    .rise__avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, #6E7C3F, #5A6733);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px;
+      flex: 0 0 auto;
+    }
+    .rise__bubble p { margin: 0; font-size: 14px; color: #553824; line-height: 1.55; }
+    .rise__bubble p + p { margin-top: 2px; }
+    .rise__bubble strong { font-family: var(--font-display); font-weight: 600; font-size: 12.5px; color: #A9522F; }
+
+    .rise__prompt {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #553824;
+      margin: 0 0 12px;
+    }
+
+    .rise__choices { display: flex; flex-direction: column; gap: 10px; }
+    .rise__choice {
+      display: flex; align-items: flex-start; gap: 14px;
+      text-align: left;
+      background: #fff;
+      border: 1.5px solid rgba(85, 56, 36, 0.18);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: #553824;
+      font-family: inherit;
+      cursor: pointer;
+      transition: border-color 160ms, background 160ms, transform 80ms;
+    }
+    .rise__choice:hover {
+      border-color: #C4663D;
+      background: #FBEEE4;
+    }
+    .rise__choice:active { transform: translateY(1px); }
+    .rise__choice[disabled] { cursor: default; opacity: 0.6; }
+    .rise__choice[disabled]:hover { border-color: rgba(85,56,36,0.18); background: #fff; }
+    .rise__choice-letter {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #FBEEE4;
+      color: #A9522F;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      flex: 0 0 auto;
+    }
+    .rise__choice strong { display: block; font-weight: 600; font-size: 15px; margin-bottom: 2px; line-height: 1.35; }
+    .rise__choice em { font-style: normal; color: rgba(85,56,36,0.65); font-size: 13px; line-height: 1.45; }
+
+    .rise__feedback {
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      border-left: 4px solid;
+    }
+    .rise__feedback--correct { background: #E3E7CC; border-color: #5A6733; }
+    .rise__feedback--incorrect { background: #FBEEE4; border-color: #A9522F; }
+    .rise__feedback h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      margin: 0 0 6px;
+      color: #553824;
+    }
+    .rise__feedback p { margin: 0 0 8px; color: rgba(85,56,36,0.85); line-height: 1.55; }
+    .rise__feedback p:last-child { margin-bottom: 0; }
+    .rise__feedback .rise__cite {
+      display: inline-block; margin-top: 8px;
+      font-size: 12px; font-style: italic;
+      color: rgba(85,56,36,0.55);
+    }
+
+    .rise__cta-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; }
+    .rise__cta-row--center { justify-content: center; }
+    .rise__btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 600; font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
+      transition: background 160ms, border-color 160ms, color 160ms;
+    }
+    .rise__btn--primary { background: #C4663D; color: #FBF4E2; }
+    .rise__btn--primary:hover { background: #A9522F; }
+    .rise__btn--ghost { background: transparent; color: #553824; border-color: rgba(85,56,36,0.25); }
+    .rise__btn--ghost:hover { background: #FBEEE4; border-color: #C4663D; }
+
+    .rise__recap {
+      background: #FBF4E2;
+      border: 1px solid rgba(85,56,36,0.12);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin: 16px 0 20px;
+    }
+    .rise__recap h3 {
+      font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      text-transform: uppercase; letter-spacing: 0.08em; color: rgba(85,56,36,0.55);
+      margin: 0 0 10px;
+    }
+    .rise__recap ul { margin: 0; padding-left: 20px; color: rgba(85,56,36,0.82); line-height: 1.65; font-size: 14px; }
+    .rise__recap li { margin-bottom: 4px; }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const feedbacks = {
+        'reg-date': {
+          correct: false,
+          headline: 'Not quite — and it\'s a costly miss.',
+          body:
+            'ECOA does require the notice within 30 days, but the clock starts at the <strong>decision</strong>, not the application. If the application was filed 12 days ago but denied today, you have up to 30 days from today — not 18 days from today.',
+          cite: 'Reg B · 12 CFR 1002.9(a)',
+        },
+        'decision-date': {
+          correct: true,
+          headline: 'Exactly — decision, not application.',
+          body:
+            'The 30-day clock begins when the adverse action decision is made. "Don\'t wait" is the right coaching instinct; the regulatory floor is 30 days, but operational best practice is within three business days to reduce applicant friction.',
+          cite: 'Reg B · 12 CFR 1002.9(a)',
+        },
+        'verbal': {
+          correct: false,
+          headline: 'Close to a common myth — but no.',
+          body:
+            'A written adverse action notice is required regardless of whether the denial was first communicated verbally. The only thing the applicant\'s request changes is the statement-of-reasons disclosure, not the notice itself.',
+          cite: 'Reg B · 12 CFR 1002.9(a)(2)',
+        },
+      };
+
+      const stages = {
+        scenario: document.getElementById('stage-scenario'),
+        feedback: document.getElementById('stage-feedback'),
+        summary: document.getElementById('stage-summary'),
+      };
+      const dots = document.querySelectorAll('.rise__progress-dot');
+      const fbContent = document.getElementById('feedback-content');
+      const continueBtn = document.getElementById('continueBtn');
+      const retryBtn = document.getElementById('retryBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const choices = document.querySelectorAll('.rise__choice');
+
+      function setStage(name) {
+        Object.entries(stages).forEach(([k, el]) => el.classList.toggle('is-active', k === name));
+        window.scrollTo({ top: document.getElementById('rise').offsetTop - 40, behavior: 'smooth' });
+      }
+
+      function markProgress(index) {
+        dots.forEach((d, i) => {
+          d.classList.toggle('is-done', i < index);
+          d.classList.toggle('is-active', i === index);
+        });
+      }
+
+      let lastChoice = null;
+
+      choices.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.feedback;
+          const isCorrect = btn.dataset.correct === 'true';
+          lastChoice = key;
+
+          choices.forEach(b => b.setAttribute('disabled', 'true'));
+
+          const fb = feedbacks[key];
+          fbContent.innerHTML = `
+            <p class="rise__eyebrow">${isCorrect ? 'Correct' : 'Not quite'}</p>
+            <div class="rise__feedback ${isCorrect ? 'rise__feedback--correct' : 'rise__feedback--incorrect'}">
+              <h3>${fb.headline}</h3>
+              <p>${fb.body}</p>
+              <span class="rise__cite">${fb.cite}</span>
+            </div>
+          `;
+          retryBtn.style.display = isCorrect ? 'none' : '';
+          setStage('feedback');
+          if (isCorrect) markProgress(2);
+        });
+      });
+
+      retryBtn.addEventListener('click', () => {
+        choices.forEach(b => b.removeAttribute('disabled'));
+        setStage('scenario');
+      });
+
+      continueBtn.addEventListener('click', () => {
+        markProgress(4);
+        setStage('summary');
+      });
+
+      restartBtn.addEventListener('click', () => {
+        choices.forEach(b => b.removeAttribute('disabled'));
+        markProgress(1);
+        setStage('scenario');
+      });
+    })();
+  </script>
+</BaseLayout>

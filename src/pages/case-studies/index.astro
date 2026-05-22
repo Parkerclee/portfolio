@@ -7,8 +7,11 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 const entries = await getCollection('case-studies', ({ data }) => !data.draft);
 entries.sort((a, b) => a.data.order - b.data.order);
+
+const realWork = entries.filter(e => !e.data.aiGenerated);
+const conceptPieces = entries.filter(e => e.data.aiGenerated);
 ---
-<BaseLayout title="Case Studies" description="Three synthetic case studies demonstrating AI-assisted instructional design.">
+<BaseLayout title="Case Studies" description="Real L&D work from financial services operations, plus concept pieces demonstrating methodology against fictional briefs.">
   <section class="relative overflow-hidden bg-paper paper-bg">
     <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
     <div class="max-w-4xl mx-auto px-6 py-20 sm:py-24 text-center">
@@ -16,17 +19,22 @@ entries.sort((a, b) => a.data.order - b.data.order);
         Selected <span class="italic text-primary-600">case studies</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/70 max-w-2xl mx-auto">
-        Four fictional case studies, four distinct L&D problems. From compliance automation to manager coaching, system adoption, and retail behavior design.
+        Six real projects from financial services operations L&D, plus four concept pieces that demonstrate methodology against fictional briefs — built with AI so I can show the thinking without exposing NDA-protected detail.
       </p>
     </div>
   </section>
 
   <WavyDivider class="-mt-2 relative z-10" />
 
+  <!-- Real Work -->
   <section class="bg-cream-50 py-16 sm:py-20">
     <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Real work</p>
+        <p class="text-cocoa/60 text-sm max-w-xl">Projects from my time in financial services operations L&D. Company names are anonymized; the work, decisions, and outcomes are real.</p>
+      </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {entries.map((entry, i) => (
+        {realWork.map((entry, i) => (
           <div class={`fade-in fade-in-delay-${(i % 3) + 1}`}>
             <CaseStudyCard
               company={entry.data.company}
@@ -36,10 +44,49 @@ entries.sort((a, b) => a.data.order - b.data.order);
               color={entry.data.color}
               slug={entry.id}
               initials={entry.data.initials}
+              aiGenerated={false}
             />
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- Concept Pieces — collapsed by default -->
+  <section class="bg-paper border-t border-cocoa/10">
+    <div class="max-w-6xl mx-auto px-6 py-8">
+      <details class="group">
+        <summary class="flex items-center gap-2 cursor-pointer list-none select-none w-fit">
+          <svg class="w-3.5 h-3.5 text-cocoa/40 group-open:rotate-90 transition-transform duration-200" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5l8 7-8 7V5z"/>
+          </svg>
+          <span class="font-display text-xs uppercase tracking-widest text-cocoa/40 hover:text-cocoa/60 transition-colors">
+            Also: {conceptPieces.length} AI-generated concept pieces
+          </span>
+        </summary>
+
+        <p class="mt-3 mb-5 text-cocoa/50 text-xs max-w-lg leading-relaxed pl-6">
+          Fictional companies, real methodology — built with AI to show the thinking without exposing NDA-protected client work.
+        </p>
+
+        <ul class="pl-6 flex flex-col gap-2">
+          {conceptPieces.map(entry => (
+            <li>
+              <a
+                href={`/case-studies/${entry.id}`}
+                class="inline-flex items-center gap-2 text-sm text-cocoa/50 hover:text-primary-600 transition-colors group/link"
+              >
+                <span class="font-semibold">{entry.data.company}</span>
+                <span class="text-cocoa/30">·</span>
+                <span class="text-cocoa/40">{entry.data.deliverable}</span>
+                <svg class="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
     </div>
   </section>
 </BaseLayout>

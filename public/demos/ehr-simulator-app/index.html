@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crestline EHR Simulator — ED Admission</title>
+  <meta name="description" content="A browser-based EHR simulator demonstrating the ED admission workflow." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- App shell -->
+  <div class="app" id="app">
+
+    <!-- Top banner: patient context -->
+    <header class="patient-banner" aria-label="Patient banner">
+      <div class="patient-banner__id">
+        <span class="avatar" aria-hidden="true">JR</span>
+        <div>
+          <p class="patient-banner__name">Rivera, Jamie</p>
+          <p class="patient-banner__meta">
+            <span>MRN <strong>00482910</strong></span>
+            <span>DOB <strong>1978-06-14</strong> · 47y</span>
+            <span>Sex <strong>F</strong></span>
+            <span class="pill pill--amber">Allergy alert</span>
+          </p>
+        </div>
+      </div>
+      <div class="patient-banner__meta-right">
+        <span class="pill pill--teal">ED · Bay 4</span>
+        <span>Arrived <strong>08:14</strong></span>
+        <span>Provider <strong>Chen, L. MD</strong></span>
+      </div>
+    </header>
+
+    <!-- Workflow nav + main -->
+    <div class="workspace">
+      <nav class="step-nav" aria-label="Workflow progress">
+        <ol id="stepList"></ol>
+      </nav>
+
+      <main class="workspace__main">
+        <section class="step-panel" id="stepPanel" aria-live="polite">
+          <!-- step content injected here -->
+        </section>
+
+        <footer class="step-footer">
+          <button type="button" class="btn btn--ghost" id="backBtn">
+            <span aria-hidden="true">←</span> Back
+          </button>
+          <div class="step-footer__progress">
+            <span id="progressLabel">Step 1 of 5</span>
+          </div>
+          <button type="button" class="btn btn--primary" id="nextBtn">
+            Next <span aria-hidden="true">→</span>
+          </button>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Toast / announce region -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Restart button (always available) -->
+    <button class="restart-pill" id="restartBtn" title="Restart workflow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+        <path d="M3 12a9 9 0 1 0 3.2-6.9" stroke-linecap="round" />
+        <path d="M3 4v6h6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Restart
+    </button>
+  </div>
+
+  <!-- Simulator identity strip at bottom (so it reads as a sim, not real) -->
+  <div class="sim-strip">
+    <strong>SIMULATOR</strong> · Training environment · No PHI
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MoonStar from '../../components/decor/MoonStar.astro';
+import Sparkles from '../../components/decor/Sparkles.astro';
+import WavyDivider from '../../components/decor/WavyDivider.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('case-studies', ({ data }) => !data.draft);
+  return entries.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+// Map the forest palette per case study theme
+const colorMap: Record<string, { badge: string; logoBg: string; logoText: string; logoBorder: string; ring: string; headingItalic: string }> = {
+  terracotta: {
+    badge: 'bg-primary-100 text-primary-700 border-primary-200',
+    logoBg: 'bg-primary-100',
+    logoText: 'text-primary-700',
+    logoBorder: 'border-primary-300',
+    ring: 'from-primary-200/40 via-accent-400/25 to-cream-50',
+    headingItalic: 'text-primary-600',
+  },
+  avocado: {
+    badge: 'bg-secondary-100 text-secondary-700 border-secondary-200',
+    logoBg: 'bg-secondary-100',
+    logoText: 'text-secondary-700',
+    logoBorder: 'border-secondary-300',
+    ring: 'from-secondary-200/40 via-accent-400/20 to-cream-50',
+    headingItalic: 'text-secondary-600',
+  },
+  mustard: {
+    badge: 'bg-accent-400/25 text-accent-700 border-accent-500/40',
+    logoBg: 'bg-accent-400/25',
+    logoText: 'text-accent-700',
+    logoBorder: 'border-accent-500/40',
+    ring: 'from-accent-400/40 via-primary-200/30 to-cream-50',
+    headingItalic: 'text-accent-700',
+  },
+};
+
+const theme = colorMap[data.color] ?? colorMap.terracotta;
+---
+<BaseLayout title={data.company} description={data.challenge}>
+  <!-- Hero panel -->
+  <section class={`relative overflow-hidden bg-gradient-to-br ${theme.ring} paper-bg`}>
+    <MoonStar class="absolute top-8 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+    <Sparkles class="hidden md:block absolute bottom-10 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+
+    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-28">
+      <a href="/#case-studies" class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to case studies
+      </a>
+
+      {data.aiGenerated && (
+        <div class="mb-6 inline-flex items-start gap-3 px-4 py-3 rounded-2xl bg-cream-100 border border-cocoa/15 text-sm text-cocoa/80 max-w-2xl">
+          <svg class="w-5 h-5 mt-0.5 text-cocoa/60 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+          <span>
+            <strong class="font-semibold text-cocoa">AI-generated concept piece.</strong>
+            {' '}This company is fictional. The methodology, artifacts, and architecture mirror approaches I've applied in real NDA-protected client work — built with AI as a development partner so I can show the thinking without exposing protected detail.
+          </span>
+        </div>
+      )}
+
+      <div class="flex items-center gap-4 mb-6">
+        <span class={`w-14 h-14 rounded-2xl ${theme.logoBg} ${theme.logoText} border ${theme.logoBorder} flex items-center justify-center font-display font-bold text-xl retro-sheen`}>
+          {data.initials}
+        </span>
+        <div>
+          <p class="font-display font-semibold text-cocoa text-lg leading-tight">{data.company}</p>
+          <p class="text-sm text-cocoa/60">{data.industry}{data.location ? ` · ${data.location}` : ''}</p>
+        </div>
+      </div>
+
+      <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
+        {data.title}
+      </h1>
+
+      <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        {data.challenge}
+      </p>
+
+      <!-- Meta grid -->
+      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+        <div>
+          <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Deliverable</dt>
+          <dd class="text-cocoa font-semibold">{data.deliverable}</dd>
+        </div>
+        {data.duration && (
+          <div>
+            <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Duration</dt>
+            <dd class="text-cocoa font-semibold">{data.duration}</dd>
+          </div>
+        )}
+        {data.role && (
+          <div>
+            <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Role</dt>
+            <dd class="text-cocoa font-semibold">{data.role}</dd>
+          </div>
+        )}
+        {data.companySize && (
+          <div>
+            <dt class="text-xs uppercase tracking-widest text-cocoa/50 font-display mb-1">Company size</dt>
+            <dd class="text-cocoa font-semibold">{data.companySize}</dd>
+          </div>
+        )}
+      </dl>
+
+      {data.tools.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-2">
+          {data.tools.map(tool => (
+            <span class={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${theme.badge}`}>
+              {tool}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {data.demoLink && (
+        <a
+          href={data.demoLink}
+          class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-500 text-cream font-semibold retro-sheen hover:bg-primary-600 transition-colors"
+        >
+          Try the live demo
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <!-- Body -->
+  <article class="bg-paper py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-6 prose prose-cocoa">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Next case study nav -->
+  <section class="bg-espresso py-12 text-cream">
+    <div class="max-w-3xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <p class="font-display text-lg">See another project →</p>
+      <a
+        href="/#case-studies"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-espresso font-semibold retro-sheen hover:bg-accent-400 transition-colors"
+      >
+        All case studies
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Lightweight prose theme override (Tailwind Typography plugin isn't installed) */
+  .prose :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    color: #553824;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .prose :global(h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #553824;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose :global(p) {
+    color: rgba(85, 56, 36, 0.82);
+    line-height: 1.75;
+    margin: 1rem 0;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 1rem 0 1rem 1.5rem;
+    color: rgba(85, 56, 36, 0.82);
+    line-height: 1.75;
+  }
+  .prose :global(ul) { list-style: disc; }
+  .prose :global(ol) { list-style: decimal; }
+  .prose :global(li) { margin: 0.35rem 0; }
+  .prose :global(strong) { color: #553824; font-weight: 600; }
+  .prose :global(blockquote) {
+    border-left: 3px solid #D9A441;
+    padding: 0.75rem 1rem;
+    margin: 1.5rem 0;
+    background: rgba(217, 164, 65, 0.08);
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: rgba(85, 56, 36, 0.75);
+    font-style: italic;
+  }
+  .prose :global(blockquote p) { margin: 0; }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.925rem;
+  }
+  .prose :global(thead th) {
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: #553824;
+    border-bottom: 2px solid rgba(85, 56, 36, 0.2);
+    padding: 0.6rem 0.75rem;
+    background: rgba(217, 164, 65, 0.12);
+  }
+  .prose :global(tbody td) {
+    border-bottom: 1px solid rgba(85, 56, 36, 0.1);
+    padding: 0.6rem 0.75rem;
+    color: rgba(85, 56, 36, 0.85);
+    vertical-align: top;
+  }
+  .prose :global(a) {
+    color: #A9522F;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose :global(a):hover { color: #8A4124; }
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: rgba(85, 56, 36, 0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.35rem;
+  }
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px dashed rgba(85, 56, 36, 0.25);
+    margin: 2.5rem 0;
+  }
+</style>
