@@ -946,10 +946,27 @@ function DeckView({ meeting, state }: { meeting: Meeting; state: AppState }) {
         ) : (
           <div className="dd-notes"><span className="label">SAY THIS</span><div>"{slide.body.replace(/^"|"$/g, '')}"</div></div>
         )}
-        <div className="card terracotta" style={{ padding: 14, marginTop: 'auto' }}>
+        <button
+          type="button"
+          className="card terracotta"
+          onClick={() => setSlideIdx(i => Math.min(i + 1, slides.length - 1))}
+          disabled={slideIdx >= slides.length - 1}
+          style={{
+            padding: 14, marginTop: 'auto', textAlign: 'left', cursor: slideIdx >= slides.length - 1 ? 'default' : 'pointer',
+            font: 'inherit', width: '100%', opacity: slideIdx >= slides.length - 1 ? 0.5 : 1,
+            transition: 'transform 0.12s, opacity 0.15s',
+          }}
+          onMouseDown={e => { if (!e.currentTarget.disabled) e.currentTarget.style.transform = 'scale(0.98)'; }}
+          onMouseUp={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+        >
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, marginBottom: 4 }}>NEXT</div>
-          <div style={{ fontSize: 13, lineHeight: 1.4 }}>Press → to advance to slide {Math.min(slideIdx + 2, slides.length)}.</div>
-        </div>
+          <div style={{ fontSize: 13, lineHeight: 1.4 }}>
+            {slideIdx >= slides.length - 1
+              ? 'End of deck.'
+              : <>Advance to slide {slideIdx + 2} <span aria-hidden="true">→</span></>}
+          </div>
+        </button>
       </div>
     </div>
   );

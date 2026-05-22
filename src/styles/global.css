@@ -1,1 +1,101 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* ── Sky blue (primary — Totoro cerulean) ─────── */
+  --color-primary-50:  #E6F2FB;
+  --color-primary-100: #C2DFF4;
+  --color-primary-200: #8FC5EA;
+  --color-primary-300: #58A8DC;
+  --color-primary-400: #2E96D2;
+  --color-primary-500: #1F82BE;
+  --color-primary-600: #186AA1;
+  --color-primary-700: #135480;
+  --color-primary-800: #0E3D5E;
+  --color-primary-900: #08263C;
+
+  /* ── Meadow green (secondary — lush grass) ────── */
+  --color-secondary-50:  #EFF8E5;
+  --color-secondary-100: #D7ECBC;
+  --color-secondary-200: #B5D982;
+  --color-secondary-300: #8FBF54;
+  --color-secondary-400: #74A53D;
+  --color-secondary-500: #5C8A2E;
+  --color-secondary-600: #486F23;
+  --color-secondary-700: #36531A;
+  --color-secondary-800: #253812;
+  --color-secondary-900: #16220A;
+
+  /* ── Sunflower yellow (accent — warm gold) ────── */
+  --color-accent-300: #FBE19B;
+  --color-accent-400: #F8D269;
+  --color-accent-500: #F2BE3A;
+  --color-accent-600: #D5A21F;
+  --color-accent-700: #A47A12;
+
+  /* ── Named tokens ─────────────────────────────── */
+  --color-cocoa:      #3D2818;
+  --color-cocoa-soft: #5A3D26;
+  --color-espresso:   #1F1109;
+  --color-cream:      #F1EBDB;
+  --color-cream-50:   #F7F7F2;
+  --color-cream-100:  #F0F0E8;
+  --color-paper:      #FCFCF9;
+}
+
+/* ── Base ────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Paper texture (very subtle dotted grain) ── */
+.paper-bg {
+  background-image:
+    radial-gradient(rgba(61, 40, 24, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(61, 40, 24, 0.022) 1px, transparent 1px);
+  background-size: 18px 18px, 26px 26px;
+  background-position: 0 0, 9px 13px;
+}
+
+/* ── Retro pill button sheen ─────────────────── */
+.retro-sheen {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* ── Scroll-triggered fade-in ────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children */
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+
+/* ── Prose overrides for case studies ─────────── */
+.prose h2 {
+  margin-top: 2.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
