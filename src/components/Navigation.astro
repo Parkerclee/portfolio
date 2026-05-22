@@ -1,0 +1,92 @@
+---
+import MoonStar from './decor/MoonStar.astro';
+
+const navLinks = [
+  { label: 'Case Studies', href: '/#case-studies' },
+  { label: 'Process', href: '/process' },
+  { label: 'Demos', href: '/demos' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'About', href: '/about' },
+];
+---
+<header class="sticky top-0 z-50 bg-cream-50/85 backdrop-blur-lg border-b border-cocoa/10">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo / Name -->
+    <a href="/" class="flex items-center gap-2 group relative">
+      <span class="w-9 h-9 rounded-xl bg-primary-500 retro-sheen flex items-center justify-center text-cream font-display font-bold text-base
+                   group-hover:bg-primary-600 transition-colors">
+        PL
+      </span>
+      <span class="font-display font-semibold text-cocoa text-lg hidden sm:block">Parker Lee</span>
+      <MoonStar class="hidden sm:block absolute -top-2 -right-3 w-5 h-5 opacity-90 pointer-events-none" />
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-cocoa/80 hover:text-primary-600 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="text-sm font-semibold px-5 py-2 rounded-full bg-primary-500 text-cream retro-sheen
+               hover:bg-primary-600 transition-colors"
+      >
+        Contact
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 rounded-lg hover:bg-primary-50 transition-colors"
+      aria-label="Toggle menu"
+    >
+      <svg id="hamburger-icon" class="w-5 h-5 text-cocoa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="close-icon" class="w-5 h-5 text-cocoa hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-cocoa/10 bg-cream-50">
+    <div class="px-6 py-4 flex flex-col gap-3">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-cocoa/80 hover:text-primary-600 py-2 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact"
+        class="text-sm font-semibold px-4 py-2.5 rounded-full bg-primary-500 text-cream text-center retro-sheen
+               hover:bg-primary-600 transition-colors mt-2"
+      >
+        Contact
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    hamburger?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+</script>
