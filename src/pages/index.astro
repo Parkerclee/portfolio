@@ -1,8 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import WavyDivider from '../components/decor/WavyDivider.astro';
+
+const allEntries = await getCollection('case-studies', ({ data }) => !data.draft);
+allEntries.sort((a, b) => a.data.order - b.data.order);
+const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 ---
 <BaseLayout title="Home">
   <Hero />
@@ -75,44 +80,34 @@ import WavyDivider from '../components/decor/WavyDivider.astro';
           Selected <span class="italic text-primary-600">case studies</span>
         </h2>
         <p class="mt-3 text-lg text-cocoa/70">
-          Three projects across different industries — each demonstrating a different approach to learning design.
+          Real work from financial services operations L&D — anonymized, detailed, and built to show how decisions get made.
         </p>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="fade-in fade-in-delay-1">
-          <CaseStudyCard
-            company="Meridian Financial"
-            industry="Fintech / Digital Banking"
-            challenge="Redesigned compliance onboarding for a lending product with high error rates and regulatory pressure."
-            deliverable="Rise 360 eLearning Module"
-            color="terracotta"
-            slug="meridian-financial"
-            initials="MF"
-          />
-        </div>
-        <div class="fade-in fade-in-delay-2">
-          <CaseStudyCard
-            company="Crestline Health"
-            industry="Healthcare / Hospital System"
-            challenge="Built an interactive EHR simulator to accelerate adoption of a new electronic health records system."
-            deliverable="Code-Built EHR Simulator"
-            color="avocado"
-            slug="crestline-health"
-            initials="CH"
-          />
-        </div>
-        <div class="fade-in fade-in-delay-3">
-          <CaseStudyCard
-            company="Basecamp Retail"
-            industry="Retail / E-commerce"
-            challenge="Designed a blended curriculum for a product launch across 200+ stores with 60% new hires."
-            deliverable="Blended Curriculum Design"
-            color="mustard"
-            slug="basecamp-retail"
-            initials="BR"
-          />
-        </div>
+        {featuredEntries.map((entry, i) => (
+          <div class={`fade-in fade-in-delay-${i + 1}`}>
+            <CaseStudyCard
+              company={entry.data.company}
+              industry={entry.data.industry}
+              challenge={entry.data.challenge}
+              deliverable={entry.data.deliverable}
+              color={entry.data.color}
+              slug={entry.id}
+              initials={entry.data.initials}
+              aiGenerated={false}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/case-studies" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+          View all case studies — including concept pieces
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
       </div>
     </div>
   </section>

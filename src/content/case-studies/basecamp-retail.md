@@ -12,8 +12,9 @@ role: "Senior Learning Designer"
 demoLink: "/demos/basecamp-facilitator"
 color: "mustard"
 initials: "BR"
-order: 3
+order: 12
 draft: false
+aiGenerated: true
 ---
 
 > **Note:** Basecamp Retail is a fictional company. The curriculum architecture, facilitator approach, and evaluation framework reflect practices I've led in real retail L&D engagements.

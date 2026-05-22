@@ -7,8 +7,11 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 const entries = await getCollection('case-studies', ({ data }) => !data.draft);
 entries.sort((a, b) => a.data.order - b.data.order);
+
+const realWork = entries.filter(e => !e.data.aiGenerated);
+const conceptPieces = entries.filter(e => e.data.aiGenerated);
 ---
-<BaseLayout title="Case Studies" description="Three synthetic case studies demonstrating AI-assisted instructional design.">
+<BaseLayout title="Case Studies" description="Real L&D work from financial services operations, plus concept pieces demonstrating methodology against fictional briefs.">
   <section class="relative overflow-hidden bg-paper paper-bg">
     <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
     <div class="max-w-4xl mx-auto px-6 py-20 sm:py-24 text-center">
@@ -16,17 +19,22 @@ entries.sort((a, b) => a.data.order - b.data.order);
         Selected <span class="italic text-primary-600">case studies</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/70 max-w-2xl mx-auto">
-        Four fictional case studies, four distinct L&D problems. From compliance automation to manager coaching, system adoption, and retail behavior design.
+        Six real projects from financial services operations L&D, plus four concept pieces that demonstrate methodology against fictional briefs — built with AI so I can show the thinking without exposing NDA-protected detail.
       </p>
     </div>
   </section>
 
   <WavyDivider class="-mt-2 relative z-10" />
 
+  <!-- Real Work -->
   <section class="bg-cream-50 py-16 sm:py-20">
     <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Real work</p>
+        <p class="text-cocoa/60 text-sm max-w-xl">Projects from my time in financial services operations L&D. Company names are anonymized; the work, decisions, and outcomes are real.</p>
+      </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {entries.map((entry, i) => (
+        {realWork.map((entry, i) => (
           <div class={`fade-in fade-in-delay-${(i % 3) + 1}`}>
             <CaseStudyCard
               company={entry.data.company}
@@ -36,6 +44,33 @@ entries.sort((a, b) => a.data.order - b.data.order);
               color={entry.data.color}
               slug={entry.id}
               initials={entry.data.initials}
+              aiGenerated={false}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Concept Pieces -->
+  <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Concept pieces</p>
+        <p class="text-cocoa/60 text-sm max-w-xl">Fictional companies, real methodology. Built with AI as a development partner to show the thinking — eLearning, simulators, blended design, and coaching tools — without exposing protected client work.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {conceptPieces.map((entry, i) => (
+          <div class={`fade-in fade-in-delay-${(i % 3) + 1}`}>
+            <CaseStudyCard
+              company={entry.data.company}
+              industry={entry.data.industry}
+              challenge={entry.data.challenge}
+              deliverable={entry.data.deliverable}
+              color={entry.data.color}
+              slug={entry.id}
+              initials={entry.data.initials}
+              aiGenerated={true}
             />
           </div>
         ))}

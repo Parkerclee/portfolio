@@ -12,8 +12,9 @@ role: "Lead Instructional Designer & Developer"
 demoLink: "/demos/ehr-simulator"
 color: "avocado"
 initials: "CH"
-order: 2
+order: 11
 draft: false
+aiGenerated: true
 ---
 
 > **Note:** Crestline Health is a fictional company. The simulator approach, xAPI integration pattern, and evaluation structure reflect methods I've used in real client projects.

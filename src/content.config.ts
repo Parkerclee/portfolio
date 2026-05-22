@@ -19,6 +19,7 @@ const caseStudies = defineCollection({
     initials: z.string().max(3),
     order: z.number().default(99),
     draft: z.boolean().default(false),
+    aiGenerated: z.boolean().default(false),
   }),
 });
 

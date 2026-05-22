@@ -12,8 +12,9 @@ role: "Lead Instructional Designer"
 demoLink: "/demos/meridian-scenario"
 color: "terracotta"
 initials: "MF"
-order: 1
+order: 10
 draft: false
+aiGenerated: true
 ---
 
 > **Note:** Meridian Financial is a fictional company. The methodology, artifacts, and outcomes reflect patterns I've applied in real client work.
