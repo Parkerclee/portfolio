@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Claude for L&D — Interactive Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper:       #FEFAF4;
+      --paper-2:     #F5EDE0;
+      --ink:         #2C1A0E;
+      --ink-2:       #553824;
+      --ink-3:       #8B6B52;
+      --line:        #E2D5C3;
+      --line-2:      #D0C0AB;
+      --canvas-bg:   #EDE3D4;
+      --mustard:     #E8B752;
+      --terracotta:  #D87854;
+      --avocado:     #9DB35E;
+      --teal:        #67A6A8;
+      --plum:        #B26C84;
+      --dark-fixed:  #2C1A0E;
+      --cream-fixed: #FEFAF4;
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      background: var(--canvas-bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .app { max-width: 900px; margin: 0 auto; padding: 26px 20px 40px; }
+    .app-kicker { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 4px; }
+    .app-title  { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .app-desc   { font-size: 14px; color: var(--ink-3); margin-bottom: 20px; max-width: 580px; }
+
+    /* Tab nav */
+    .tab-nav { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 15px; border-radius: var(--r-xl);
+      border: 1.5px solid var(--line-2); background: var(--paper);
+      font-size: 13px; font-weight: 600; color: var(--ink-3);
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .tab-btn:hover { border-color: var(--ink-2); color: var(--ink-2); }
+    .tab-btn.active { background: var(--ink); color: var(--cream-fixed); border-color: var(--ink); }
+    .tab-btn .tb-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); flex-shrink: 0; }
+    .tab-btn.active .tb-dot { background: var(--mustard); }
+
+    /* Panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Panel header */
+    .panel-head {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--ink); color: var(--cream-fixed);
+      border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 20px 26px;
+    }
+    .ph-icon {
+      font-family: 'Bagel Fat One', serif; font-weight: 400;
+      font-size: 46px; line-height: 1; color: var(--mustard);
+      flex-shrink: 0; letter-spacing: -0.02em;
+    }
+    .ph-name { font-size: 24px; font-weight: 700; }
+    .ph-sub  { font-size: 13px; color: rgba(242,233,214,0.65); margin-top: 3px; }
+
+    /* Panel body */
+    .panel-body {
+      background: var(--paper); border: 1.5px solid var(--line-2);
+      border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
+      padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    @media (max-width: 600px) { .panel-body { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card {
+      background: var(--paper-2); border: 1.5px solid var(--line);
+      border-radius: var(--r-md); padding: 15px 17px;
+    }
+    .card.full  { grid-column: 1 / -1; }
+    .card.third { /* used in 3-col rows */ }
+    .card-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 10px;
+    }
+    .card-text { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+    .card-text + .card-text { margin-top: 8px; }
+
+    /* Bullet list */
+    .blist { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .blist li { display: flex; gap: 8px; font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+    .blist li .bi { flex-shrink: 0; }
+
+    /* Feature grid (2-col inside a card) */
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+    @media (max-width: 600px) { .feat-grid { grid-template-columns: 1fr; } }
+    .feat-box { border-radius: var(--r-sm); padding: 11px 13px; }
+    .feat-box.yes  { background: rgba(157,179,94,0.12); border: 1.5px solid rgba(157,179,94,0.30); }
+    .feat-box.no   { background: rgba(216,120,84,0.08); border: 1.5px solid rgba(216,120,84,0.22); }
+    .feat-box.info { background: rgba(103,166,168,0.10); border: 1.5px solid rgba(103,166,168,0.25); }
+    .feat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 7px; }
+    .feat-box.yes  .feat-label { color: #4a7a18; }
+    .feat-box.no   .feat-label { color: #a04a28; }
+    .feat-box.info .feat-label { color: #2a7070; }
+    .feat-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .feat-list li { font-size: 13px; color: var(--ink-2); display: flex; gap: 6px; line-height: 1.4; }
+    .feat-list li::before { content: '→'; opacity: 0.45; flex-shrink: 0; }
+
+    /* Skill table */
+    .skill-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+    .skill-table th {
+      text-align: left; font-weight: 700; color: var(--ink);
+      padding: 7px 10px; border-bottom: 2px solid var(--line-2);
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .skill-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--ink-2); line-height: 1.4; vertical-align: top; }
+    .skill-table tr:last-child td { border-bottom: none; }
+    .skill-table .cmd { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink); background: var(--paper); padding: 2px 7px; border-radius: 5px; border: 1px solid var(--line-2); white-space: nowrap; }
+
+    /* Prompt / code box */
+    .prompt-box {
+      margin-top: 10px;
+      background: var(--ink); border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .prompt-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .prompt-bar-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .prompt-bar-label { font-size: 11px; color: rgba(242,233,214,0.4); font-family: 'Space Mono', monospace; margin-left: auto; }
+    .prompt-body { padding: 14px 16px; font-family: 'Space Mono', monospace; font-size: 12px; color: rgba(242,233,214,0.85); line-height: 1.65; }
+    .prompt-body .you { color: var(--mustard); }
+    .prompt-body .claude { color: rgba(157,179,94,0.85); }
+
+    /* Code line */
+    .code-line {
+      display: inline-block; font-family: 'Space Mono', monospace;
+      font-size: 12px; color: var(--ink); background: var(--paper);
+      padding: 3px 8px; border-radius: 5px; border: 1px solid var(--line-2);
+    }
+
+    /* Tool grid */
+    .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    @media (max-width: 600px) { .tool-grid { grid-template-columns: 1fr; } }
+    .tool-row {
+      display: flex; flex-direction: column; gap: 3px;
+      padding: 11px 13px; border-radius: var(--r-sm);
+      background: var(--paper); border: 1.5px solid var(--line);
+    }
+    .tool-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+    .tool-desc { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+
+    /* Artifact grid */
+    .artifact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 600px) { .artifact-grid { grid-template-columns: 1fr; } }
+    .artifact-card {
+      background: var(--paper-2); border: 1.5px solid var(--line);
+      border-radius: var(--r-md); padding: 13px 15px;
+    }
+    .artifact-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+    .artifact-cat.terracotta { color: #a04a28; }
+    .artifact-cat.avocado    { color: #4a7a18; }
+    .artifact-cat.teal       { color: #2a7070; }
+    .artifact-cat.mustard    { color: #8a6010; }
+    .artifact-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .artifact-list li { font-size: 13px; color: var(--ink-2); display: flex; gap: 7px; line-height: 1.4; }
+    .artifact-list li::before { content: '◆'; font-size: 7px; color: var(--line-2); flex-shrink: 0; margin-top: 5px; }
+
+    /* Steps */
+    .steps  { display: flex; flex-direction: column; gap: 10px; }
+    .step   { display: flex; gap: 13px; align-items: flex-start; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+    .step-n {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--mustard); color: var(--dark-fixed);
+      font-weight: 700; font-size: 12px; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .step strong { color: var(--ink); }
+
+    /* Highlight box */
+    .hl-box {
+      margin-top: 10px; padding: 12px 14px; border-radius: var(--r-sm);
+      background: rgba(232,183,82,0.12); border: 1.5px solid rgba(232,183,82,0.35);
+      font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    }
+    .hl-box-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #8a6010; margin-bottom: 5px; }
+
+    /* Analogy banner */
+    .analogy {
+      grid-column: 1 / -1;
+      display: flex; gap: 16px; align-items: stretch;
+      background: var(--ink); color: var(--cream-fixed);
+      border-radius: var(--r-md); padding: 18px 20px;
+    }
+    .analogy-side {
+      flex: 1; padding: 13px 15px; border-radius: var(--r-sm);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .analogy-side.dark { background: rgba(255,255,255,0.06); }
+    .analogy-side.lit  { background: rgba(232,183,82,0.20); }
+    .analogy-divider { width: 1px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+    .analogy-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.5; margin-bottom: 4px; }
+    .analogy-title { font-size: 16px; font-weight: 700; color: var(--cream-fixed); }
+    .analogy-side.lit .analogy-title { color: var(--mustard); }
+    .analogy-desc { font-size: 13px; color: rgba(242,233,214,0.70); line-height: 1.5; }
+
+    .app-footer { margin-top: 20px; text-align: center; font-size: 12px; color: var(--ink-3); }
+  </style>
+</head>
+<body>
+<div class="app">
+  <p class="app-kicker">Parker Lee · AI for Instructional Design</p>
+  <p class="app-title">Claude for L&D — an interactive guide</p>
+  <p class="app-desc">What Claude is, what Skills and MCP unlock, and what you can actually build — for L&D folks who are curious but don't know where to start.</p>
+
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" data-tab="what"   role="tab" aria-selected="true" ><span class="tb-dot"></span>What is Claude?</button>
+    <button class="tab-btn"        data-tab="skills" role="tab" aria-selected="false"><span class="tb-dot"></span>Skills</button>
+    <button class="tab-btn"        data-tab="mcp"    role="tab" aria-selected="false"><span class="tb-dot"></span>MCP &amp; Tools</button>
+    <button class="tab-btn"        data-tab="build"  role="tab" aria-selected="false"><span class="tb-dot"></span>Build with AI</button>
+    <button class="tab-btn"        data-tab="start"  role="tab" aria-selected="false"><span class="tb-dot"></span>Start Here</button>
+  </nav>
+
+
+  <!-- ── WHAT IS CLAUDE ── -->
+  <div class="tab-panel active" id="tp-what">
+    <div class="panel-head">
+      <span class="ph-icon">AI</span>
+      <div>
+        <div class="ph-name">What is Claude?</div>
+        <div class="ph-sub">A reasoning partner — not a search engine, not autocomplete</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="card full">
+        <p class="card-label">The mental model</p>
+        <p class="card-text">Think of Claude as a brilliant colleague who has read everything but hasn't done your specific job. It knows ADDIE, Bloom's Taxonomy, action mapping, and xAPI — but it doesn't know your learners, your company culture, or your SME's particular quirks.</p>
+        <p class="card-text" style="margin-top:8px;">That division of labor is the whole game: <strong style="color:var(--ink)">you bring context, relationships, and judgment. Claude brings speed, pattern recognition, and tireless output.</strong></p>
+      </div>
+
+      <div class="card">
+        <p class="card-label">What Claude IS</p>
+        <ul class="blist">
+          <li><span class="bi" style="color:var(--avocado)">✓</span><span><strong>A reasoning engine</strong> — it can think through a problem, not just retrieve an answer</span></li>
+          <li><span class="bi" style="color:var(--avocado)">✓</span><span><strong>A writing accelerant</strong> — first drafts, rewrites, narration scripts, scenario branches in seconds</span></li>
+          <li><span class="bi" style="color:var(--avocado)">✓</span><span><strong>A structure builder</strong> — takes messy SME notes and returns a coherent outline</span></li>
+          <li><span class="bi" style="color:var(--avocado)">✓</span><span><strong>A code generator</strong> — builds interactive HTML tools, simulations, and learning apps</span></li>
+          <li><span class="bi" style="color:var(--avocado)">✓</span><span><strong>A tireless reviewer</strong> — critiques your work without getting bored on draft seven</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <p class="card-label">What Claude ISN'T</p>
+        <ul class="blist">
+          <li><span class="bi" style="color:var(--terracotta)">✕</span><span><strong>Your domain SME</strong> — it will sound confident about things it's wrong about. Always get expert review on technical content</span></li>
+          <li><span class="bi" style="color:var(--terracotta)">✕</span><span><strong>A source of truth</strong> — it doesn't know your organization, your learners, or last quarter's policy change</span></li>
+          <li><span class="bi" style="color:var(--terracotta)">✕</span><span><strong>Autonomous (without tools)</strong> — by default it can only work with what you put in the conversation</span></li>
+          <li><span class="bi" style="color:var(--terracotta)">✕</span><span><strong>A judgment replacer</strong> — when two design choices are genuinely in tension, that call is still yours</span></li>
+        </ul>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">How it differs from other tools</p>
+        <div class="feat-grid">
+          <div class="feat-box info">
+            <p class="feat-label">vs. Search engines</p>
+            <ul class="feat-list">
+              <li>Search retrieves existing content. Claude reasons through new problems.</li>
+              <li>Search gives you links. Claude gives you drafts.</li>
+              <li>Search doesn't know your constraints. Claude works within them.</li>
+            </ul>
+          </div>
+          <div class="feat-box info">
+            <p class="feat-label">vs. ChatGPT / other LLMs</p>
+            <ul class="feat-list">
+              <li>Similar capability class — the key difference is the context window (how much it can hold at once) and instruction-following quality.</li>
+              <li>Claude handles very long documents well — full storyboards, entire policy PDFs, multi-course curricula.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">A real exchange — what this looks like in practice</p>
+        <div class="prompt-box">
+          <div class="prompt-bar">
+            <div class="prompt-bar-dot" style="background:#D87854"></div>
+            <div class="prompt-bar-dot" style="background:#E8B752"></div>
+            <div class="prompt-bar-dot" style="background:#9DB35E"></div>
+            <span class="prompt-bar-label">conversation</span>
+          </div>
+          <div class="prompt-body">
+<span class="you">You →</span> Here's a brief I got from a stakeholder: "We need training on our new returns policy — it changed last month." What questions should I ask before I design anything?
+<br /><br />
+<span class="claude">Claude →</span> Before you design anything, I'd push on these:
+  1. What behavior is breaking down — are people processing returns wrong, or do they not know the policy changed?
+  2. What does a bad return interaction actually cost? (Returns, refunds, customer escalations?)
+  3. Is this a knowledge problem or a process problem? If the system doesn't surface the new policy at the moment of decision, training won't fix it.
+  4. Who are the learners — floor staff, phone agents, managers? Their context is completely different.
+  5. What's the actual deadline here, and does it allow for a pilot?
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── SKILLS ── -->
+  <div class="tab-panel" id="tp-skills">
+    <div class="panel-head">
+      <span class="ph-icon">/skill</span>
+      <div>
+        <div class="ph-name">Skills</div>
+        <div class="ph-sub">Pre-packaged workflows — expertise in a single command</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="card full">
+        <p class="card-label">What is a skill?</p>
+        <p class="card-text">A skill is a saved workflow that encodes the right sequence of thinking steps for a specific task. Instead of writing a long, careful prompt every time you need a scenario draft or a needs analysis, a skill does that setup for you automatically.</p>
+        <p class="card-text" style="margin-top:8px;">In <strong style="color:var(--ink)">Claude Code</strong> (the desktop app), skills appear as slash commands: type <span class="code-line">/scenario-draft</span> and Claude already knows the format, the questions to ask, and the output structure you want. In the <strong style="color:var(--ink)">Claude Agent SDK</strong>, skills are defined capabilities that agents can invoke as part of a larger workflow.</p>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Why this matters for L&D</p>
+        <ul class="blist">
+          <li><span class="bi">→</span><span><strong>Consistency</strong> — every scenario draft starts from the same structure, regardless of who on the team runs it</span></li>
+          <li><span class="bi">→</span><span><strong>Speed</strong> — no rebuilding the prompt from memory; the skill holds the pattern</span></li>
+          <li><span class="bi">→</span><span><strong>Shareable</strong> — a skill file is plain text. Your team can use the same one.</span></li>
+          <li><span class="bi">→</span><span><strong>Improvable</strong> — when a prompt pattern gets better, update the skill file once and everyone benefits</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <p class="card-label">Building your own</p>
+        <p class="card-text">Skills are plain text Markdown files. No coding required. If you can write a good prompt, you can build a skill.</p>
+        <p class="card-text" style="margin-top:8px;">In Claude Code, save a <span class="code-line">.md</span> file to <span class="code-line">.claude/commands/</span> in your project. Give it a name. That name becomes the slash command.</p>
+        <div class="hl-box" style="margin-top:10px;">
+          <p class="hl-box-label">The rule</p>
+          Find the task you do 10+ times a project (usually scenario writing or objective drafting). Get your prompt working great once. Save it as a skill.
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">L&D skill examples</p>
+        <table class="skill-table">
+          <thead>
+            <tr><th>Command</th><th>What it does</th><th>Input</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="cmd">/needs-analysis</span></td><td>Structures a brief into a diagnosis — separates training problems from process/tool problems</td><td>Stakeholder brief or interview notes</td></tr>
+            <tr><td><span class="cmd">/scenario-draft</span></td><td>Scaffolds a branching scenario with realistic trigger, 3 choices, and consequence-driven feedback</td><td>Situation description + wrong behavior to train against</td></tr>
+            <tr><td><span class="cmd">/objective-writer</span></td><td>Converts vague goals into Bloom's-aligned, application-level learning objectives</td><td>Stakeholder's stated goal</td></tr>
+            <tr><td><span class="cmd">/sme-interview</span></td><td>Generates action-mapping SME interview questions — behavior-focused, not knowledge-focused</td><td>Topic area + role of SME</td></tr>
+            <tr><td><span class="cmd">/kirkpatrick-plan</span></td><td>Builds an L1–L4 evaluation plan with realistic data sources and attribution honesty</td><td>Project brief + available data sources</td></tr>
+            <tr><td><span class="cmd">/launch-email</span></td><td>Drafts learner and manager launch communications that lead with learner benefit, not company need</td><td>Course summary + audience</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">What a skill definition looks like (simplified)</p>
+        <div class="prompt-box">
+          <div class="prompt-bar">
+            <div class="prompt-bar-dot" style="background:#D87854"></div>
+            <div class="prompt-bar-dot" style="background:#E8B752"></div>
+            <div class="prompt-bar-dot" style="background:#9DB35E"></div>
+            <span class="prompt-bar-label">.claude/commands/scenario-draft.md</span>
+          </div>
+          <div class="prompt-body">
+You are an instructional designer creating a branching scenario.
+<br /><br />
+Given the situation the user describes:<br />
+1. Write a realistic opening trigger (2–3 sentences, present tense, specific setting)<br />
+2. Offer exactly 3 choices — none obviously correct, all plausible<br />
+3. For each choice, write the realistic consequence (not "try again" — what actually happens)<br />
+4. Write a debrief that explains the reasoning, not just the correct answer<br /><br />
+
+Use conversational language. Avoid corporate training clichés.<br />
+Ask the user for the situation if they haven't provided one.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── MCP & TOOLS ── -->
+  <div class="tab-panel" id="tp-mcp">
+    <div class="panel-head">
+      <span class="ph-icon">MCP</span>
+      <div>
+        <div class="ph-name">MCP &amp; Tools</div>
+        <div class="ph-sub">How Claude connects to the world outside the conversation</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="card full">
+        <p class="card-label">What is MCP?</p>
+        <p class="card-text"><strong style="color:var(--ink)">MCP stands for Model Context Protocol.</strong> It's an open standard (published by Anthropic) that defines how AI models connect to external tools, data sources, and systems. Think of it as the universal connector between Claude and the rest of the software world.</p>
+        <p class="card-text" style="margin-top:8px;">Without MCP, Claude can only work with what you manually paste into the chat. With MCP, Claude can read files, search the web, write documents, call APIs, and run code — all within a conversation.</p>
+      </div>
+
+      <div class="analogy">
+        <div class="analogy-side dark">
+          <p class="analogy-label">Without MCP</p>
+          <p class="analogy-title">Sealed room</p>
+          <p class="analogy-desc">Claude is a brilliant advisor sitting in a room with no windows or doors. You have to carry every piece of information in yourself — copy-paste your SME notes, your storyboard template, your LMS report. Claude responds, and you carry the output back out manually.</p>
+        </div>
+        <div class="analogy-divider"></div>
+        <div class="analogy-side lit">
+          <p class="analogy-label">With MCP</p>
+          <p class="analogy-title">Connected workspace</p>
+          <p class="analogy-desc">MCP opens the doors. Claude can read your project files directly, pull data from Notion, search the web for compliance requirements, write files back to your hard drive, and run the code it just generated — all without you copy-pasting anything.</p>
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">MCP tool categories for L&D</p>
+        <div class="tool-grid">
+          <div class="tool-row">
+            <span class="tool-name">File system</span>
+            <span class="tool-desc">Read SME interview notes, write storyboard drafts, organize content libraries — directly from your project folder</span>
+          </div>
+          <div class="tool-row">
+            <span class="tool-name">Web search</span>
+            <span class="tool-desc">Research industry benchmarks, pull compliance requirements, find current data without leaving the conversation</span>
+          </div>
+          <div class="tool-row">
+            <span class="tool-name">Notion / Google Docs</span>
+            <span class="tool-desc">Read existing content docs, update project pages, sync resources across your workspace</span>
+          </div>
+          <div class="tool-row">
+            <span class="tool-name">Code runner</span>
+            <span class="tool-desc">Generate and immediately test HTML/JavaScript for interactive learning tools — Claude writes it, runs it, and fixes errors in one loop</span>
+          </div>
+          <div class="tool-row">
+            <span class="tool-name">Browser</span>
+            <span class="tool-desc">Preview what a course looks like in a browser, reference live UI for simulator design, capture screenshots</span>
+          </div>
+          <div class="tool-row">
+            <span class="tool-name">LMS / API</span>
+            <span class="tool-desc">Pull completion data, analyze assessment results, generate reports — if your LMS has an API, MCP can connect to it</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">What a connected workflow looks like</p>
+        <div class="prompt-box">
+          <div class="prompt-bar">
+            <div class="prompt-bar-dot" style="background:#D87854"></div>
+            <div class="prompt-bar-dot" style="background:#E8B752"></div>
+            <div class="prompt-bar-dot" style="background:#9DB35E"></div>
+            <span class="prompt-bar-label">Claude with file system + web search tools</span>
+          </div>
+          <div class="prompt-body">
+<span class="you">You →</span> Read the SME interview notes in /project/sme-notes.txt, then generate a storyboard outline using our standard template at /templates/storyboard-template.md. Save the result to /project/storyboard-draft.md.
+<br /><br />
+<span class="claude">Claude →</span> [reads sme-notes.txt] I can see 3 key behavior gaps in the notes. [reads storyboard-template.md] Using your template structure. [generates storyboard] [saves file]
+Done — storyboard saved to /project/storyboard-draft.md. I found 8 scenarios in the SME notes and drafted 3 of the highest-stakes ones in full detail. Want me to draft the remaining 5, or should we review the first batch first?
+          </div>
+        </div>
+        <div class="hl-box" style="margin-top:12px;">
+          <p class="hl-box-label">The shift</p>
+          Without tools: Claude is a writing assistant. With tools: Claude is a workflow partner that can complete multi-step L&D tasks end to end — without you manually moving information between steps.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── BUILD WITH AI ── -->
+  <div class="tab-panel" id="tp-build">
+    <div class="panel-head">
+      <span class="ph-icon">Build</span>
+      <div>
+        <div class="ph-name">Build with AI</div>
+        <div class="ph-sub">A catalog of L&D artifacts Claude can help you create</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="card full" style="padding-bottom:18px;">
+        <p class="card-label">Artifact catalog</p>
+        <div class="artifact-grid">
+          <div class="artifact-card">
+            <p class="artifact-cat terracotta">◆ Discovery &amp; Analysis</p>
+            <ul class="artifact-list">
+              <li>Needs analysis reports from interview notes</li>
+              <li>Performance gap diagnoses</li>
+              <li>SME interview question guides</li>
+              <li>Audience analysis summaries</li>
+              <li>Learning Design Documents (LDD)</li>
+            </ul>
+          </div>
+          <div class="artifact-card">
+            <p class="artifact-cat avocado">◆ Course Content</p>
+            <ul class="artifact-list">
+              <li>Rise 360 content outlines with section structure</li>
+              <li>Storyline slide scripts &amp; branching logic maps</li>
+              <li>Full narrator scripts (VO-ready)</li>
+              <li>Knowledge check questions with distractors</li>
+              <li>Scenario scripts with character dialogue</li>
+            </ul>
+          </div>
+          <div class="artifact-card">
+            <p class="artifact-cat teal">◆ Interactive Tools</p>
+            <ul class="artifact-list">
+              <li>HTML/JS learning simulations (no Storyline required)</li>
+              <li>Branching scenario players</li>
+              <li>Sales enablement product builders</li>
+              <li>Software process simulators</li>
+              <li>Decision-tree job aids</li>
+            </ul>
+          </div>
+          <div class="artifact-card">
+            <p class="artifact-cat mustard">◆ Delivery &amp; Evaluation</p>
+            <ul class="artifact-list">
+              <li>Manager one-pagers for launch prep</li>
+              <li>Learner launch communications</li>
+              <li>L1 reaction surveys</li>
+              <li>L3 behavioral observation checklists</li>
+              <li>Kirkpatrick evaluation plans</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">What to hand Claude vs. what to keep</p>
+        <div class="feat-grid">
+          <div class="feat-box yes">
+            <p class="feat-label">Hand to Claude</p>
+            <ul class="feat-list">
+              <li>First drafts of anything — especially things you'd revise anyway</li>
+              <li>Structural decisions (how to organize content, which modality to recommend)</li>
+              <li>Bulk generation (10 scenario branches, 20 quiz questions)</li>
+              <li>Plain HTML and JavaScript for interactive tools</li>
+              <li>Language polishing and consistency checks</li>
+            </ul>
+          </div>
+          <div class="feat-box no">
+            <p class="feat-label">Keep in your hands</p>
+            <ul class="feat-list">
+              <li>Domain accuracy review — always have an SME check technical content</li>
+              <li>Learner empathy — Claude doesn't know who's actually sitting in front of the course</li>
+              <li>Judgment calls when two design directions are genuinely in tension</li>
+              <li>The relationships: sponsor, SME, manager — that's still human work</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">Full build example — HTML learning tool</p>
+        <div class="prompt-box">
+          <div class="prompt-bar">
+            <div class="prompt-bar-dot" style="background:#D87854"></div>
+            <div class="prompt-bar-dot" style="background:#E8B752"></div>
+            <div class="prompt-bar-dot" style="background:#9DB35E"></div>
+            <span class="prompt-bar-label">Claude Code with file system tool</span>
+          </div>
+          <div class="prompt-body">
+<span class="you">You →</span> Build a de-escalation scenario trainer in plain HTML. The learner reads a frustrated customer message, picks a response from 3 options, and gets feedback with an empathy score. Save it to /output/deesc-trainer.html
+<br /><br />
+<span class="claude">Claude →</span> [generates HTML + JS + CSS] [saves file] [tests in browser] [fixes a bug in the scoring logic] Done. The file is at /output/deesc-trainer.html. It includes 5 customer scenarios, scored responses on empathy + resolution speed, and a summary screen at the end. Want me to add a print-to-PDF button for use as a coaching artifact?
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ── START HERE ── -->
+  <div class="tab-panel" id="tp-start">
+    <div class="panel-head">
+      <span class="ph-icon">Go →</span>
+      <div>
+        <div class="ph-name">Start Here</div>
+        <div class="ph-sub">Five days to working fluency with Claude</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="card full">
+        <p class="card-label">Your first week</p>
+        <div class="steps">
+          <div class="step">
+            <span class="step-n">1</span>
+            <span><strong>Day 1 — Pressure-test a brief.</strong> Take a current project brief and paste it into Claude. Ask: "What questions should I ask before designing training for this?" Watch what it surfaces that you'd have missed. Don't use the output directly — use it to sharpen your own thinking.</span>
+          </div>
+          <div class="step">
+            <span class="step-n">2</span>
+            <span><strong>Day 2 — Draft SME questions.</strong> Before your next SME interview, ask Claude to generate action-mapping questions for the topic. Compare them to what you'd have written. Use the best of both — you'll probably take 60% Claude, 40% yours.</span>
+          </div>
+          <div class="step">
+            <span class="step-n">3</span>
+            <span><strong>Day 3 — Restructure your notes.</strong> After an SME interview, paste your raw notes and ask Claude to extract the behaviors that distinguish expert from novice performers. It won't be perfect — but it'll be 80% of the way there in 30 seconds.</span>
+          </div>
+          <div class="step">
+            <span class="step-n">4</span>
+            <span><strong>Day 4 — Build something with code.</strong> Describe a simple interactive piece you wish you had: a decision-tree job aid, a talking-point flashcard, a quiz. Ask Claude to build it in plain HTML. Even if it's rough, you'll see what's possible.</span>
+          </div>
+          <div class="step">
+            <span class="step-n">5</span>
+            <span><strong>Day 5 — Save your best prompt as a skill.</strong> Identify which task you repeated most this week. Write a prompt that produces the output you want. Save it in a text file. That's your first skill — you can formalize it later.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-label">What to watch for</p>
+        <ul class="blist">
+          <li><span class="bi">→</span><span><strong>When Claude sounds confident and is wrong</strong> — this is your signal to push for SME review. It always sounds confident.</span></li>
+          <li><span class="bi">→</span><span><strong>When the output is generic</strong> — you didn't give it enough context. Add your learner profile, your company context, your constraints.</span></li>
+          <li><span class="bi">→</span><span><strong>When it gives you a both-sides answer</strong> — that's Claude avoiding the decision. Push back: "Given these specific constraints, which would you choose and why?"</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <p class="card-label">The only rule that matters</p>
+        <div class="hl-box">
+          <p class="hl-box-label">Core principle</p>
+          <strong style="color:var(--ink)">Use Claude on real work, not practice work.</strong>
+        </div>
+        <p class="card-text" style="margin-top:10px;">The fastest way to develop judgment about what Claude is good at is to see it succeed and fail on actual projects. Toy prompts don't build intuition. The moment it saves you an hour on something that actually mattered, you'll know how to use it.</p>
+      </div>
+
+      <div class="card full">
+        <p class="card-label">The workflow that actually works</p>
+        <div class="feat-grid">
+          <div class="feat-box info">
+            <p class="feat-label">Use Claude to accelerate</p>
+            <ul class="feat-list">
+              <li>Pressure-test the brief before you design anything</li>
+              <li>Draft interview questions, scenario scaffolds, objective language</li>
+              <li>Build interactive HTML tools you couldn't build alone</li>
+              <li>Review your own drafts for corporate-speak and unclear logic</li>
+            </ul>
+          </div>
+          <div class="feat-box info">
+            <p class="feat-label">Then filter hard</p>
+            <ul class="feat-list">
+              <li>Take what's useful, discard the generic</li>
+              <li>SME-verify anything domain-specific</li>
+              <li>Apply your judgment to the calls Claude can't make</li>
+              <li>Save your best patterns as skills for next time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="app-footer">Parker Lee · parkerclee.com</p>
+</div>
+
+<script>
+  const btns   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tab;
+      btns.forEach(b   => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById('tp-' + t).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

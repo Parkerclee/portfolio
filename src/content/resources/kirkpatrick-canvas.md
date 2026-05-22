@@ -4,11 +4,11 @@ blurb: "A single-page canvas I fill in with the sponsor during Discovery, so eva
 type: "Template"
 tags: ["Evaluation", "Kirkpatrick", "xAPI"]
 timeToUse: "45 min with a sponsor"
-downloadUrl: "/resources/downloads/kirkpatrick-canvas.pdf"
-downloadLabel: "Download the canvas (PDF)"
+embedUrl: "/resources/kirkpatrick-app/index.html"
+embedMinHeight: "680px"
 color: "terracotta"
 featured: false
-order: 4
+order: 3
 draft: false
 ---
 

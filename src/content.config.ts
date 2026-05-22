@@ -28,7 +28,7 @@ const resources = defineCollection({
   schema: z.object({
     title: z.string(),
     blurb: z.string(),
-    type: z.enum(['Framework', 'Template', 'Prompt library', 'Tool walkthrough', 'Case pattern', 'Interactive']),
+    type: z.enum(['Framework', 'Template', 'Prompt library', 'Tool walkthrough', 'Case pattern', 'Interactive', 'Guide']),
     tags: z.array(z.string()).default([]),
     timeToUse: z.string().optional(),
     downloadUrl: z.string().optional(),

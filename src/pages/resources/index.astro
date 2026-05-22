@@ -17,6 +17,7 @@ const typeColor: Record<string, { tag: string; ring: string }> = {
   'Tool walkthrough':  { tag: 'bg-secondary-100 text-secondary-700 border-secondary-200', ring: 'from-secondary-100/60 to-cream-50' },
   'Case pattern':      { tag: 'bg-primary-100 text-primary-700 border-primary-200',       ring: 'from-primary-100/60 to-cream-50' },
   'Interactive':       { tag: 'bg-accent-400/25 text-accent-700 border-accent-500/40',    ring: 'from-accent-400/25 to-cream-50' },
+  'Guide':             { tag: 'bg-secondary-100 text-secondary-700 border-secondary-200', ring: 'from-secondary-100/60 to-cream-50' },
 };
 
 function theme(type: string) {
@@ -132,7 +133,7 @@ const allTypes = Array.from(new Set(all.map(r => r.data.type)));
     </div>
   </section>
 
-  <section class="bg-espresso py-14 text-cream">
+  <section class="bg-[#111111] py-14 text-cream">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-display font-semibold text-2xl sm:text-3xl mb-3">
         Have something you want me to build?

@@ -4,8 +4,8 @@ blurb: "Discover, Design, Build, Deliver, Measure. The version I use on actual e
 type: "Framework"
 tags: ["Methodology", "Project kickoff", "Action mapping"]
 timeToUse: "About an hour to adapt"
-downloadUrl: "/resources/downloads/five-phase-framework.pdf"
-downloadLabel: "Download the canvas (PDF)"
+embedUrl: "/resources/five-phase-app/index.html"
+embedMinHeight: "730px"
 color: "avocado"
 featured: true
 order: 2
