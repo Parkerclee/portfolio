@@ -7,8 +7,9 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
 const all = (await getCollection('resources', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 
-const featured = all.filter(r => r.data.featured);
-const rest = all.filter(r => !r.data.featured);
+// Quick grabs read in a couple of minutes; deep dives are the interactive guides.
+const quick = all.filter(r => !r.data.embedUrl);
+const deep = all.filter(r => r.data.embedUrl);
 
 const typeColor: Record<string, { tag: string; ring: string }> = {
   'Framework':         { tag: 'bg-secondary-100 text-secondary-700 border-secondary-200', ring: 'from-secondary-100/60 to-cream-50' },
@@ -23,8 +24,6 @@ const typeColor: Record<string, { tag: string; ring: string }> = {
 function theme(type: string) {
   return typeColor[type] ?? typeColor['Template'];
 }
-
-const allTypes = Array.from(new Set(all.map(r => r.data.type)));
 ---
 <BaseLayout
   title="Free Resources"
@@ -38,37 +37,81 @@ const allTypes = Array.from(new Set(all.map(r => r.data.type)));
         The stuff I use, <span class="italic text-primary-600">shared freely</span>.
       </h1>
       <p class="mt-5 text-lg text-cocoa/75 max-w-2xl leading-relaxed">
-        Frameworks, templates, and interactive pieces — written for the people who <em>own</em> the outcome as much as the people who build the training. If you're a manager or sponsor, these are the tools that tell you whether a program will actually move behavior before you fund it, and how AI and xAPI let you prove it in weeks instead of guessing at the next audit. No email gate. Take what's useful.
+        Tools for the people who <em>own</em> the outcome as much as the people who build the training. Quick grabs you can read in two minutes, and a few deeper interactive guides when you want them. No email gate — take what's useful.
       </p>
-      <div class="mt-8 flex flex-wrap gap-2">
-        {allTypes.map(t => (
-          <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-cocoa/20 text-cocoa/70 bg-cream-50">
-            {t}
-          </span>
-        ))}
-      </div>
     </div>
   </section>
 
   <WavyDivider class="-mt-2 relative z-10" />
 
-  {featured.length > 0 && (
+  <!-- Quick grabs — bite-size, two-minute reads -->
+  {quick.length > 0 && (
     <section class="bg-cream-50 py-16 sm:py-20">
       <div class="max-w-6xl mx-auto px-6">
-        <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-4">Featured</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          {featured.map(r => {
+        <div class="mb-5">
+          <p class="font-display text-sm uppercase tracking-widest text-cocoa/50">Quick grabs</p>
+          <p class="text-cocoa/60 text-sm mt-1">Read in two minutes. Copy what's useful, skip the rest.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {quick.map(r => {
             const t = theme(r.data.type);
             return (
               <a
                 href={`/resources/${r.id}`}
-                class="group relative block rounded-3xl border border-cocoa/15 bg-paper p-6 sm:p-7 hover:border-primary-400 hover:shadow-xl hover:shadow-primary-600/10 transition-all"
+                class="group flex flex-col rounded-2xl border border-cocoa/15 bg-paper p-5 sm:p-6 hover:border-primary-400 hover:shadow-lg hover:shadow-primary-600/10 transition-all"
+              >
+                <div class="flex items-center gap-2">
+                  <span class={`inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold border ${t.tag}`}>
+                    {r.data.type}
+                  </span>
+                  {r.data.timeToUse && (
+                    <span class="text-[11px] font-semibold text-cocoa/45">{r.data.timeToUse}</span>
+                  )}
+                </div>
+                <h3 class="mt-3.5 font-display font-semibold text-lg text-cocoa leading-tight">
+                  {r.data.title}
+                </h3>
+                <p class="mt-2 text-cocoa/70 leading-relaxed text-sm flex-1">
+                  {r.data.blurb}
+                </p>
+                <span class="mt-4 text-sm font-semibold text-primary-600 inline-flex items-center gap-1 group-hover:gap-1.5 transition-all">
+                  Open
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Deep dives — the interactive guides -->
+  {deep.length > 0 && (
+    <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-5">
+          <p class="font-display text-sm uppercase tracking-widest text-cocoa/50">Deep dives</p>
+          <p class="text-cocoa/60 text-sm mt-1">Interactive guides for when you want the whole picture.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          {deep.map(r => {
+            const t = theme(r.data.type);
+            return (
+              <a
+                href={`/resources/${r.id}`}
+                class="group relative block rounded-3xl border border-cocoa/15 bg-cream-50 p-6 sm:p-7 hover:border-primary-400 hover:shadow-xl hover:shadow-primary-600/10 transition-all"
               >
                 <div class={`absolute inset-x-0 top-0 h-24 rounded-t-3xl bg-gradient-to-b ${t.ring} opacity-70 pointer-events-none`}></div>
                 <div class="relative">
-                  <span class={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold border ${t.tag}`}>
-                    {r.data.type}
-                  </span>
+                  <div class="flex items-center gap-2">
+                    <span class={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold border ${t.tag}`}>
+                      {r.data.type}
+                    </span>
+                    <span class="text-[11px] font-semibold text-cocoa/45">Interactive</span>
+                  </div>
                   <h2 class="mt-5 font-display font-semibold text-xl text-cocoa leading-tight">
                     {r.data.title}
                   </h2>
@@ -92,46 +135,6 @@ const allTypes = Array.from(new Set(all.map(r => r.data.type)));
       </div>
     </section>
   )}
-
-  <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
-    <div class="max-w-6xl mx-auto px-6">
-      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-4">Everything else</p>
-      {rest.length === 0 ? (
-        <p class="text-cocoa/60">More resources coming.</p>
-      ) : (
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {rest.map(r => {
-            const t = theme(r.data.type);
-            return (
-              <a
-                href={`/resources/${r.id}`}
-                class="group block rounded-2xl border border-cocoa/15 bg-cream-50 p-5 sm:p-6 hover:border-primary-400 hover:shadow-lg hover:shadow-primary-600/10 transition-all"
-              >
-                <span class={`inline-block px-2 py-1 rounded-full text-[11px] font-semibold border ${t.tag}`}>
-                  {r.data.type}
-                </span>
-                <h3 class="mt-4 font-display font-semibold text-lg text-cocoa leading-tight">
-                  {r.data.title}
-                </h3>
-                <p class="mt-2 text-cocoa/70 leading-relaxed text-sm">
-                  {r.data.blurb}
-                </p>
-                <div class="mt-4 flex items-center justify-between text-xs text-cocoa/55">
-                  <span>{r.data.timeToUse ?? ''}</span>
-                  <span class="font-semibold text-primary-600 inline-flex items-center gap-1">
-                    Open
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </div>
-              </a>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  </section>
 
   <section class="bg-[#111111] py-14 text-cream">
     <div class="max-w-3xl mx-auto px-6 text-center">
