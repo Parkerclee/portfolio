@@ -194,6 +194,20 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
     padding: 0.15rem 0.4rem;
     border-radius: 0.35rem;
   }
+  .prose :global(pre) {
+    padding: 1rem 1.1rem;
+    border-radius: 0.7rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    border: 1px solid rgba(85, 56, 36, 0.15);
+  }
+  .prose :global(pre code) {
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+  }
   .prose :global(hr) {
     border: none;
     border-top: 1px dashed rgba(85, 56, 36, 0.25);
