@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MoonStar from '../../components/decor/MoonStar.astro';
+import Sparkles from '../../components/decor/Sparkles.astro';
+import WavyDivider from '../../components/decor/WavyDivider.astro';
+import PracticeRoom from '../../components/PracticeRoom/PracticeRoom';
+---
+<BaseLayout
+  title="Practice Room — AI Roleplay"
+  description="A leader practices a hard 1:1 with an AI-played teammate who reacts in the moment. Live read on how it's landing, every turn streamed to the LRS as xAPI, and an AI coaching debrief at the end."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-paper paper-bg">
+    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+    <Sparkles class="hidden md:block absolute bottom-8 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-20">
+      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">What AI unlocks · scenario-based practice</p>
+      <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+        You can read about hard conversations. Or you can <span class="italic text-primary-600">have one</span>.
+      </h1>
+      <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        Slide decks and quizzes can't rehearse a moment that talks back. This one can: a leader walks into a 1:1 with
+        a teammate who's quietly checked out, and practices the actual skill — making it safe, listening before
+        fixing, naming the pattern without blame. The teammate reacts to what you really say, the read on how it's
+        landing moves live, and every turn streams to the LRS as xAPI so the behavior is measurable, not just the click.
+      </p>
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <!-- The experience -->
+  <section class="bg-cream-50 py-12 sm:py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <PracticeRoom client:load />
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="bg-paper border-t border-cocoa/10 py-14">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">Practice, not exposure</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">The first time a manager has this conversation shouldn't be with a real person who's actually struggling. Here they can take a wrong turn, watch it land badly, and run it again.</p>
+        </div>
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">The thing only AI does</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">A branching scenario has a fixed set of right answers. A model plays a person — it improvises, gets defensive, opens up, and the debrief reads back what <em>you</em> actually said.</p>
+        </div>
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">Measurable behavior</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">Every turn is an xAPI statement — the approach taken, the read at that moment, the rubric at the end — landing in the LRS and rolling up to the <a href="/dashboard" class="text-primary-600 font-semibold hover:underline">manager dashboard</a> as Kirkpatrick L3.</p>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-cocoa/55 max-w-3xl">
+        The conversation runs live against a model when one is connected; on this static page it runs as a guided
+        version off the same design so it's always fully playable. Sam is fictional — the burnout pattern is not.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
