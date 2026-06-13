@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MoonStar from '../components/decor/MoonStar.astro';
+import Sparkles from '../components/decor/Sparkles.astro';
+import WavyDivider from '../components/decor/WavyDivider.astro';
+
+const values = [
+  {
+    num: '01',
+    title: 'Learning is behavior change, not content delivery.',
+    body: 'Completion rates are flattering; behavior change is the job. Every project starts by naming the behavior the business actually needs, then working backwards to the smallest intervention that will move it.',
+    color: 'terracotta',
+  },
+  {
+    num: '02',
+    title: 'Pick the right modality, even when it\'s harder.',
+    body: 'Rise is my default when content is linear. Code-built when interaction fidelity or data granularity matters. Blended when the behavior only transfers through practice with feedback. The modality is a design decision, not a department default.',
+    color: 'avocado',
+  },
+  {
+    num: '03',
+    title: 'AI is a power tool, not a shortcut.',
+    body: 'I use Cursor + Claude to compress weeks of scaffolding into days — scenario drafts, SCORM packaging, xAPI pipelines, UI prototypes. The judgment, the voice, and the final call are still mine. This portfolio is itself a proof of what that partnership makes possible on a small team budget.',
+    color: 'mustard',
+  },
+  {
+    num: '04',
+    title: 'If you can\'t measure it, you can\'t defend it.',
+    body: 'Kirkpatrick 1-4 isn\'t an afterthought; it\'s baked in from Discovery. xAPI statements designed against the sponsor\'s dashboard, not the LMS\'s default report. The story the data tells is as important as the training itself.',
+    color: 'terracotta',
+  },
+];
+
+const tools = [
+  { label: 'Design & authoring', items: ['Articulate Rise 360', 'Storyline 360', 'Illustrator', 'InDesign', 'Figma', 'Canva'] },
+  { label: 'Video & motion', items: ['After Effects', 'Adobe Premiere', 'Google Vids', 'Camtasia'] },
+  { label: 'Code & AI', items: ['Cursor', 'Claude', 'Astro', 'Tailwind', 'HTML / CSS / JS'] },
+  { label: 'Data & delivery', items: ['xAPI 1.0.3', 'SCORM 1.2 / 2004', 'SCORM Cloud', 'Looker', 'Bynder', 'Bridge LMS', 'Chart.js'] },
+  { label: 'Methodology', items: ['Action mapping', 'Competency-based design', 'Flipped classroom', 'Kirkpatrick L1–L4'] },
+];
+---
+<BaseLayout
+  title="About"
+  description="Parker Lee — instructional designer using AI as a development partner to build learning experiences that move business outcomes."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-paper paper-bg">
+    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+    <Sparkles class="hidden md:block absolute bottom-8 right-8 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+
+    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-28">
+      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">About</p>
+      <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+        I design learning that <span class="italic text-primary-600">moves the metric</span>.
+      </h1>
+      <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        I'm Parker Lee — senior learning experience designer at SoFi, working in fintech and financial services. My background spans financial services, retail, customer service, and manufacturing: whatever the industry, the job is the same. Figure out the actual gap, design the smallest intervention that closes it, and build something the learner's schedule can absorb. The last two years I've added AI-assisted development to the stack, which has quietly changed what a one-person L&D function can ship.
+      </p>
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <!-- Story -->
+  <section class="bg-cream-50 py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-6 space-y-8">
+      <div>
+        <h2 class="font-display font-semibold text-cocoa text-2xl sm:text-3xl mb-4 leading-tight">
+          How I got here
+        </h2>
+        <div class="space-y-4 text-cocoa/80 leading-relaxed text-[1.02rem]">
+          <p>
+            I started in the usual way — Rise modules, Storyline interactions, "make this policy into a course." The craft clicked immediately. It clicked a lot more when I could sit with subject matter experts and action-map the actual behavior we were trying to change. That's where I found my lane: sales enablement, customer service soft skills, compliance training, new-hire onboarding, and software simulators for systems nobody wanted to learn on live data.
+          </p>
+          <p>
+            I've built AI certification programs from scratch, administered LMSs with 80+ courses across multiple learning paths, and designed branded visual systems that SMEs actually want to use. At SoFi I've scaled curriculum architecture across six product lines, redesigned new hire programs with competency-based assessment gates, and built a needs-analysis methodology around real production data — agent communication signals, SOP coverage maps, rubric scoring — instead of just SME interviews. The throughline: <strong>design that respects the learner's time and moves a number the business cares about.</strong>
+          </p>
+          <p>
+            Then AI tooling got genuinely useful. Not "write me a script" useful — <em>build me a working prototype of a branching scenario engine</em> useful. Cursor and Claude changed what I can ship alone. A code-built EHR simulator that used to need a developer-ID pairing is now a week with a well-scoped spec. A pilot analytics dashboard that used to require a BI team is a weekend of Chart.js.
+          </p>
+          <p>
+            This portfolio is the proof. Every page — the case studies, the live simulator, the xAPI dashboard, this About page — was designed by me and built with an AI collaborator. The judgment is mine. The execution is shared. Let's work together if that's the kind of partner you want on your next program.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="bg-paper border-t border-cocoa/10 py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3 text-center">What I believe</p>
+      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl text-center mb-12 leading-tight">
+        Four principles I hold onto
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        {values.map(v => {
+          const colorClass =
+            v.color === 'terracotta' ? 'text-primary-500' :
+            v.color === 'avocado' ? 'text-secondary-600' :
+            'text-accent-700';
+          return (
+            <article class="rounded-3xl border border-cocoa/15 bg-cream-50 p-6 sm:p-7 retro-sheen">
+              <p class={`font-display font-semibold text-4xl mb-3 ${colorClass} leading-none`}>
+                {v.num}
+              </p>
+              <h3 class="font-display font-semibold text-cocoa text-lg mb-2 leading-tight">
+                {v.title}
+              </h3>
+              <p class="text-cocoa/75 leading-relaxed text-[0.96rem]">
+                {v.body}
+              </p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
+        <div>
+          <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3">The kit</p>
+          <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl leading-tight">
+            Tools I reach for
+          </h2>
+          <p class="mt-4 text-cocoa/70 leading-relaxed text-[0.96rem]">
+            Deep in some, comfortable in others. The list is less about mastery and more about the shape of work I can realistically own end-to-end.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          {tools.map(group => (
+            <div class="rounded-2xl border border-cocoa/15 bg-paper p-5">
+              <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/50 mb-3">
+                {group.label}
+              </p>
+              <ul class="flex flex-wrap gap-1.5">
+                {group.items.map(item => (
+                  <li class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-cream-50 border border-cocoa/15 text-cocoa/80">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond work -->
+  <section class="bg-paper border-t border-cocoa/10 py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="rounded-3xl border border-cocoa/15 bg-cream-50 p-7 sm:p-9">
+        <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
+          Outside of work
+        </h2>
+        <p class="text-cocoa/75 leading-relaxed">
+          I spend a lot of time outdoors, which is probably why the site ended up looking like a 70s national-parks guidebook. I read a lot about systems thinking, organizational design, and how small teams punch above their weight. I'm deeply interested in how AI changes what a single person can build, and in helping L&D functions get ahead of that curve rather than behind it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-espresso py-16 text-cream relative overflow-hidden">
+    <Sparkles class="absolute top-10 right-10 w-20 h-auto opacity-40 text-cream" />
+    <div class="relative max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4">
+        Let's make something <span class="italic text-accent-500">that works</span>.
+      </h2>
+      <p class="text-cream/75 leading-relaxed mb-8 max-w-xl mx-auto">
+        If your team is stuck between "we need training" and "we don't know what'll actually move the number" — that's the conversation I love having.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-espresso font-semibold retro-sheen hover:bg-accent-400 transition-colors"
+      >
+        Get in touch
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

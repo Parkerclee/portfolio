@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kirkpatrick L1–L4 Planning Canvas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper:       #FEFAF4;
+      --paper-2:     #F5EDE0;
+      --ink:         #2C1A0E;
+      --ink-2:       #553824;
+      --ink-3:       #8B6B52;
+      --line:        #E2D5C3;
+      --line-2:      #D0C0AB;
+      --canvas-bg:   #EDE3D4;
+      --mustard:     #E8B752;
+      --terracotta:  #D87854;
+      --avocado:     #9DB35E;
+      --teal:        #67A6A8;
+      --dark-fixed:  #2C1A0E;
+      --cream-fixed: #FEFAF4;
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      background: var(--canvas-bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .app { max-width: 900px; margin: 0 auto; padding: 28px 20px 40px; }
+    .app-kicker { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 4px; }
+    .app-title  { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .app-desc   { font-size: 14px; color: var(--ink-3); margin-bottom: 22px; max-width: 560px; }
+
+    /* Level nav */
+    .level-nav { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 16px; }
+    @media (max-width: 520px) { .level-nav { grid-template-columns: repeat(2,1fr); } }
+
+    .level-btn {
+      padding: 14px 8px; border-radius: var(--r-md);
+      border: 2px solid var(--line-2); background: var(--paper);
+      cursor: pointer; font-family: inherit; text-align: center;
+      transition: all 0.15s;
+    }
+    .level-btn:hover { border-color: var(--ink-3); }
+    .lv-num  { font-family: 'Bagel Fat One', serif; font-size: 28px; font-weight: 400; display: block; line-height: 1; margin-bottom: 4px; }
+    .lv-name { font-size: 12px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* Per-level accent colors */
+    .level-btn[data-lv="1"] .lv-num { color: var(--terracotta); }
+    .level-btn[data-lv="2"] .lv-num { color: #c89418; }
+    .level-btn[data-lv="3"] .lv-num { color: #4a7a18; }
+    .level-btn[data-lv="4"] .lv-num { color: #2a7070; }
+
+    .level-btn.active[data-lv="1"] { border-color: var(--terracotta); background: rgba(216,120,84,0.08); }
+    .level-btn.active[data-lv="2"] { border-color: #c89418;          background: rgba(232,183,82,0.10); }
+    .level-btn.active[data-lv="3"] { border-color: #4a7a18;          background: rgba(157,179,94,0.10); }
+    .level-btn.active[data-lv="4"] { border-color: #2a7070;          background: rgba(103,166,168,0.10); }
+
+    /* Panel */
+    .level-panel { display: none; }
+    .level-panel.active { display: block; }
+
+    /* Panel header */
+    .panel-head {
+      display: flex; align-items: center; gap: 20px;
+      padding: 20px 24px; border-radius: var(--r-lg) var(--r-lg) 0 0;
+      border: 2px solid transparent;
+    }
+    .panel-head[data-lv="1"] { background: rgba(216,120,84,0.10); border-color: rgba(216,120,84,0.25); }
+    .panel-head[data-lv="2"] { background: rgba(232,183,82,0.12); border-color: rgba(200,148,24,0.30); }
+    .panel-head[data-lv="3"] { background: rgba(157,179,94,0.12); border-color: rgba(74,122,24,0.25); }
+    .panel-head[data-lv="4"] { background: rgba(103,166,168,0.12); border-color: rgba(42,112,112,0.25); }
+
+    .big-lv { font-family: 'Bagel Fat One', serif; font-size: 64px; font-weight: 400; line-height: 1; flex-shrink: 0; }
+    .panel-head[data-lv="1"] .big-lv { color: var(--terracotta); }
+    .panel-head[data-lv="2"] .big-lv { color: #c89418; }
+    .panel-head[data-lv="3"] .big-lv { color: #4a7a18; }
+    .panel-head[data-lv="4"] .big-lv { color: #2a7070; }
+
+    .panel-name { font-size: 24px; font-weight: 700; color: var(--ink); }
+    .panel-sub  { font-size: 13px; color: var(--ink-3); margin-top: 3px; }
+
+    /* Canvas 3-col grid */
+    .canvas {
+      background: var(--paper); border: 2px solid var(--line-2);
+      border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
+      padding: 22px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 560px) { .canvas { grid-template-columns: 1fr; } }
+
+    .cell {
+      background: var(--paper-2); border: 1.5px solid var(--line);
+      border-radius: var(--r-md); padding: 15px 16px;
+    }
+    .cell-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 10px;
+    }
+    .cell-text  { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+    .cell-list  { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+    .cell-list li { display: flex; gap: 8px; font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+    .cell-list li::before { content: '·'; color: var(--ink-3); flex-shrink: 0; }
+
+    /* Effort dots */
+    .effort { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .dots   { display: flex; gap: 4px; }
+    .d-on  { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-2); }
+    .d-off { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); }
+    .effort-lbl { font-size: 12px; color: var(--ink-3); }
+
+    /* Honest box */
+    .honest {
+      margin-top: 10px; padding: 11px 13px;
+      border-radius: var(--r-sm);
+      background: rgba(216,120,84,0.07);
+      border: 1.5px solid rgba(216,120,84,0.22);
+      font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    }
+    .honest-lbl {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: #a04a28; margin-bottom: 5px;
+    }
+
+    .app-footer { margin-top: 20px; text-align: center; font-size: 12px; color: var(--ink-3); }
+  </style>
+</head>
+<body>
+<div class="app">
+  <p class="app-kicker">Parker Lee · Instructional Design</p>
+  <p class="app-title">Kirkpatrick L1–L4 Planning Canvas</p>
+  <p class="app-desc">Fill this in with your sponsor at kickoff. If L3 and L4 stay blank, that's a signal — not a problem to solve after launch.</p>
+
+  <div class="level-nav" role="tablist">
+    <button class="level-btn active" data-lv="1" role="tab" aria-selected="true">
+      <span class="lv-num">L1</span><span class="lv-name">Reaction</span>
+    </button>
+    <button class="level-btn" data-lv="2" role="tab" aria-selected="false">
+      <span class="lv-num">L2</span><span class="lv-name">Learning</span>
+    </button>
+    <button class="level-btn" data-lv="3" role="tab" aria-selected="false">
+      <span class="lv-num">L3</span><span class="lv-name">Behavior</span>
+    </button>
+    <button class="level-btn" data-lv="4" role="tab" aria-selected="false">
+      <span class="lv-num">L4</span><span class="lv-name">Results</span>
+    </button>
+  </div>
+
+  <!-- L1 -->
+  <div class="level-panel active" id="lp-1">
+    <div class="panel-head" data-lv="1">
+      <span class="big-lv">L1</span>
+      <div><div class="panel-name">Reaction</div><div class="panel-sub">Did learners find it relevant, engaging, and well-delivered?</div></div>
+    </div>
+    <div class="canvas">
+      <div class="cell">
+        <p class="cell-label">What we measure</p>
+        <p class="cell-text">Perceived relevance, satisfaction, and whether learners would recommend it. Not "did they like it" — "did they find it useful."</p>
+        <ul class="cell-list">
+          <li>Overall satisfaction (1–5)</li>
+          <li>Content relevance to their job</li>
+          <li>Pacing and length</li>
+          <li>Clarity of objectives</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <p class="cell-label">How we capture it</p>
+        <p class="cell-text">3–5 question survey immediately at course end. Completion rate drops fast after 5 questions — keep it short.</p>
+        <ul class="cell-list">
+          <li>LMS end-of-course survey</li>
+          <li>Reaction survey embedded in course</li>
+          <li>1–2 open qualitative questions</li>
+        </ul>
+        <div class="effort">
+          <div class="dots"><div class="d-on"></div><div class="d-off"></div><div class="d-off"></div></div>
+          <span class="effort-lbl">Low effort to collect</span>
+        </div>
+      </div>
+      <div class="cell">
+        <p class="cell-label">Who owns the signal</p>
+        <p class="cell-text">L&D designer reviews each cohort. Results feed into design improvements, not stakeholder reports.</p>
+        <ul class="cell-list">
+          <li>L&D: reviews scores + qualitative</li>
+          <li>Informs next iteration, not business case</li>
+        </ul>
+        <div class="honest">
+          <p class="honest-lbl">Honest ceiling</p>
+          L1 measures perception, not learning. High score ≠ retention. Low score is useful — it flags confusion or credibility problems worth fixing.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L2 -->
+  <div class="level-panel" id="lp-2">
+    <div class="panel-head" data-lv="2">
+      <span class="big-lv">L2</span>
+      <div><div class="panel-name">Learning</div><div class="panel-sub">Did knowledge, skill, or confidence actually change?</div></div>
+    </div>
+    <div class="canvas">
+      <div class="cell">
+        <p class="cell-label">What we measure</p>
+        <p class="cell-text">Knowledge acquisition, skill demonstration, and confidence shift from pre to post training.</p>
+        <ul class="cell-list">
+          <li>Knowledge check scores (pre vs. post)</li>
+          <li>Scenario performance in branching</li>
+          <li>Scored simulation accuracy</li>
+          <li>Self-reported confidence shift</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <p class="cell-label">How we capture it</p>
+        <p class="cell-text">In-course assessments and pre/post checks. If you're not adjusting design based on failure rates, you're not using L2 data.</p>
+        <ul class="cell-list">
+          <li>Knowledge checks (LMS tracks)</li>
+          <li>Branching scenario scoring</li>
+          <li>Pre-course baseline survey</li>
+          <li>xAPI statements for interaction data</li>
+        </ul>
+        <div class="effort">
+          <div class="dots"><div class="d-on"></div><div class="d-on"></div><div class="d-off"></div></div>
+          <span class="effort-lbl">Moderate effort</span>
+        </div>
+      </div>
+      <div class="cell">
+        <p class="cell-label">Who owns the signal</p>
+        <p class="cell-text">L&D tracks failure rates by question and scenario. Manager sees aggregate completion status.</p>
+        <ul class="cell-list">
+          <li>L&D: question-level failure analysis</li>
+          <li>Manager: pass/fail completion status</li>
+          <li>L&D adjusts design based on results</li>
+        </ul>
+        <div class="honest">
+          <p class="honest-lbl">Honest ceiling</p>
+          L2 measures what they knew in the training context — not what they'll do on the job. High L2 with low L3 is common and usually a design problem, not a learner problem.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L3 -->
+  <div class="level-panel" id="lp-3">
+    <div class="panel-head" data-lv="3">
+      <span class="big-lv">L3</span>
+      <div><div class="panel-name">Behavior</div><div class="panel-sub">Are learners applying it on the job, 30–90 days out?</div></div>
+    </div>
+    <div class="canvas">
+      <div class="cell">
+        <p class="cell-label">What we measure</p>
+        <p class="cell-text">Observable behavior change in the work environment. Not what they say they're doing — what managers observe or systems record.</p>
+        <ul class="cell-list">
+          <li>Manager observation reports</li>
+          <li>Behavioral checklist at 30/60/90 days</li>
+          <li>System/tool usage metrics</li>
+          <li>Quality audit results post-training</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <p class="cell-label">How we capture it</p>
+        <p class="cell-text">Requires manager pre-commitment before launch. If managers aren't in the plan before rollout, L3 data usually doesn't happen.</p>
+        <ul class="cell-list">
+          <li>Manager observation form</li>
+          <li>Pre/post quality audit</li>
+          <li>System data pull (if tool usage is the behavior)</li>
+          <li>Follow-up survey to manager + learner</li>
+        </ul>
+        <div class="effort">
+          <div class="dots"><div class="d-on"></div><div class="d-on"></div><div class="d-on"></div></div>
+          <span class="effort-lbl">High effort to collect</span>
+        </div>
+      </div>
+      <div class="cell">
+        <p class="cell-label">Who owns the signal</p>
+        <p class="cell-text">Shared between L&D and the direct manager. L&D designs the instrument; manager collects and reports.</p>
+        <ul class="cell-list">
+          <li>Manager: observation + reporting</li>
+          <li>L&D: instrument design + synthesis</li>
+          <li>Sponsor: sees aggregate trend</li>
+        </ul>
+        <div class="honest">
+          <p class="honest-lbl">Honest ceiling</p>
+          Even real behavior change is hard to attribute to training alone. Acknowledge other factors — manager coaching, process changes — in any L3 readout.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L4 -->
+  <div class="level-panel" id="lp-4">
+    <div class="panel-head" data-lv="4">
+      <span class="big-lv">L4</span>
+      <div><div class="panel-name">Results</div><div class="panel-sub">Did business outcomes move — and can we defend the causal link?</div></div>
+    </div>
+    <div class="canvas">
+      <div class="cell">
+        <p class="cell-label">What we measure</p>
+        <p class="cell-text">The business metric this training was supposed to move. Defined at kickoff with the sponsor — not retrofitted after launch.</p>
+        <ul class="cell-list">
+          <li>Compliance / audit pass rates</li>
+          <li>Quality scores or error rates</li>
+          <li>Sales conversion metrics</li>
+          <li>Customer satisfaction scores</li>
+          <li>Time-to-productivity for new hires</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <p class="cell-label">How we capture it</p>
+        <p class="cell-text">This data usually exists in the business already. The work is connecting L&D's training cohort to the relevant metric window.</p>
+        <ul class="cell-list">
+          <li>Business reporting / BI tools</li>
+          <li>Pre/post with control group</li>
+          <li>Time-series analysis vs. baseline</li>
+          <li>Partner with data/analytics team early</li>
+        </ul>
+        <div class="effort">
+          <div class="dots"><div class="d-on"></div><div class="d-on"></div><div class="d-on"></div></div>
+          <span class="effort-lbl">Very high — plan at kickoff</span>
+        </div>
+      </div>
+      <div class="cell">
+        <p class="cell-label">Who owns the signal</p>
+        <p class="cell-text">Sponsor owns the business metric. L&D's job is to connect it to the intervention and be honest about what can be attributed.</p>
+        <ul class="cell-list">
+          <li>Sponsor: business metric tracking</li>
+          <li>L&D: connects cohort to data</li>
+          <li>Analytics team: statistical support</li>
+        </ul>
+        <div class="honest">
+          <p class="honest-lbl">Honest ceiling</p>
+          L4 attribution is almost never clean. Market conditions, leadership, and process changes affect the same metrics. Overpromising damages L&D credibility more than admitting uncertainty.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="app-footer">Parker Lee · parkerclee.com</p>
+</div>
+
+<script>
+  const btns   = document.querySelectorAll('.level-btn');
+  const panels = document.querySelectorAll('.level-panel');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lv = btn.dataset.lv;
+      btns.forEach(b   => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById('lp-' + lv).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

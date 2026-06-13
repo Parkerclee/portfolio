@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>xAPI Sandbox — Allergy Verification Micro-check</title>
+  <meta name="description" content="A live xAPI statement sandbox — watch statements flow from a micro-lesson into a mock LRS in real time." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <div>
+        <p class="app__eyebrow">Crestline Health · xAPI Sandbox</p>
+        <h1 class="app__title">Allergy Verification — live statement stream</h1>
+      </div>
+      <div class="app__endpoint">
+        <label for="endpoint">LRS endpoint</label>
+        <select id="endpoint">
+          <option value="mock">Local mock (in-browser)</option>
+          <option value="live">Live Learning Locker (localhost)</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="app__live-config" id="liveConfig" hidden aria-label="Live LRS configuration">
+      <div class="live-config">
+        <div class="live-config__row">
+          <label for="lrsBase">Base URL</label>
+          <input id="lrsBase" type="url" spellcheck="false" placeholder="http://localhost:8080" />
+        </div>
+        <div class="live-config__row">
+          <label for="lrsKey">Client key</label>
+          <input id="lrsKey" type="text" spellcheck="false" placeholder="(from Learning Locker → Settings → Clients)" />
+        </div>
+        <div class="live-config__row">
+          <label for="lrsSecret">Client secret</label>
+          <input id="lrsSecret" type="password" spellcheck="false" placeholder="(from Learning Locker → Settings → Clients)" />
+        </div>
+        <div class="live-config__row">
+          <label for="lrsAuth">Auth header</label>
+          <input id="lrsAuth" type="text" spellcheck="false" placeholder='Optional: paste "Basic …" from Learning Locker' />
+        </div>
+        <p class="live-config__hint">
+          This demo sends statements to <code>/data/xAPI/statements</code> with Basic Auth + <code>X-Experience-API-Version: 1.0.3</code>.
+          Values are saved in your browser storage.
+        </p>
+      </div>
+    </section>
+
+    <main class="app__grid">
+      <!-- LEFT: Micro-lesson -->
+      <section class="panel panel--lesson" aria-label="Micro-lesson">
+        <div class="panel__header">
+          <span class="pill pill--terracotta">Learner view</span>
+          <button class="btn btn--ghost" id="restart" type="button">Restart</button>
+        </div>
+
+        <div class="lesson" id="lesson">
+          <!-- Step 1: Launch -->
+          <div class="lesson__step" data-step="1">
+            <p class="lesson__kicker">Step 1 of 3 · Launch</p>
+            <h2 class="lesson__heading">Allergy verification micro-check</h2>
+            <p class="lesson__body">
+              You'll be shown a short order scenario. Your job is to verify the allergy record before the order is placed. Takes about 90 seconds.
+            </p>
+            <button class="btn btn--primary" data-action="launch">Begin</button>
+          </div>
+
+          <!-- Step 2: Question -->
+          <div class="lesson__step" data-step="2" hidden>
+            <p class="lesson__kicker">Step 2 of 3 · Decision</p>
+            <h2 class="lesson__heading">Order proposed: <em>Amoxicillin 500mg PO</em></h2>
+            <p class="lesson__body">
+              Patient record shows: <strong>Penicillin — anaphylaxis (2019)</strong>. What do you do?
+            </p>
+            <div class="lesson__choices">
+              <button class="choice" data-choice="safe" data-correct="true">
+                Hold the order and page the attending
+              </button>
+              <button class="choice" data-choice="override">
+                Proceed — amoxicillin is different enough
+              </button>
+              <button class="choice" data-choice="ignore">
+                Administer and monitor
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Complete -->
+          <div class="lesson__step" data-step="3" hidden>
+            <p class="lesson__kicker">Step 3 of 3 · Result</p>
+            <h2 class="lesson__heading" id="resultHeading">—</h2>
+            <p class="lesson__body" id="resultBody">—</p>
+            <button class="btn btn--primary" data-action="complete">Mark complete</button>
+          </div>
+
+          <!-- Done -->
+          <div class="lesson__step lesson__step--done" data-step="4" hidden>
+            <p class="lesson__kicker">Session complete</p>
+            <h2 class="lesson__heading">Statements delivered to the LRS.</h2>
+            <p class="lesson__body">
+              Watch the right panel — every action you just took produced an xAPI statement. Hit <em>Restart</em> to run another learner through.
+            </p>
+          </div>
+        </div>
+
+        <div class="lesson__progress" aria-hidden="true">
+          <span class="progress-dot" data-dot="1"></span>
+          <span class="progress-dot" data-dot="2"></span>
+          <span class="progress-dot" data-dot="3"></span>
+        </div>
+      </section>
+
+      <!-- RIGHT: Statement feed -->
+      <section class="panel panel--feed" aria-label="xAPI statement feed">
+        <div class="panel__header">
+          <span class="pill pill--avocado">xAPI feed</span>
+          <span class="panel__count" id="statementCount">0 statements</span>
+        </div>
+        <ol class="feed" id="feed">
+          <li class="feed__empty">No statements yet. Start the lesson on the left — each action will land here as an xAPI statement.</li>
+        </ol>
+      </section>
+    </main>
+
+    <!-- BOTTOM: Mini dashboard -->
+    <section class="dashboard" aria-label="Mini analytics dashboard">
+      <div class="dashboard__header">
+        <span class="pill pill--mustard">Mini dashboard</span>
+        <p class="dashboard__hint">Aggregated from the statement stream, same as a real LRS report.</p>
+      </div>
+      <div class="dashboard__grid">
+        <div class="metric">
+          <p class="metric__label">Attempts</p>
+          <p class="metric__value" id="mAttempts">0</p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Completions</p>
+          <p class="metric__value" id="mCompletions">0</p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Pass rate</p>
+          <p class="metric__value" id="mPassRate">—</p>
+        </div>
+        <div class="metric">
+          <p class="metric__label">Avg time to decision</p>
+          <p class="metric__value" id="mAvgTime">—</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

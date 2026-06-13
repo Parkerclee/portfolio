@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Five-Phase ID Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper:       #FEFAF4;
+      --paper-2:     #F5EDE0;
+      --ink:         #2C1A0E;
+      --ink-2:       #553824;
+      --ink-3:       #8B6B52;
+      --line:        #E2D5C3;
+      --line-2:      #D0C0AB;
+      --canvas-bg:   #EDE3D4;
+      --mustard:     #E8B752;
+      --terracotta:  #D87854;
+      --avocado:     #9DB35E;
+      --teal:        #67A6A8;
+      --dark-fixed:  #2C1A0E;
+      --cream-fixed: #FEFAF4;
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      background: var(--canvas-bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .app { max-width: 860px; margin: 0 auto; padding: 28px 20px 40px; }
+
+    .app-kicker { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 4px; }
+    .app-title  { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+
+    /* Phase nav */
+    .phase-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .phase-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: var(--r-xl);
+      border: 1.5px solid var(--line-2); background: var(--paper);
+      font-size: 13px; font-weight: 600; color: var(--ink-3);
+      cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .phase-btn:hover { border-color: var(--ink-2); color: var(--ink-2); }
+    .phase-btn.active { background: var(--ink); color: var(--cream-fixed); border-color: var(--ink); }
+    .phase-btn .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-2); flex-shrink: 0; }
+    .phase-btn.active .dot { background: var(--mustard); }
+
+    /* Phase panel */
+    .phase-panel { display: none; }
+    .phase-panel.active { display: block; }
+
+    /* Panel header */
+    .panel-head {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--ink); color: var(--cream-fixed);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      padding: 22px 26px;
+    }
+    .panel-num {
+      font-family: 'Bagel Fat One', serif; font-weight: 400;
+      font-size: 56px; line-height: 1; color: var(--mustard); flex-shrink: 0;
+    }
+    .panel-name  { font-size: 26px; font-weight: 700; }
+    .panel-sub   { font-size: 13px; color: rgba(242,233,214,0.7); margin-top: 3px; }
+
+    /* Panel body */
+    .panel-body {
+      background: var(--paper); border: 1.5px solid var(--line-2);
+      border-top: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
+      padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    @media (max-width: 580px) { .panel-body { grid-template-columns: 1fr; } }
+
+    /* Card */
+    .card {
+      background: var(--paper-2); border: 1.5px solid var(--line);
+      border-radius: var(--r-md); padding: 16px 18px;
+    }
+    .card.full { grid-column: 1 / -1; }
+    .card-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--ink-3); margin-bottom: 12px;
+    }
+
+    /* Q list */
+    .q-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .q-list li { display: flex; gap: 10px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+    .q-num { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--mustard); flex-shrink: 0; width: 20px; padding-top: 2px; }
+
+    /* AI can/can't */
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 580px) { .ai-grid { grid-template-columns: 1fr; } }
+    .ai-box { border-radius: var(--r-sm); padding: 12px 14px; }
+    .ai-box.can  { background: rgba(157,179,94,0.12); border: 1.5px solid rgba(157,179,94,0.35); }
+    .ai-box.cant { background: rgba(216,120,84,0.08); border: 1.5px solid rgba(216,120,84,0.25); }
+    .ai-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 7px; }
+    .ai-box.can  .ai-label { color: #4a7a18; }
+    .ai-box.cant .ai-label { color: #a04a28; }
+    .ai-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .ai-list li { font-size: 13px; color: var(--ink-2); display: flex; gap: 6px; line-height: 1.45; }
+    .ai-list li::before { content: '→'; flex-shrink: 0; opacity: 0.5; }
+
+    /* Modality rows */
+    .mod-grid { display: flex; flex-direction: column; gap: 7px; }
+    .mod-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 12px; border-radius: var(--r-sm);
+      background: var(--paper); border: 1.5px solid var(--line);
+      font-size: 13px;
+    }
+    .mod-tool { font-weight: 700; color: var(--ink); min-width: 100px; flex-shrink: 0; }
+    .mod-desc { color: var(--ink-3); line-height: 1.4; }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 8px; }
+    .step { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+    .step-n {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--mustard); color: var(--dark-fixed);
+      font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .app-footer { margin-top: 20px; text-align: center; font-size: 12px; color: var(--ink-3); }
+  </style>
+</head>
+<body>
+<div class="app">
+  <p class="app-kicker">Parker Lee · Instructional Design</p>
+  <p class="app-title">Five-Phase ID Framework</p>
+
+  <nav class="phase-nav" role="tablist">
+    <button class="phase-btn active" role="tab" aria-selected="true"  data-phase="discover"><span class="dot"></span>Discover</button>
+    <button class="phase-btn"        role="tab" aria-selected="false" data-phase="design">  <span class="dot"></span>Design</button>
+    <button class="phase-btn"        role="tab" aria-selected="false" data-phase="build">   <span class="dot"></span>Build</button>
+    <button class="phase-btn"        role="tab" aria-selected="false" data-phase="deliver"> <span class="dot"></span>Deliver</button>
+    <button class="phase-btn"        role="tab" aria-selected="false" data-phase="measure"> <span class="dot"></span>Measure</button>
+  </nav>
+
+  <!-- DISCOVER -->
+  <div class="phase-panel active" id="panel-discover">
+    <div class="panel-head">
+      <span class="panel-num">01</span>
+      <div><div class="panel-name">Discover</div><div class="panel-sub">Verify the problem before designing any solution</div></div>
+    </div>
+    <div class="panel-body">
+      <div class="card full">
+        <p class="card-label">Questions I won't skip</p>
+        <ul class="q-list">
+          <li><span class="q-num">01</span><span>What behavior is missing or wrong — observable, on the job?</span></li>
+          <li><span class="q-num">02</span><span>What happens when someone gets it wrong? What's the real cost?</span></li>
+          <li><span class="q-num">03</span><span>Who decided this is a training problem — and did anyone push back?</span></li>
+          <li><span class="q-num">04</span><span>Can you show me what expert performance looks like, or introduce me to someone who does it well?</span></li>
+          <li><span class="q-num">05</span><span>Is the gap in knowledge, skill, or environment — process, tools, management clarity?</span></li>
+          <li><span class="q-num">06</span><span>What would change if training worked perfectly? Would you see it in a metric?</span></li>
+          <li><span class="q-num">07</span><span>What do learners already know? What's their context coming in?</span></li>
+          <li><span class="q-num">08</span><span>What's the real timeline, and is it realistic for the scope being described?</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">SME action-mapping script</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>Ask what experts <em>do</em>, not what they <em>know</em></span></li>
+          <li><span class="q-num">→</span><span>"Walk me through the last time this went wrong — specifically."</span></li>
+          <li><span class="q-num">→</span><span>"What would a great performer do at this decision point that a novice wouldn't?"</span></li>
+          <li><span class="q-num">→</span><span>Push vague answers: "What does that look like on the floor?"</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">AI + this phase</p>
+        <div class="ai-grid">
+          <div class="ai-box can">
+            <p class="ai-label">✓ Can help</p>
+            <ul class="ai-list">
+              <li>Draft SME interview questions</li>
+              <li>Pressure-test the brief</li>
+              <li>Flag non-training problems</li>
+            </ul>
+          </div>
+          <div class="ai-box cant">
+            <p class="ai-label">✕ Can't replace</p>
+            <ul class="ai-list">
+              <li>The actual SME conversation</li>
+              <li>Org and culture context</li>
+              <li>Training vs. process judgment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN -->
+  <div class="phase-panel" id="panel-design">
+    <div class="panel-head">
+      <span class="panel-num">02</span>
+      <div><div class="panel-name">Design</div><div class="panel-sub">Pick the right modality. Structure before building.</div></div>
+    </div>
+    <div class="panel-body">
+      <div class="card full">
+        <p class="card-label">Modality decision guide</p>
+        <div class="mod-grid">
+          <div class="mod-row"><span class="mod-tool">Rise 360</span><span class="mod-desc">Async, self-paced knowledge transfer — onboarding, compliance, product content. Use when completion tracking matters.</span></div>
+          <div class="mod-row"><span class="mod-tool">Storyline</span><span class="mod-desc">Branching scenarios, scored simulations, complex interactions. Use when skill practice and realistic consequence matter.</span></div>
+          <div class="mod-row"><span class="mod-tool">HTML / code</span><span class="mod-desc">Lightweight reference tools, embeddable job aids, sales enablement. Faster, more accessible, easier to update.</span></div>
+          <div class="mod-row"><span class="mod-tool">Blended</span><span class="mod-desc">Complex judgment calls, culture-shaping, sensitive topics. If the live debrief is the point, don't async your way out of it.</span></div>
+          <div class="mod-row"><span class="mod-tool">Job aid</span><span class="mod-desc">Pure reference — process steps, checklists, decision trees. Never needs a quiz. If they need to memorize it, it's not a job aid.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-label">Scenario structure</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>Realistic trigger — not "imagine you are a rep..."</span></li>
+          <li><span class="q-num">→</span><span>Choices that aren't obviously right or wrong</span></li>
+          <li><span class="q-num">→</span><span>Realistic consequences — not just "try again"</span></li>
+          <li><span class="q-num">→</span><span>Debrief that explains, not just reveals the answer</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">AI + this phase</p>
+        <div class="ai-grid">
+          <div class="ai-box can">
+            <p class="ai-label">✓ Can help</p>
+            <ul class="ai-list">
+              <li>Scaffold scenario text fast</li>
+              <li>Draft and critique objectives</li>
+              <li>Suggest modality given constraints</li>
+            </ul>
+          </div>
+          <div class="ai-box cant">
+            <p class="ai-label">✕ Can't replace</p>
+            <ul class="ai-list">
+              <li>Knowing your learners' context</li>
+              <li>Culture that makes scenarios real</li>
+              <li>Domain accuracy — SME review required</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILD -->
+  <div class="phase-panel" id="panel-build">
+    <div class="panel-head">
+      <span class="panel-num">03</span>
+      <div><div class="panel-name">Build</div><div class="panel-sub">Pre-build discipline prevents expensive rework</div></div>
+    </div>
+    <div class="panel-body">
+      <div class="card">
+        <p class="card-label">Pre-build</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>Storyboard before opening Storyline or Rise</span></li>
+          <li><span class="q-num">→</span><span>Content QA with SME <em>before</em> build — not after</span></li>
+          <li><span class="q-num">→</span><span>Lock final brand assets before building</span></li>
+          <li><span class="q-num">→</span><span>Scope in writing — verbal agreements disappear</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">Build cadence</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>Pilot section first — QA one piece before building everything</span></li>
+          <li><span class="q-num">→</span><span>Narration: script → record temp → record final</span></li>
+          <li><span class="q-num">→</span><span>In Storyline: master slides before content slides</span></li>
+          <li><span class="q-num">→</span><span>Test every branch, especially failure paths</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">Polish checklist</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>Read every word aloud — awkward phrasing reveals itself</span></li>
+          <li><span class="q-num">→</span><span>Test on the device learners actually use</span></li>
+          <li><span class="q-num">→</span><span>One SME review pass on final content only</span></li>
+          <li><span class="q-num">→</span><span>Check accessibility: tab order, alt text, contrast</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">AI + this phase</p>
+        <div class="ai-grid">
+          <div class="ai-box can">
+            <p class="ai-label">✓ Can help</p>
+            <ul class="ai-list">
+              <li>Draft narration scripts</li>
+              <li>Flag corporate-sounding language</li>
+              <li>Suggest alternatives for awkward phrasing</li>
+            </ul>
+          </div>
+          <div class="ai-box cant">
+            <p class="ai-label">✕ Can't replace</p>
+            <ul class="ai-list">
+              <li>Domain accuracy QA</li>
+              <li>Never skip the SME content review</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVER -->
+  <div class="phase-panel" id="panel-deliver">
+    <div class="panel-head">
+      <span class="panel-num">04</span>
+      <div><div class="panel-name">Deliver</div><div class="panel-sub">Manager prep is the most skipped, most impactful step</div></div>
+    </div>
+    <div class="panel-body">
+      <div class="card full">
+        <p class="card-label">Launch sequence</p>
+        <div class="steps">
+          <div class="step"><span class="step-n">1</span><span>Pilot with 3–5 real learners — not leadership, not L&D. Track time-on-task and confusion points.</span></div>
+          <div class="step"><span class="step-n">2</span><span>Adjust based on pilot. Completion time, drop-offs, and qualitative quotes beat survey scores.</span></div>
+          <div class="step"><span class="step-n">3</span><span>Manager brief <em>before</em> learner launch: what's coming, why it matters, what to reinforce.</span></div>
+          <div class="step"><span class="step-n">4</span><span>Launch email: one sentence on why this matters to <em>them</em>, not to the company.</span></div>
+          <div class="step"><span class="step-n">5</span><span>Completion deadline: visible, specific, reasonable. "By end of quarter" is not a deadline.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-label">Manager one-pager</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>What the training covers (2 sentences max)</span></li>
+          <li><span class="q-num">→</span><span>3 questions to ask in a 1:1 after completion</span></li>
+          <li><span class="q-num">→</span><span>What good performance looks like in 30 days</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">AI + this phase</p>
+        <div class="ai-grid">
+          <div class="ai-box can">
+            <p class="ai-label">✓ Can help</p>
+            <ul class="ai-list">
+              <li>Draft launch communications</li>
+              <li>Write the manager one-pager</li>
+              <li>Summarize pilot readout data</li>
+            </ul>
+          </div>
+          <div class="ai-box cant">
+            <p class="ai-label">✕ Can't replace</p>
+            <ul class="ai-list">
+              <li>The manager conversation</li>
+              <li>Advocacy from the right sponsor</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEASURE -->
+  <div class="phase-panel" id="panel-measure">
+    <div class="panel-head">
+      <span class="panel-num">05</span>
+      <div><div class="panel-name">Measure</div><div class="panel-sub">Evaluation is a design constraint, not an afterthought</div></div>
+    </div>
+    <div class="panel-body">
+      <div class="card full">
+        <p class="card-label">Kirkpatrick L1–L4</p>
+        <div class="mod-grid">
+          <div class="mod-row"><span class="mod-tool">L1 · Reaction</span><span class="mod-desc">Survey at end, 3–5 questions. Useful for spotting confusion. Not evidence of effectiveness.</span></div>
+          <div class="mod-row"><span class="mod-tool">L2 · Learning</span><span class="mod-desc">Knowledge checks in-course. If you're not adjusting design based on failure rates, you're not using L2 data.</span></div>
+          <div class="mod-row"><span class="mod-tool">L3 · Behavior</span><span class="mod-desc">Observation or manager report 30–90 days post. Requires manager pre-commitment before launch.</span></div>
+          <div class="mod-row"><span class="mod-tool">L4 · Results</span><span class="mod-desc">Business metric change. Only promise if you have a clear, defensible causal path — attribution is almost never clean.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-label">When L3/L4 attribution is credible</p>
+        <ul class="q-list">
+          <li><span class="q-num">→</span><span>You have a pre/post baseline on the metric</span></li>
+          <li><span class="q-num">→</span><span>You control for confounds: market, leadership, headcount changes</span></li>
+          <li><span class="q-num">→</span><span>Training was the only meaningful intervention in the window</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="card-label">AI + this phase</p>
+        <div class="ai-grid">
+          <div class="ai-box can">
+            <p class="ai-label">✓ Can help</p>
+            <ul class="ai-list">
+              <li>Draft L1 survey questions</li>
+              <li>Suggest L3 behavioral indicators</li>
+              <li>Design evaluation canvas with sponsor</li>
+            </ul>
+          </div>
+          <div class="ai-box cant">
+            <p class="ai-label">✕ Can't replace</p>
+            <ul class="ai-list">
+              <li>Collecting the actual data</li>
+              <li>Causal attribution — that's a business call</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="app-footer">Parker Lee · parkerclee.com</p>
+</div>
+
+<script>
+  const btns   = document.querySelectorAll('.phase-btn');
+  const panels = document.querySelectorAll('.phase-panel');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const phase = btn.dataset.phase;
+      btns.forEach(b   => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById('panel-' + phase).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+---
+/**
+ * DemoPlayer — a responsive iframe wrapper for standalone HTML demos
+ * that live under /public/demos/<slug>/. Keeps the demo sandboxed and
+ * easy to swap for a SCORM package later.
+ */
+interface Props {
+  src: string;
+  title: string;
+  /** Aspect ratio as width/height, e.g. "16/10". Defaults to 16/10. */
+  ratio?: string;
+  /** Minimum height in pixels on narrow screens. */
+  minHeight?: number;
+  /** Allow the iframe to go fullscreen. */
+  allowFullscreen?: boolean;
+}
+const {
+  src,
+  title,
+  ratio = '16 / 10',
+  minHeight = 620,
+  allowFullscreen = true
+} = Astro.props;
+---
+<div class="demo-player" style={`--demo-ratio:${ratio}; --demo-min-h:${minHeight}px;`}>
+  <div class="demo-player__frame">
+    <iframe
+      src={src}
+      title={title}
+      loading="lazy"
+      allowfullscreen={allowFullscreen}
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </div>
+  <div class="demo-player__actions">
+    <a href={src} target="_blank" rel="noopener" class="demo-player__link">
+      Open in a new tab
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M14 3h7v7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 14L21 3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  .demo-player {
+    --demo-ratio: 16 / 10;
+    --demo-min-h: 620px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .demo-player__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--demo-ratio);
+    min-height: var(--demo-min-h);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: #0b1416;
+    border: 1px solid rgba(85, 56, 36, 0.18);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 24px 60px -24px rgba(46, 31, 20, 0.35);
+  }
+  .demo-player__frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .demo-player__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+  }
+  .demo-player__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #A9522F;
+    text-decoration: none;
+  }
+  .demo-player__link:hover { color: #8A4124; text-decoration: underline; text-underline-offset: 3px; }
+</style>

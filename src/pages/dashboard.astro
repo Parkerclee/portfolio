@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MoonStar from '../components/decor/MoonStar.astro';
+import Sparkles from '../components/decor/Sparkles.astro';
+import WavyDivider from '../components/decor/WavyDivider.astro';
+import Dashboard from '../components/TeamPulse/Dashboard';
+---
+<BaseLayout
+  title="Manager Dashboard"
+  description="What an xAPI learning pipeline looks like to the person who has to act on it — a manager's view of one training assignment, plus AI that turns the statements into a follow-up plan and Slack coaching nudges."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-paper paper-bg">
+    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+    <Sparkles class="hidden md:block absolute bottom-10 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+
+    <div class="relative max-w-5xl mx-auto px-6 py-16 sm:py-20">
+      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">From statements to a decision</p>
+      <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+        The dashboard a <span class="italic text-primary-600">manager</span> actually opens.
+      </h1>
+      <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        Most learning dashboards bury managers in charts. This one leads with the four things they came to
+        find out — who's done, how they scored, who needs a nudge, and how long they've got — and then does the
+        part no completion report can: it reads the xAPI (the quiz scores <em>and</em> the open-text answers),
+        finds the real exposure, and hands back a follow-up plan and ready-to-send Slack coaching.
+      </p>
+
+      <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-cocoa/15 bg-cream-50 px-4 py-1.5 text-xs font-semibold text-cocoa/70 font-display uppercase tracking-widest">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent-500"></span>
+        Synthetic team · real xAPI data shapes
+      </div>
+    </div>
+  </section>
+
+  <WavyDivider class="-mt-2 relative z-10" />
+
+  <!-- The dashboard itself -->
+  <section class="bg-cream-50 py-12 sm:py-16">
+    <div class="max-w-5xl mx-auto px-6">
+      <Dashboard client:load />
+    </div>
+  </section>
+
+  <!-- About the data -->
+  <section class="bg-paper border-t border-cocoa/10 py-14">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="rounded-3xl border border-cocoa/15 bg-cream-50 p-7 sm:p-9">
+        <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
+          About this demo
+        </h2>
+        <p class="text-cocoa/75 leading-relaxed mb-3">
+          The team is fictional, but the data is shaped exactly like aggregated LRS output: one assignment, a roster
+          of learners, per-person <span class="font-mono text-sm">launched / progressed / answered / passed / completed</span>
+          statements, quiz scores, and the free-text answers people actually typed. The completion rate looks healthy —
+          the risk is hiding in three of those answers. That's the whole point.
+        </p>
+        <p class="text-cocoa/75 leading-relaxed">
+          The AI step calls a live model when one is available and falls back to authored output otherwise, so the
+          analysis is reproducible here. In a real engagement it reads the same xAPI statements posted to a client LRS,
+          and the Slack messages go out through a webhook — the draft-and-approve flow stays exactly as shown.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

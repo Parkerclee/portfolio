@@ -10,8 +10,9 @@ role: "Learning Designer & Frontend Engineer"
 demoLink: "/demos/manager-coach"
 color: "mustard"
 initials: "MC"
-order: 4
+order: 13
 draft: false
+aiGenerated: true
 ---
 
 > **Note:** L&D Tool Concept is a synthetic company and exploratory project. The design patterns and interaction model reflect principles I've applied in real manager-development work, adapted for a conversational AI context.
