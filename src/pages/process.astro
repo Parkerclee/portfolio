@@ -13,17 +13,17 @@ const phases = [
     pitch: 'Learn what the business actually needs before promising what training can deliver.',
     activities: [
       'Stakeholder interviews with sponsors, managers, and target learners',
-      'Performance analysis — where exactly is the gap between what people do and what the business needs?',
-      'Root-cause check — is this a knowledge problem, a skill problem, or a system/environment problem?',
+      'Performance analysis: where exactly is the gap between what people do and what the business needs?',
+      'Root-cause check: is this a knowledge problem, a skill problem, or a system problem?',
       'Success metrics agreed before any content decisions happen'
     ],
     outputs: [
       'A one-page problem statement signed off by the sponsor',
       'Baseline metrics (the numbers we\'re moving)',
       'Learner profile and context map',
-      'Go/no-go recommendation — sometimes the answer is "this isn\'t a training problem"'
+      'Go/no-go recommendation; sometimes the answer is "this isn\'t a training problem"'
     ],
-    heuristic: '"No training" is a legitimate recommendation. If it\'s a process problem, say so on page one — the sponsor will respect you for it later.'
+    heuristic: '"No training" is a legitimate recommendation. If it\'s a process problem, say so on page one. The sponsor will respect you for it later.'
   },
   {
     num: '02',
@@ -33,15 +33,15 @@ const phases = [
     pitch: 'Make the hard structural decisions on paper before a single screen gets built.',
     activities: [
       'Write measurable terminal objectives (Mager-style) tied to the business metrics',
-      'Pick a modality against a checklist — classroom, blended, code-built, Rise, microlearning — using evidence, not taste',
-      'Storyboard scenarios and branching with realistic detours, not just happy paths',
-      'Design the assessment before the content — what would prove the objective was met?'
+      'Pick a modality against a checklist (classroom, blended, code-built, Rise, microlearning) using evidence, not taste',
+      'Storyboard scenarios and branching with realistic detours, not only happy paths',
+      'Design the assessment before the content: what would prove the objective was met?'
     ],
     outputs: [
       'Design document covering objectives, modality rationale, assessment strategy',
       'Scenario map with branching logic',
       'Rough wireframes or click-through sketches',
-      'Risk list — what\'s most likely to break in build?'
+      'Risk list: what\'s most likely to break in build?'
     ],
     heuristic: 'The modality decision is where most projects fail. A "just make a Rise module" instinct is usually a design problem dressed as a tooling problem.'
   },
@@ -50,12 +50,12 @@ const phases = [
     short: 'Build',
     title: 'Development',
     color: 'mustard',
-    pitch: 'Prototype early, iterate in small loops, and pick tools based on what the learner needs — not what\'s in the department license.',
+    pitch: 'Prototype early, iterate in small loops, and pick tools based on what the learner needs, not the department license.',
     activities: [
-      'Prototype the highest-risk interaction first (the scenario engine, the simulator, the branching module) — not the intro screen',
+      'Prototype the highest-risk interaction first (the scenario engine, the simulator, the branching module), not the intro screen',
       'Rise 360 for linear rapid build; code-built HTML/CSS/JS when the interaction matters or data fidelity is required',
-      'AI-assisted scaffolding in Cursor + Claude for code-built work — compresses weeks into days',
-      'Two rounds of learner testing minimum before handoff — cheaper than fixing it after launch'
+      'AI-assisted scaffolding in Cursor and Claude for code-built work, compressing weeks into days',
+      'Two rounds of learner testing before handoff, cheaper than fixing it after launch'
     ],
     outputs: [
       'Working prototype of the riskiest piece, shown to stakeholders in week 2',
@@ -74,7 +74,7 @@ const phases = [
     activities: [
       'LMS or host deployment and smoke test',
       'Train-the-trainer where people facilitate, SME briefings where they don\'t',
-      'Communications plan with managers — people need to know why this exists and when they\'re expected to complete it',
+      'Communications plan with managers, so people know why this exists and when they\'re expected to finish it',
       'Support channel for the first 30 days so early friction gets fixed fast'
     ],
     outputs: [
@@ -89,12 +89,12 @@ const phases = [
     short: 'Measure',
     title: 'Evaluation',
     color: 'avocado',
-    pitch: 'Prove the work landed by measuring against the metrics agreed in Discovery — not what\'s easy to count.',
+    pitch: 'Prove the work landed by measuring against the metrics agreed in Discovery, not what\'s easy to count.',
     activities: [
-      'Level 1 — reaction surveys, kept short and pointed',
-      'Level 2 — learning, via xAPI statements from interactions, scenario outcomes, and assessments',
-      'Level 3 — behavior change, measured in the operational system (help desk tickets, error rates, cycle times)',
-      'Level 4 — results, tied back to the sponsor\'s business metric'
+      'Level 1, reaction: surveys, kept short and pointed',
+      'Level 2, learning: xAPI statements from interactions, scenario outcomes, and assessments',
+      'Level 3, behavior: change measured in the operational system (help desk tickets, error rates, cycle times)',
+      'Level 4, results: tied back to the sponsor\'s business metric'
     ],
     outputs: [
       'xAPI statement schema and LRS pipeline (SCORM Cloud or client LRS)',
@@ -129,7 +129,7 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
 ---
 <BaseLayout
   title="Process"
-  description="The five-phase methodology behind every project — Discovery, Design, Development, Delivery, and Evaluation."
+  description="The five-phase methodology behind every project: Discovery, Design, Development, Delivery, Evaluation."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -142,7 +142,7 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
         A five-phase <span class="italic text-primary-600">methodology</span>, tuned for AI-assisted L&amp;D.
       </h1>
       <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        Every project in the case studies uses the same underlying framework. It borrows from ADDIE and Kirkpatrick, leans on Mager for objectives, and updates the development phase for what AI tooling now makes practical — hand-built interactions and client-grade data pipelines on small-team budgets.
+        Every project in the case studies uses the same framework. It borrows from ADDIE and Kirkpatrick and leans on Mager for objectives. What's new is the development phase: AI tooling makes hand-built interactions and client-grade data pipelines practical on a small-team budget.
       </p>
 
       <div class="mt-10 flex flex-wrap gap-2">
@@ -159,17 +159,17 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider />
 
   <!-- Why this matters -->
   <section class="bg-cream-50 py-14 sm:py-16">
     <div class="max-w-3xl mx-auto px-6">
       <div class="rounded-3xl border border-cocoa/15 bg-paper p-7 sm:p-9 retro-sheen">
         <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
-          Why the framework matters — especially now
+          Why the framework matters, especially now
         </h2>
         <p class="text-cocoa/75 leading-relaxed">
-          AI tooling has made it easier than ever to produce <em>something</em> that looks like training. The constraint has moved. The hard part isn't generating content anymore — it's deciding what to build, how to measure whether it worked, and whether training is even the right intervention. This framework is where those decisions get made on purpose, not by accident.
+          AI tooling has made it easy to produce <em>something</em> that looks like training. The constraint has moved. The hard part isn't generating content anymore. It's deciding what to build, how to measure whether it worked, and whether training is even the right fix. This framework is where those decisions get made on purpose.
         </p>
       </div>
     </div>
@@ -248,7 +248,7 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
         See the framework <span class="italic text-accent-500">in action</span>
       </h2>
       <p class="text-cream/75 leading-relaxed mb-8 max-w-xl mx-auto">
-        Each case study shows how these phases played out on a specific project — the decisions, the detours, the numbers.
+        Each case study shows how these phases played out on a specific project: the decisions, the detours, the numbers.
       </p>
       <a
         href="/case-studies"

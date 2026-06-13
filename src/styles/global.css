@@ -99,3 +99,23 @@ body {
   font-family: var(--font-display);
   font-weight: 600;
 }
+
+/* ── Decorative graphics: gentle drift + twinkle ─ */
+.decor-twinkle,
+.decor-twinkle-2 {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes decor-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-7px) rotate(-2deg); }
+  }
+  @keyframes decor-twinkle {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%      { opacity: .45; transform: scale(.82); }
+  }
+  .decor-float    { animation: decor-float 8s ease-in-out infinite; }
+  .decor-twinkle  { animation: decor-twinkle 3.6s ease-in-out infinite; }
+  .decor-twinkle-2{ animation: decor-twinkle 5.2s ease-in-out .9s infinite; }
+}

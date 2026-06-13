@@ -5,7 +5,7 @@ import MoonStar from '../../components/decor/MoonStar.astro';
 import WavyDivider from '../../components/decor/WavyDivider.astro';
 ---
 <BaseLayout
-  title="EHR Simulator — Crestline Health"
+  title="EHR Simulator, Crestline Health"
   description="A browser-based electronic health record simulator demonstrating an ED admission workflow with a branching allergy decision."
 >
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -26,7 +26,7 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
         Crestline Health · Live Demo
       </p>
       <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
-        EHR Simulator — <span class="italic text-primary-600">ED Admission</span>
+        EHR Simulator, <span class="italic text-primary-600">ED Admission</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/70 leading-relaxed max-w-2xl">
         A five-step emergency-department admission flow with a branching drug-allergy decision point. Built with plain HTML, CSS, and JavaScript so it packages cleanly into SCORM later.
@@ -53,13 +53,13 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider />
 
   <section class="bg-cream-50 py-12 sm:py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <DemoPlayer
         src="/demos/ehr-simulator-app/index.html"
-        title="Crestline EHR Simulator — ED Admission"
+        title="Crestline EHR Simulator, ED Admission"
         ratio="16 / 10"
         minHeight={680}
       />
@@ -67,12 +67,12 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
       <div class="max-w-3xl mx-auto mt-12 text-cocoa/75 leading-relaxed">
         <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">How it works</h2>
         <p>
-          The simulator is a single-page app with a small state machine that gates each step on a meaningful decision — verifying identifiers, capturing vitals, resolving an allergy conflict, assigning placement, and signing off. The branching moment on step three is the one the real training needs: a penicillin-class order is proposed for a patient with anaphylaxis on file, and the learner must pick the safe path forward.
+          The simulator is a single-page app with a small state machine that gates each step on a meaningful decision, verifying identifiers, capturing vitals, resolving an allergy conflict, assigning placement, and signing off. The branching moment on step three is the one the real training needs: a penicillin-class order is proposed for a patient with anaphylaxis on file, and the learner must pick the safe path forward.
         </p>
 
         <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">Why build it this way</h3>
         <p>
-          A code-built sim is cheaper to iterate than a re-authored Rise module and it produces the same xAPI data stream I'd need for Kirkpatrick Level 2. The UI is intentionally spare so the focus stays on the decision, not the chrome — the goal isn't a pixel-perfect EHR clone, it's a reliable reflex for <em>stop, check, reroute</em>.
+          A code-built sim is cheaper to iterate than a re-authored Rise module and it produces the same xAPI data stream I'd need for Kirkpatrick Level 2. The UI is intentionally spare so the focus stays on the decision, not the chrome, the goal isn't a pixel-perfect EHR clone, it's a reliable reflex for <em>stop, check, reroute</em>.
         </p>
 
         <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">What's next</h3>

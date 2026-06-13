@@ -4,8 +4,8 @@ import MoonStar from '../../components/decor/MoonStar.astro';
 import WavyDivider from '../../components/decor/WavyDivider.astro';
 ---
 <BaseLayout
-  title="Compliance Scenario — Meridian Financial"
-  description="A representative branching scenario from the Meridian compliance onboarding module — decision-first, feedback-driven."
+  title="Compliance Scenario, Meridian Financial"
+  description="A representative branching scenario from the Meridian compliance onboarding module, decision-first, feedback-driven."
 >
   <section class="relative overflow-hidden bg-paper paper-bg">
     <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
@@ -22,15 +22,15 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
         Meridian Financial · Representative Scenario
       </p>
       <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
-        Adverse Action — <span class="italic text-primary-600">decision first</span>
+        Adverse Action, <span class="italic text-primary-600">decision first</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/70 leading-relaxed max-w-2xl">
-        A single branching moment from the Reg B chapter of the module. The full course covers four decision clusters in this format; this preview shows one. Answer first, feedback after — the content of the regulation shows up only once the learner has committed to a call.
+        A single branching moment from the Reg B chapter of the module. The full course covers four decision clusters in this format; this preview shows one. Answer first, feedback after, the content of the regulation shows up only once the learner has committed to a call.
       </p>
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider />
 
   <section class="bg-cream-50 py-12 sm:py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
@@ -62,7 +62,7 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
               On Tuesday morning, you denied a mortgage application.
             </h2>
             <p class="rise__lede">
-              The applicant, Ms. Harris, had applied twelve days ago. Credit score below threshold, DTI outside policy — a clean denial on the merits. Your teammate asks when you need to send the adverse action notice.
+              The applicant, Ms. Harris, had applied twelve days ago. Credit score below threshold, DTI outside policy, a clean denial on the merits. Your teammate asks when you need to send the adverse action notice.
             </p>
 
             <div class="rise__chat">
@@ -81,21 +81,21 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
               <button class="rise__choice" data-correct="false" data-feedback="reg-date">
                 <span class="rise__choice-letter">A</span>
                 <span>
-                  <strong>"Today — it's 12 days since she applied."</strong>
+                  <strong>"Today, it's 12 days since she applied."</strong>
                   <em>ECOA says 30 days from application; the clock is running.</em>
                 </span>
               </button>
               <button class="rise__choice" data-correct="true" data-feedback="decision-date">
                 <span class="rise__choice-letter">B</span>
                 <span>
-                  <strong>"Within 30 days of the denial decision — so we have time, but don't wait."</strong>
+                  <strong>"Within 30 days of the denial decision, so we have time, but don't wait."</strong>
                   <em>The clock starts at the decision, not the application.</em>
                 </span>
               </button>
               <button class="rise__choice" data-correct="false" data-feedback="verbal">
                 <span class="rise__choice-letter">C</span>
                 <span>
-                  <strong>"Only if she asks — verbal denials don't always require the notice."</strong>
+                  <strong>"Only if she asks, verbal denials don't always require the notice."</strong>
                   <em>A written notice is required regardless of the channel.</em>
                 </span>
               </button>
@@ -120,7 +120,7 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
           <!-- Stage 3: summary -->
           <div id="stage-summary" class="stage">
             <p class="rise__eyebrow">Chapter complete</p>
-            <h2 class="rise__h2">That's the pattern — decision first, rule second.</h2>
+            <h2 class="rise__h2">That's the pattern, decision first, rule second.</h2>
             <p class="rise__lede">
               In the full course, this scenario links to three more decisions in the Reg B chapter alone. Your pattern-recognition builds across cases rather than from memorizing citation numbers.
             </p>
@@ -147,7 +147,7 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
       </div>
 
       <p class="mt-6 text-center text-sm text-cocoa/55">
-        Representative interaction — styled to match a Rise 360 scenario block. The production module was authored in Articulate Rise and published with xAPI statements to SCORM Cloud.
+        Representative interaction, styled to match a Rise 360 scenario block. The production module was authored in Articulate Rise and published with xAPI statements to SCORM Cloud.
       </p>
     </div>
   </section>
@@ -346,21 +346,21 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
       const feedbacks = {
         'reg-date': {
           correct: false,
-          headline: 'Not quite — and it\'s a costly miss.',
+          headline: 'Not quite, and it\'s a costly miss.',
           body:
-            'ECOA does require the notice within 30 days, but the clock starts at the <strong>decision</strong>, not the application. If the application was filed 12 days ago but denied today, you have up to 30 days from today — not 18 days from today.',
+            'ECOA does require the notice within 30 days, but the clock starts at the <strong>decision</strong>, not the application. If the application was filed 12 days ago but denied today, you have up to 30 days from today, not 18 days from today.',
           cite: 'Reg B · 12 CFR 1002.9(a)',
         },
         'decision-date': {
           correct: true,
-          headline: 'Exactly — decision, not application.',
+          headline: 'Exactly, decision, not application.',
           body:
             'The 30-day clock begins when the adverse action decision is made. "Don\'t wait" is the right coaching instinct; the regulatory floor is 30 days, but operational best practice is within three business days to reduce applicant friction.',
           cite: 'Reg B · 12 CFR 1002.9(a)',
         },
         'verbal': {
           correct: false,
-          headline: 'Close to a common myth — but no.',
+          headline: 'Close to a common myth, but no.',
           body:
             'A written adverse action notice is required regardless of whether the denial was first communicated verbally. The only thing the applicant\'s request changes is the statement-of-reasons disclosure, not the notice itself.',
           cite: 'Reg B · 12 CFR 1002.9(a)(2)',

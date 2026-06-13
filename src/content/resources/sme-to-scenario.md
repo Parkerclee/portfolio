@@ -11,7 +11,7 @@ draft: false
 
 The fastest way to a bad course is to turn an SME transcript straight into slides. These three prompts pull the *decisions* out of the content first. Run them in order; paste your material where marked.
 
-## 1 — Find the moments that actually matter
+## 1, Find the moments that actually matter
 
 ```text
 Here are my notes from a subject-matter interview:
@@ -23,7 +23,7 @@ the right move, and the tempting wrong move people actually make.
 Ignore anything that's just reference information.
 ```
 
-## 2 — Draft a decision-first scenario
+## 2, Draft a decision-first scenario
 
 ```text
 Take this moment:
@@ -32,15 +32,15 @@ Take this moment:
 Write a short scenario where the learner faces the decision before any
 teaching. Give one realistic setup, three options (one right, two that
 reflect real misconceptions), and one-line feedback for each that
-explains the reasoning — not just "correct" or "incorrect."
+explains the reasoning, not just "correct" or "incorrect."
 ```
 
-## 3 — Make it measurable
+## 3, Make it measurable
 
 ```text
 For that scenario, propose the xAPI statements it should emit (launched,
 answered with the choice, passed/failed) and the single on-the-job
-behavior it maps to — so it can be tracked to Kirkpatrick Level 3
+behavior it maps to, so it can be tracked to Kirkpatrick Level 3
 instead of just completion.
 ```
 

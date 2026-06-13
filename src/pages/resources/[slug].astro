@@ -107,7 +107,7 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider top="#F7F7F2" bottom={data.embedUrl ? '#F7F7F2' : '#FCFCF9'} />
 
   {data.embedUrl && (
     <section class="bg-cream-50 py-12 sm:py-14 border-b border-cocoa/10">

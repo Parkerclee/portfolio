@@ -27,7 +27,7 @@ function theme(type: string) {
 ---
 <BaseLayout
   title="Free Resources"
-  description="Free instructional design methodologies, prompt libraries, and templates — the tools I actually use, shared as I build them."
+  description="Free instructional design frameworks, prompts, and templates: the tools I actually use, shared as I build them."
 >
   <section class="relative overflow-hidden bg-paper paper-bg">
     <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
@@ -37,14 +37,14 @@ function theme(type: string) {
         The stuff I use, <span class="italic text-primary-600">shared freely</span>.
       </h1>
       <p class="mt-5 text-lg text-cocoa/75 max-w-2xl leading-relaxed">
-        Tools for the people who <em>own</em> the outcome as much as the people who build the training. Quick grabs you can read in two minutes, and a few deeper interactive guides when you want them. No email gate — take what's useful.
+        Tools for the people who <em>own</em> the outcome as much as the people who build the training. Quick grabs you can read in two minutes, plus a few deeper interactive guides. No email gate, take what's useful.
       </p>
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider />
 
-  <!-- Quick grabs — bite-size, two-minute reads -->
+  <!-- Quick grabs (bite-size, two-minute reads) -->
   {quick.length > 0 && (
     <section class="bg-cream-50 py-16 sm:py-20">
       <div class="max-w-6xl mx-auto px-6">
@@ -88,7 +88,7 @@ function theme(type: string) {
     </section>
   )}
 
-  <!-- Deep dives — the interactive guides -->
+  <!-- Deep dives (the interactive guides) -->
   {deep.length > 0 && (
     <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
       <div class="max-w-6xl mx-auto px-6">

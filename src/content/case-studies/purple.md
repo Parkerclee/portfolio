@@ -4,7 +4,7 @@ industry: Consumer Products · Retail L&D
 location: Lehi, UT
 initials: PL
 title: "Building a Learning Ecosystem from Scratch for a Fast-Growing Consumer Brand"
-challenge: "Purple had a cult following but no formal L&D infrastructure. New retail partners needed product expertise fast; direct-to-consumer reps needed soft skills. Everything had to be built — brand, curriculum, tooling — simultaneously."
+challenge: "Purple had a cult following but no formal L&D infrastructure. New retail partners needed product expertise fast; direct-to-consumer reps needed soft skills. Everything had to be built, brand, curriculum, tooling, simultaneously."
 deliverable: "Multi-modal learning ecosystem"
 duration: "~2 years"
 role: "Instructional Designer"
@@ -24,7 +24,7 @@ aiGenerated: false
 
 ## The situation
 
-Purple was scaling fast — new retail doors opening, a growing direct sales force, and a customer care team fielding increasingly complex product questions. There was no L&D function. No brand standards for training. No content library. I was hired to build all of it.
+Purple was scaling fast, new retail doors opening, a growing direct sales force, and a customer care team fielding increasingly complex product questions. There was no L&D function. No brand standards for training. No content library. I was hired to build all of it.
 
 The challenge wasn't just making courses. It was standing up a learning brand that felt as distinct as Purple's product marketing, then filling it with content that actually changed behavior.
 
@@ -32,7 +32,7 @@ The challenge wasn't just making courses. It was standing up a learning brand th
 
 ### Purple Academy brand system
 
-Before writing a single learning objective, I designed the visual and verbal identity for all training. Purple Academy used the company's signature purple and yellow, but adapted for learning contexts — custom iconography, a "recipe card" layout system for one-pagers, and a consistent voice that matched the brand's playful confidence.
+Before writing a single learning objective, I designed the visual and verbal identity for all training. Purple Academy used the company's signature purple and yellow, but adapted for learning contexts, custom iconography, a "recipe card" layout system for one-pagers, and a consistent voice that matched the brand's playful confidence.
 
 This meant L&D materials looked like they belonged to Purple, not like generic corporate training with a logo slapped on.
 
@@ -44,7 +44,7 @@ Customer care reps were handling returns, complaints, and exchanges for a premiu
 - De-escalation language frameworks
 - Branching scenario practice (built in Storyline, embedded in Rise)
 
-The Storyline module put learners in real customer conversations and scored their choices — not just "right/wrong" but tracking empathy language, resolution speed, and escalation avoidance.
+The Storyline module put learners in real customer conversations and scored their choices, not just "right/wrong" but tracking empathy language, resolution speed, and escalation avoidance.
 
 ### Sales methodology curriculum (Rise 360)
 
@@ -66,7 +66,7 @@ Built four standalone Storyline simulations that were embedded across Rise cours
 | Zendesk Sell Simulator | Trains CRM data entry without touching the live system |
 | Order Management Simulator | Walks through the order intake workflow with guided error correction |
 
-Each was built to feel more like a game than a compliance module — Purple's brand demanded it.
+Each was built to feel more like a game than a compliance module, Purple's brand demanded it.
 
 ### Order system training (Rise 360)
 
@@ -74,13 +74,13 @@ When Purple switched order management platforms, I built the transition training
 
 ## Results
 
-- Sales reps at retail partners reported faster confidence ramp — anecdotally, managers said they could skip "the basics" conversation by week 2 instead of week 6
+- Sales reps at retail partners reported faster confidence ramp, anecdotally, managers said they could skip "the basics" conversation by week 2 instead of week 6
 - De-escalation course completion drove measurable drop in supervisor escalations during a high-volume return season
-- Storyline simulations were reused across onboarding, refresher training, and manager coaching sessions — content that paid back many times over
+- Storyline simulations were reused across onboarding, refresher training, and manager coaching sessions, content that paid back many times over
 - Purple Academy brand was still in use after I left, adopted by the next L&D hire as the foundation for new content
 
 ## What made this work
 
-Starting with brand before content was the right call. When every piece of training looks and sounds like Purple, people trust it more. It signals investment. The simulations felt like a natural extension of a company that cared about the experience — which is exactly the brand promise Purple makes with its products.
+Starting with brand before content was the right call. When every piece of training looks and sounds like Purple, people trust it more. It signals investment. The simulations felt like a natural extension of a company that cared about the experience, which is exactly the brand promise Purple makes with its products.
 
-The Storyline interactives also gave managers a coaching tool they didn't have before. Instead of shadowing calls, they could run someone through the de-escalation game and debrief the choices. That changed how L&D was perceived — from "the people who make slides" to a team with actual tools.
+The Storyline interactives also gave managers a coaching tool they didn't have before. Instead of shadowing calls, they could run someone through the de-escalation game and debrief the choices. That changed how L&D was perceived, from "the people who make slides" to a team with actual tools.

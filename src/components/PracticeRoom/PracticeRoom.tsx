@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 /**
- * Practice Room — an AI roleplay where a leader works through a real
+ * Practice Room, an AI roleplay where a leader works through a real
  * conversation with a character who reacts in the moment. This is the thing a
  * fixed branching scenario can't do: the learner can say anything, the read on
  * how it's landing moves live, every turn streams to the LRS as xAPI, and the
  * debrief is generated from what the learner actually said.
  *
  * Scenario: coaching Sam Rivera, a senior engineer and former go-to who's been
- * quietly disengaging. The goal isn't to "fix" Sam — it's to make it safe
+ * quietly disengaging. The goal isn't to "fix" Sam, it's to make it safe
  * enough that the real thing surfaces.
  *
  * AI: when window.claude.complete is available (e.g. a Claude preview) the
@@ -66,7 +66,7 @@ const BEATS: Beat[] = [
     approaches: [
       {
         id: 'open-care',
-        label: 'No agenda — check in on the person',
+        label: 'No agenda, check in on the person',
         text: 'Honestly, no agenda. Your work’s solid. I’ve just missed a bit of your spark lately and wanted to see how you’re actually doing.',
         deltas: { trust: 14, openness: 12, guard: -12 },
         quality: 'insightful',
@@ -75,14 +75,14 @@ const BEATS: Beat[] = [
       {
         id: 'open-observe',
         label: 'Name what you’ve noticed, gently',
-        text: 'Your work isn’t the issue at all. I’ve just noticed you seem a little further away lately — quieter in standup — and I wanted to check in.',
+        text: 'Your work isn’t the issue at all. I’ve just noticed you seem a little further away lately, quieter in standup, and I wanted to check in.',
         deltas: { trust: 7, openness: 6, guard: -4 },
         quality: 'okay',
         skill: 'Named the pattern',
       },
       {
         id: 'open-fix',
-        label: 'Get to the point — re-engage them',
+        label: 'Get to the point, re-engage them',
         text: 'I’ve noticed your engagement is down and I want to talk about how we get you back on track.',
         deltas: { trust: -6, openness: -8, guard: 16 },
         quality: 'misstep',
@@ -100,8 +100,8 @@ const BEATS: Beat[] = [
     approaches: [
       {
         id: 'surf-listen',
-        label: 'Stay with it — ask them to say more',
-        text: 'Flat. Say more about that — when did it start feeling that way?',
+        label: 'Stay with it, ask them to say more',
+        text: 'Flat. Say more about that, when did it start feeling that way?',
         deltas: { trust: 10, openness: 16, guard: -8 },
         quality: 'insightful',
         skill: 'Listened before fixing',
@@ -117,7 +117,7 @@ const BEATS: Beat[] = [
       {
         id: 'surf-solve',
         label: 'Offer a fix right away',
-        text: 'Okay — maybe we get you onto a newer project, something shinier? That usually helps.',
+        text: 'Okay, maybe we get you onto a newer project, something shinier? That usually helps.',
         deltas: { trust: -4, openness: -10, guard: 8 },
         quality: 'misstep',
         skill: 'Listened before fixing',
@@ -151,7 +151,7 @@ const BEATS: Beat[] = [
       {
         id: 'truth-defend',
         label: 'Reassure that it’s valued',
-        text: 'But you’re so good at it — that’s why it comes to you. The team really needs you in that role right now.',
+        text: 'But you’re so good at it, that’s why it comes to you. The team really needs you in that role right now.',
         deltas: { trust: -8, openness: -12, guard: 14 },
         quality: 'misstep',
         skill: 'Listened before fixing',
@@ -163,13 +163,13 @@ const BEATS: Beat[] = [
     sam: {
       cold: 'I don’t know what would even help at this point, honestly.',
       neutral: 'I don’t know. Part of me wants a real project. Part of me is just relieved someone finally noticed.',
-      warm: 'Honestly, just being able to say this helps. And yeah — I’d love something that stretches me again.',
+      warm: 'Honestly, just being able to say this helps. And yeah, I’d love something that stretches me again.',
     },
     approaches: [
       {
         id: 'next-cocreate',
         label: 'Co-create the next step with them',
-        text: 'Then let’s design it together. If we could hand off two of the “everything routes to Sam” things and carve out one real challenge for next quarter — what would you want that challenge to be?',
+        text: 'Then let’s design it together. If we could hand off two of the “everything routes to Sam” things and carve out one real challenge for next quarter, what would you want that challenge to be?',
         deltas: { trust: 12, openness: 14, guard: -8 },
         quality: 'insightful',
         skill: 'Co-created a next step',
@@ -197,13 +197,13 @@ const BEATS: Beat[] = [
     sam: {
       cold: 'Okay. I appreciate you asking, at least.',
       neutral: 'Yeah. Let’s try that. It’s the most seen I’ve felt in a while, honestly.',
-      warm: 'That actually sounds great. Thank you — genuinely. This is the most hopeful I’ve felt about this job in months.',
+      warm: 'That actually sounds great. Thank you, genuinely. This is the most hopeful I’ve felt about this job in months.',
     },
     approaches: [
       {
         id: 'close-commit',
         label: 'Lock a specific follow-up',
-        text: 'Let’s put 30 minutes on Friday to write down the handoffs and the new project so it’s real, not just a nice talk. And this is a standing check-in now — not a one-off.',
+        text: 'Let’s put 30 minutes on Friday to write down the handoffs and the new project so it’s real, not just a nice talk. And this is a standing check-in now, not a one-off.',
         deltas: { trust: 10, openness: 8, guard: -6 },
         quality: 'insightful',
         skill: 'Co-created a next step',
@@ -211,7 +211,7 @@ const BEATS: Beat[] = [
       {
         id: 'close-thank',
         label: 'Close warmly, keep it loose',
-        text: 'I’m really glad we talked. Let’s keep this going — my door’s open whenever.',
+        text: 'I’m really glad we talked. Let’s keep this going, my door’s open whenever.',
         deltas: { trust: 4, openness: 2, guard: -2 },
         quality: 'okay',
         skill: 'Made it safe',
@@ -462,7 +462,7 @@ export default function PracticeRoom() {
               <ReadMeter label="Openness" value={read.openness} tone="primary" />
               <ReadMeter label="Guard up" value={read.guard} tone="warm" invert />
               <p className="mt-3 text-[11px] text-cocoa/50 leading-relaxed">
-                The read shifts with every line — the same loop a coach watches for, made visible.
+                The read shifts with every line, the same loop a coach watches for, made visible.
               </p>
             </div>
 
@@ -503,11 +503,11 @@ function Brief({ aiLive, onStart }: { aiLive: boolean; onStart: () => void }) {
       <div className="space-y-3 text-cocoa/75 text-sm leading-relaxed">
         <p>
           <strong className="text-cocoa">You’re Sam Rivera’s manager.</strong> Four years in, Sam was the person
-          everything routed to — now they’ve turned down a conference talk, gone quiet in standup, and answered a
+          everything routed to, now they’ve turned down a conference talk, gone quiet in standup, and answered a
           stretch project with a flat “sure, I’ll take it.” The work still ships. The spark is gone.
         </p>
         <p>
-          You’ve got a 1:1 in a minute. Your job isn’t to <em>fix</em> Sam — it’s to make it safe enough that the
+          You’ve got a 1:1 in a minute. Your job isn’t to <em>fix</em> Sam, it’s to make it safe enough that the
           real thing surfaces, and to leave with a next step you build together.
         </p>
       </div>
@@ -517,7 +517,7 @@ function Brief({ aiLive, onStart }: { aiLive: boolean; onStart: () => void }) {
       </div>
       <p className="mt-4 text-[12px] text-cocoa/55">
         {aiLive
-          ? 'A live model is playing Sam — type anything, or pick a suggested approach. The read and the debrief respond to what you actually say.'
+          ? 'A live model is playing Sam, type anything, or pick a suggested approach. The read and the debrief respond to what you actually say.'
           : 'Running as a guided demo: choose how you respond and watch the read move. Connect a model and you can free-type, with Sam improvising back.'}
       </p>
       <button
@@ -637,15 +637,15 @@ function DebriefCard({ debrief, loading, read, onReplay }: { debrief: Debrief | 
 function authoredDebrief(chosen: Approach[], read: Read): Debrief {
   const bySkill = (skill: string) => {
     const moves = chosen.filter((c) => c.skill === skill);
-    if (moves.length === 0) return { score: 50, note: 'Didn’t really come up — a chance you left on the table.' };
+    if (moves.length === 0) return { score: 50, note: 'Didn’t really come up, a chance you left on the table.' };
     const good = moves.filter((m) => m.quality === 'insightful').length;
     const bad = moves.filter((m) => m.quality === 'misstep').length;
     const score = clamp(55 + good * 22 - bad * 25);
     const note =
       bad > good
-        ? 'You reached for this but slipped into fixing or reassuring — it closed Sam down a notch.'
+        ? 'You reached for this but slipped into fixing or reassuring, it closed Sam down a notch.'
         : good > 0
-        ? 'You did this well — it’s a big reason Sam let the guard down.'
+        ? 'You did this well, it’s a big reason Sam let the guard down.'
         : 'You touched this but kept it surface; there was more room to go.';
     return { score, note };
   };
@@ -656,16 +656,16 @@ function authoredDebrief(chosen: Approach[], read: Read): Debrief {
 
   const outcome =
     composite >= 70
-      ? 'Sam went from guarded to genuinely relieved. You named the “everything routes to me” pattern without making Sam defend it, and you left with a step you built together — that’s the difference between a check-in and a turning point.'
+      ? 'Sam went from guarded to genuinely relieved. You named the “everything routes to me” pattern without making Sam defend it, and you left with a step you built together, that’s the difference between a check-in and a turning point.'
       : composite >= 55
-      ? 'Sam opened up partway. The honesty was there by the end, but a couple of moves jumped toward solving before Sam felt fully heard — the burnout surfaced, the next step is still a little yours rather than theirs.'
-      : 'Sam stayed mostly guarded. The instinct to reassure and fix kept the conversation safe for you but not for Sam — the real thing (the burnout, the thought of leaving) never fully came out. Worth a re-run.';
+      ? 'Sam opened up partway. The honesty was there by the end, but a couple of moves jumped toward solving before Sam felt fully heard, the burnout surfaced, the next step is still a little yours rather than theirs.'
+      : 'Sam stayed mostly guarded. The instinct to reassure and fix kept the conversation safe for you but not for Sam, the real thing (the burnout, the thought of leaving) never fully came out. Worth a re-run.';
 
   return {
     outcome,
     worked: insightful[0]
-      ? `“${insightful[0].text.slice(0, 90)}…” — that landed. ${insightful[0].skill.toLowerCase()} is exactly what made Sam feel safe enough to be honest.`
-      : 'You kept the conversation calm and respectful throughout — a solid floor to build on.',
+      ? `“${insightful[0].text.slice(0, 90)}…”, that landed. ${insightful[0].skill.toLowerCase()} is exactly what made Sam feel safe enough to be honest.`
+      : 'You kept the conversation calm and respectful throughout, a solid floor to build on.',
     tryNext: misstep[0]
       ? `When you said “${misstep[0].text.slice(0, 70)}…”, you reached for a fix before Sam felt heard. Next time, sit in the discomfort one beat longer and reflect back what you heard first.`
       : 'Push even further on co-creating: hand Sam the pen on what the next challenge should be, rather than offering the option yourself.',
@@ -678,11 +678,11 @@ function transcriptText(turns: Turn[]) {
   return turns.map((t) => `${t.role === 'you' ? 'MANAGER' : 'SAM'}: ${t.text}`).join('\n');
 }
 function samPrompt(turns: Turn[], managerLine: string, read: Read, isLast: boolean) {
-  return `You are roleplaying SAM RIVERA, a senior engineer quietly burning out — the former go-to who now gets all the urgent work and none of the interesting work, and has privately thought about leaving. Stay fully in character: guarded at first, opening up only as the manager earns it. Never coach or break character.\nConversation so far:\n${transcriptText(turns)}\nMANAGER just said: "${managerLine}"\nCurrent read — trust ${read.trust}, openness ${read.openness}, guard ${read.guard}.\n${isLast ? 'This is the closing beat; give a short, real reaction to how the conversation landed.' : 'Reply in 1-2 natural sentences.'}\nReturn ONLY JSON: {"line":"Sam's reply"}`;
+  return `You are roleplaying SAM RIVERA, a senior engineer quietly burning out, the former go-to who now gets all the urgent work and none of the interesting work, and has privately thought about leaving. Stay fully in character: guarded at first, opening up only as the manager earns it. Never coach or break character.\nConversation so far:\n${transcriptText(turns)}\nMANAGER just said: "${managerLine}"\nCurrent read, trust ${read.trust}, openness ${read.openness}, guard ${read.guard}.\n${isLast ? 'This is the closing beat; give a short, real reaction to how the conversation landed.' : 'Reply in 1-2 natural sentences.'}\nReturn ONLY JSON: {"line":"Sam's reply"}`;
 }
 function samFreePrompt(turns: Turn[], managerLine: string, read: Read, isLast: boolean) {
-  return `You are roleplaying SAM RIVERA (senior engineer, quietly burned out, former go-to, gets all urgent work, has thought about leaving). Stay in character. Also judge how the MANAGER's latest line lands.\nConversation:\n${transcriptText(turns)}\nMANAGER just said: "${managerLine}"\nCurrent read — trust ${read.trust}, openness ${read.openness}, guard ${read.guard} (0-100).\nReturn ONLY JSON: {"line":"Sam's 1-2 sentence in-character reply","deltas":{"trust":int -20..20,"openness":int -20..20,"guard":int -20..20},"skill":"one of: Made it safe | Listened before fixing | Named the pattern | Co-created a next step","quality":"insightful | okay | misstep"}. Reward listening and safety; penalize jumping to fixes or reassurance.`;
+  return `You are roleplaying SAM RIVERA (senior engineer, quietly burned out, former go-to, gets all urgent work, has thought about leaving). Stay in character. Also judge how the MANAGER's latest line lands.\nConversation:\n${transcriptText(turns)}\nMANAGER just said: "${managerLine}"\nCurrent read, trust ${read.trust}, openness ${read.openness}, guard ${read.guard} (0-100).\nReturn ONLY JSON: {"line":"Sam's 1-2 sentence in-character reply","deltas":{"trust":int -20..20,"openness":int -20..20,"guard":int -20..20},"skill":"one of: Made it safe | Listened before fixing | Named the pattern | Co-created a next step","quality":"insightful | okay | misstep"}. Reward listening and safety; penalize jumping to fixes or reassurance.`;
 }
 function debriefPrompt(turns: Turn[], read: Read) {
-  return `You are a warm, sharp leadership coach. Debrief this manager's coaching conversation with Sam (a burned-out top performer). Be specific, quote their actual words, no fluff.\nTranscript:\n${transcriptText(turns)}\nFinal read — trust ${read.trust}, openness ${read.openness}, guard ${read.guard}.\nReturn ONLY JSON: {"outcome":"2-3 sentences on how it went and where Sam landed","worked":"one specific thing they did well, quoting them","tryNext":"one specific thing to try next time, quoting a moment","rubric":[{"skill":"Made it safe","score":int 0-100,"note":"short, specific"},{"skill":"Listened before fixing","score":int,"note":"..."},{"skill":"Named the pattern","score":int,"note":"..."},{"skill":"Co-created a next step","score":int,"note":"..."}]}`;
+  return `You are a warm, sharp leadership coach. Debrief this manager's coaching conversation with Sam (a burned-out top performer). Be specific, quote their actual words, no fluff.\nTranscript:\n${transcriptText(turns)}\nFinal read, trust ${read.trust}, openness ${read.openness}, guard ${read.guard}.\nReturn ONLY JSON: {"outcome":"2-3 sentences on how it went and where Sam landed","worked":"one specific thing they did well, quoting them","tryNext":"one specific thing to try next time, quoting a moment","rubric":[{"skill":"Made it safe","score":int 0-100,"note":"short, specific"},{"skill":"Listened before fixing","score":int,"note":"..."},{"skill":"Named the pattern","score":int,"note":"..."},{"skill":"Co-created a next step","score":int,"note":"..."}]}`;
 }

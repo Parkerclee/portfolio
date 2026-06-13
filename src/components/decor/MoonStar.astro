@@ -5,34 +5,29 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 <svg
-  viewBox="0 0 64 64"
+  viewBox="-2 -2 68 68"
   xmlns="http://www.w3.org/2000/svg"
-  class={className}
+  class={`decor-float ${className}`}
   aria-hidden="true"
   focusable="false"
 >
-  <!-- crescent moon -->
+  <!-- crescent moon: two equal-radius circle arcs (left edge, then the bite) -->
   <path
-    d="M38 12 A20 20 0 1 0 38 52 A15 15 0 1 1 38 12 Z"
-    fill="#D9A441"
+    d="M38 10.8 A22 22 0 1 0 38 53.2 A22 22 0 0 1 38 10.8 Z"
+    fill="#E0A92E"
     stroke="#553824"
-    stroke-width="2.25"
+    stroke-width="2"
     stroke-linejoin="round"
   />
-  <!-- sparkles -->
-  <path
-    d="M12 10 L14 16 L20 18 L14 20 L12 26 L10 20 L4 18 L10 16 Z"
-    fill="#E6B85A"
-    stroke="#553824"
-    stroke-width="1.5"
-    stroke-linejoin="round"
-  />
-  <path
-    d="M54 40 L55.5 44 L59.5 45.5 L55.5 47 L54 51 L52.5 47 L48.5 45.5 L52.5 44 Z"
-    fill="#E6B85A"
-    stroke="#553824"
-    stroke-width="1.25"
-    stroke-linejoin="round"
-  />
-  <circle cx="14" cy="46" r="2" fill="#C4663D" stroke="#553824" stroke-width="1.25" />
+  <!-- four-point sparkle, upper-left -->
+  <g class="decor-twinkle" transform="translate(12 13) scale(0.6)">
+    <path d="M0,-11 C1.4,-4 4,-1.4 11,0 C4,1.4 1.4,4 0,11 C-1.4,4 -4,1.4 -11,0 C-4,-1.4 -1.4,-4 0,-11 Z"
+          fill="#F2BE3A" stroke="#553824" stroke-width="1.7" stroke-linejoin="round" />
+  </g>
+  <!-- smaller sparkle, lower-right -->
+  <g class="decor-twinkle-2" transform="translate(55 45) scale(0.4)">
+    <path d="M0,-11 C1.4,-4 4,-1.4 11,0 C4,1.4 1.4,4 0,11 C-1.4,4 -4,1.4 -11,0 C-4,-1.4 -1.4,-4 0,-11 Z"
+          fill="#F8D269" stroke="#553824" stroke-width="2.2" stroke-linejoin="round" />
+  </g>
+  <circle cx="14" cy="48" r="2" fill="#C4663D" />
 </svg>

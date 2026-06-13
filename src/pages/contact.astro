@@ -14,7 +14,7 @@ const CONTACT_EMAIL = 'hello@parkerlee.dev';
 ---
 <BaseLayout
   title="Contact"
-  description="Get in touch with Parker Lee — instructional designer for AI-assisted L&D work."
+  description="Get in touch with Parker Lee, instructional designer for AI-assisted L&D work."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -27,12 +27,12 @@ const CONTACT_EMAIL = 'hello@parkerlee.dev';
         Tell me about the <span class="italic text-primary-600">problem</span>.
       </h1>
       <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-2xl">
-        Whether you're scoping a compliance rebuild, an LMS migration, or a "we don't know if we need training at all" conversation — I'd love to hear about it. I respond within two business days.
+        Whether you're scoping a compliance rebuild, an LMS migration, or a "we don't know if we need training at all" conversation, I'd love to hear about it. I respond within two business days.
       </p>
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
+  <WavyDivider />
 
   <!-- Form + direct channels -->
   <section class="bg-cream-50 py-16 sm:py-20">
@@ -259,7 +259,7 @@ const CONTACT_EMAIL = 'hello@parkerlee.dev';
               body: JSON.stringify(payload),
             });
             if (res.ok) {
-              setStatus('Thanks — I\'ll reply within two business days.', 'success');
+              setStatus('Thanks, I\'ll reply within two business days.', 'success');
               form.reset();
             } else {
               setStatus('Something went wrong. Email is always open too.', 'error');
@@ -272,14 +272,14 @@ const CONTACT_EMAIL = 'hello@parkerlee.dev';
 
         // Mailto fallback
         const subject = encodeURIComponent(
-          `[Portfolio] ${payload.topic || 'Hello'} — ${payload.name}`
+          `[Portfolio] ${payload.topic || 'Hello'} · ${payload.name}`
         );
         const body = encodeURIComponent(
 `Hi Parker,
 
 ${payload.message}
 
-—
+--
 ${payload.name}${payload.company ? ` · ${payload.company}` : ''}
 ${payload.email}`
         );

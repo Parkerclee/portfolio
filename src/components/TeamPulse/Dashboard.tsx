@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useState } from 'react';
 
 /**
- * Team Pulse — a manager-facing view of one training assignment, the way it
+ * Team Pulse, a manager-facing view of one training assignment, the way it
  * looks once xAPI statements land in an LRS. It mirrors the LouLearn assignment
  * dashboard (who's done, scores, open-text answers) and then layers on the part
  * managers actually want: AI that reads the raw xAPI and returns a follow-up
@@ -64,7 +64,7 @@ const ASSIGN = {
 
 const TEAM: Learner[] = [
   { name: 'Priya Raman', role: 'AE', status: 'completed', progress: 100, score: 1.0, passed: true, last: '2 days ago',
-    reflection: 'I keep prospect lists in a personal spreadsheet for forecasting — I’ll move that into the CRM and delete the local copy.' },
+    reflection: 'I keep prospect lists in a personal spreadsheet for forecasting, I’ll move that into the CRM and delete the local copy.' },
   { name: 'Marcus Bell', role: 'AE', status: 'completed', progress: 100, score: 0.67, passed: false, last: '1 day ago',
     reflection: 'Honestly not sure what counts as PII vs. just contact info. I forward customer emails to my Gmail to read on my phone.' },
   { name: 'Sofia Nguyen', role: 'SDR', status: 'completed', progress: 100, score: 1.0, passed: true, last: '3 days ago' },
@@ -123,12 +123,12 @@ function rosterForPrompt() {
 const PLAN_FALLBACK: TrainingPlan = {
   headline: 'Two real exposure patterns, three people to coach this week',
   riskSummary:
-    'Completion is healthy (7 of 12) but the signal is in the answers, not the rate. Three people who finished revealed active data-handling habits that the audit would flag — and the two lowest scores both name a specific, fixable behavior. This is a coaching problem, not a re-train-everyone problem.',
+    'Completion is healthy (7 of 12) but the signal is in the answers, not the rate. Three people who finished revealed active data-handling habits that the audit would flag, and the two lowest scores both name a specific, fixable behavior. This is a coaching problem, not a re-train-everyone problem.',
   gaps: [
     { theme: 'Bulk export to local files', severity: 'high',
       evidence: 'Jordan Park (33%) exports the full customer table to CSV weekly; Priya self-reported a local prospect spreadsheet. Pattern: data leaving the system of record for convenience.' },
     { theme: 'PII boundary confusion', severity: 'high',
-      evidence: 'Marcus Bell (67%) can’t distinguish PII from contact info and forwards customer email to personal Gmail — exactly the "wrong-recipient" leak the lesson centers on.' },
+      evidence: 'Marcus Bell (67%) can’t distinguish PII from contact info and forwards customer email to personal Gmail, exactly the "wrong-recipient" leak the lesson centers on.' },
     { theme: 'Stalled before the risky part', severity: 'medium',
       evidence: 'Maya (30%) and Raj (10%) haven’t reached the breach-response section; Will and Grace haven’t started with 3 days left.' },
   ],
@@ -143,15 +143,15 @@ const PLAN_FALLBACK: TrainingPlan = {
 const SLACK_FALLBACK: SlackDraft = {
   digest: {
     channel: '#revops-leads',
-    text: 'Customer Data Handling — team is 7/12 done with 3 days left. Two scores need a quick coaching convo (Jordan 33%, Marcus 67%) — both flagged a specific, fixable habit in their answers. 4 folks still to finish. I’ve drafted nudges for each; want me to send?',
+    text: 'Customer Data Handling, team is 7/12 done with 3 days left. Two scores need a quick coaching convo (Jordan 33%, Marcus 67%), both flagged a specific, fixable habit in their answers. 4 folks still to finish. I’ve drafted nudges for each; want me to send?',
   },
   nudges: [
     { to: 'Jordan Park', channel: 'DM',
-      text: 'Hey Jordan — thanks for finishing the data-handling lesson. Quick one: I saw the bit about the weekly CSV export for the board deck. Let’s grab 15 min this week — I think we can get you the same numbers from a sanctioned dashboard export so you’re not pulling the full table down. Not a gotcha, just want to keep you covered.' },
+      text: 'Hey Jordan, thanks for finishing the data-handling lesson. Quick one: I saw the bit about the weekly CSV export for the board deck. Let’s grab 15 min this week, I think we can get you the same numbers from a sanctioned dashboard export so you’re not pulling the full table down. Not a gotcha, just want to keep you covered.' },
     { to: 'Marcus Bell', channel: 'DM',
-      text: 'Hey Marcus — appreciate you knocking out the training. One thing worth a 10-min chat: the PII vs. contact-info distinction trips a lot of people up. Can we also stop the forward-to-Gmail habit today? Happy to set you up so customer email is readable on your phone the approved way.' },
+      text: 'Hey Marcus, appreciate you knocking out the training. One thing worth a 10-min chat: the PII vs. contact-info distinction trips a lot of people up. Can we also stop the forward-to-Gmail habit today? Happy to set you up so customer email is readable on your phone the approved way.' },
     { to: 'Maya, Raj, Will, Grace', channel: 'DM',
-      text: 'Quick nudge — Customer Data Handling is due Fri. It’s ~6 minutes. Knock it out when you get a sec and you’re done: [link]' },
+      text: 'Quick nudge, Customer Data Handling is due Fri. It’s ~6 minutes. Knock it out when you get a sec and you’re done: [link]' },
   ],
 };
 
@@ -274,7 +274,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Manager KPIs — the few things that drive a decision */}
+        {/* Manager KPIs, the few things that drive a decision */}
         <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3">
           <Kpi label="Completion" value={`${completed}/${total}`} sub={`${completionPct}% of the team`} tone="neutral" />
           <Kpi label="Avg. check score" value={`${Math.round(avg * 100)}%`} sub="of those who finished" tone={avg >= 0.8 ? 'good' : 'warn'} />
@@ -347,7 +347,7 @@ export default function Dashboard() {
         </div>
         <p className="mt-2 text-xs text-cocoa/45">
           This is the whole picture a manager gets today: status, scores, and the open-text answers. The completion
-          rate looks fine — the risk is buried in the ⚑ answers. That's the gap the next step closes.
+          rate looks fine, the risk is buried in the ⚑ answers. That's the gap the next step closes.
         </p>
       </div>
 
@@ -423,7 +423,7 @@ export default function Dashboard() {
           {/* Slack automations */}
           <div className="rounded-2xl border border-cocoa/15 bg-paper p-5 flex flex-col">
             <h4 className="font-display font-semibold text-cocoa text-base mb-1">Coaching nudges, ready for Slack</h4>
-            <p className="text-xs text-cocoa/55 mb-4">A team digest and per-person DMs — drafted, not preachy.</p>
+            <p className="text-xs text-cocoa/55 mb-4">A team digest and per-person DMs, drafted, not preachy.</p>
 
             {!slack && (
               <button
