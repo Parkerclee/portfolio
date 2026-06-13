@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 
 const allEntries = await getCollection('case-studies', ({ data }) => !data.draft);
 allEntries.sort((a, b) => a.data.order - b.data.order);
@@ -12,10 +11,9 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 <BaseLayout title="Home">
   <Hero />
 
-  <WavyDivider top="#FCFCF9" bottom="#FCFCF9" />
 
   <!-- What I Do Differently -->
-  <section class="bg-paper py-20 sm:py-24">
+  <section class="bg-paper py-20 sm:py-24 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in max-w-2xl mx-auto text-center mb-16">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
@@ -70,10 +68,9 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
     </div>
   </section>
 
-  <WavyDivider flip={true} />
 
   <!-- Case Studies -->
-  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24">
+  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">

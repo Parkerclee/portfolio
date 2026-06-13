@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
 import Sparkles from '../../components/decor/Sparkles.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('case-studies', ({ data }) => !data.draft);
@@ -141,10 +140,9 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
     </div>
   </section>
 
-  <WavyDivider top="#F7F7F2" bottom="#FCFCF9" />
 
   <!-- Body -->
-  <article class="bg-paper py-16 sm:py-20">
+  <article class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-3xl mx-auto px-6 prose prose-cocoa">
       <Content />
     </div>

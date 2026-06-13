@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 const entries = await getCollection('case-studies', ({ data }) => !data.draft);
 entries.sort((a, b) => a.data.order - b.data.order);
@@ -24,10 +23,9 @@ const conceptPieces = entries.filter(e => e.data.aiGenerated);
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- Real Work -->
-  <section class="bg-cream-50 py-16 sm:py-20">
+  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-6">
       <div class="mb-8">
         <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Real work</p>

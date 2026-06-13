@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 import DemoPlayer from '../../components/DemoPlayer.astro';
 
 export async function getStaticPaths() {
@@ -107,17 +106,16 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
     </div>
   </section>
 
-  <WavyDivider top="#F7F7F2" bottom={data.embedUrl ? '#F7F7F2' : '#FCFCF9'} />
 
   {data.embedUrl && (
-    <section class="bg-cream-50 py-12 sm:py-14 border-b border-cocoa/10">
+    <section class="bg-cream-50 py-12 sm:py-14 border-y border-cocoa/10">
       <div class="max-w-5xl mx-auto px-6">
         <DemoPlayer src={data.embedUrl} title={data.title} minHeight={data.embedMinHeight ?? '680px'} />
       </div>
     </section>
   )}
 
-  <article class="bg-paper py-16 sm:py-20">
+  <article class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-3xl mx-auto px-6 prose prose-cocoa">
       <Content />
     </div>

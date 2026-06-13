@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
 import Sparkles from '../../components/decor/Sparkles.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
 ---
 <BaseLayout
@@ -26,10 +25,9 @@ import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- Click-through -->
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-5xl mx-auto px-6">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-4">Option 1 · the click-through</p>
       <ReplyInThread client:load />

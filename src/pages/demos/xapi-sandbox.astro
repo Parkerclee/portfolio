@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoPlayer from '../../components/DemoPlayer.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 ---
 <BaseLayout
   title="xAPI Sandbox, Crestline Health"
@@ -53,9 +52,8 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
     </div>
   </section>
 
-  <WavyDivider />
 
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <DemoPlayer
         src="/demos/xapi-sandbox-app/index.html"

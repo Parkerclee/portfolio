@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 const all = (await getCollection('resources', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
@@ -42,11 +41,10 @@ function theme(type: string) {
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- Quick grabs (bite-size, two-minute reads) -->
   {quick.length > 0 && (
-    <section class="bg-cream-50 py-16 sm:py-20">
+    <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
       <div class="max-w-6xl mx-auto px-6">
         <div class="mb-5">
           <p class="font-display text-sm uppercase tracking-widest text-cocoa/50">Quick grabs</p>

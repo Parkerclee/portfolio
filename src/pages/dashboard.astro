@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 import Dashboard from '../components/TeamPulse/Dashboard';
 ---
 <BaseLayout
@@ -32,10 +31,9 @@ import Dashboard from '../components/TeamPulse/Dashboard';
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- The dashboard itself -->
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-5xl mx-auto px-6">
       <Dashboard client:load />
     </div>

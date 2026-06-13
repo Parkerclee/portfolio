@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 
 // NOTE: The contact form uses a client-side mailto fallback by default,
 // so the site stays fully static on Vercel. To wire up a real backend,
@@ -32,10 +31,9 @@ const CONTACT_EMAIL = 'hello@parkerlee.dev';
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- Form + direct channels -->
-  <section class="bg-cream-50 py-16 sm:py-20">
+  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-5xl mx-auto px-6 grid lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-start">
 
       <!-- Form -->

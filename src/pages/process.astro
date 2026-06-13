@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 
 const phases = [
   {
@@ -159,10 +158,9 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
     </div>
   </section>
 
-  <WavyDivider />
 
   <!-- Why this matters -->
-  <section class="bg-cream-50 py-14 sm:py-16">
+  <section class="bg-cream-50 py-14 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-3xl mx-auto px-6">
       <div class="rounded-3xl border border-cocoa/15 bg-paper p-7 sm:p-9 retro-sheen">
         <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
