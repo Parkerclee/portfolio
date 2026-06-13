@@ -96,7 +96,7 @@ const SWIPE_CARDS: SwipeCardData[] = [
   { id: 'agenda',   q: 'Pre-meeting prep style?',              a: 'Detailed written agenda',       b: 'Loose talking points',        axis: 'structured' },
   { id: 'camera',   q: 'Defaults on Zoom?',                    a: 'Cameras on, full attention',    b: 'Cameras off, focus on talk',  axis: 'live' },
   { id: 'praise',   q: 'When someone ships big?',              a: 'Shout out in the meeting',      b: 'DM them privately',           axis: 'diplomatic' },
-  { id: 'tempo',    q: 'Default meeting length?',              a: 'Tight 25 — under by design',    b: 'Full hour to actually talk',  axis: 'decisive' },
+  { id: 'tempo',    q: 'Default meeting length?',              a: 'Tight 25, under by design',    b: 'Full hour to actually talk',  axis: 'decisive' },
   { id: 'decide',   q: 'Team split 3/3 on a call?',            a: 'I make it. Move on.',           b: 'Async vote, ship tomorrow',   axis: 'decisive' },
   { id: 'open',     q: 'First 5 minutes?',                     a: 'Quick win to warm the room',    b: 'Straight to the hard one',    axis: 'direct' },
   { id: 'conflict', q: 'Two reports clash in a meeting?',      a: 'Address it in the room',        b: 'Park it, fix in 1:1',         axis: 'direct' },
@@ -108,11 +108,11 @@ const SWIPE_CARDS: SwipeCardData[] = [
 const SCENARIOS: ScenarioData[] = [
   {
     id: 'pushback', setting: 'Tuesday standup', sub: 'You · 5 engineers · Zoom · cameras on',
-    what: 'Mid-update, **Jordan** cuts in: *"I don\'t think the roadmap makes sense — we\'re building the wrong thing."* The room goes quiet. Cameras are on.',
+    what: 'Mid-update, **Jordan** cuts in: *"I don\'t think the roadmap makes sense, we\'re building the wrong thing."* The room goes quiet. Cameras are on.',
     q: 'What do you do?',
     options: [
       { v: 'address', h: 'Address it now, in the room', s: 'Pause the standup. Hear Jordan out. Pull the team in.' },
-      { v: 'park',    h: 'Park it, 1:1 after',          s: '"That\'s worth a real convo — let\'s hit pause and dig in after."' },
+      { v: 'park',    h: 'Park it, 1:1 after',          s: '"That\'s worth a real convo, let\'s hit pause and dig in after."' },
       { v: 'defend',  h: 'Defend the roadmap',          s: 'Quickly remind the team why this work matters, move on.' },
       { v: 'open',    h: 'Ask the room',                s: '"Does anyone else feel this way?" Open it up.' },
     ],
@@ -123,8 +123,8 @@ const SCENARIOS: ScenarioData[] = [
     q: 'What do you do?',
     options: [
       { v: 'name',  h: 'Call on someone by name', s: '"Priya, what\'s on your plate that\'s tough?"' },
-      { v: 'share', h: 'Share your own first',    s: 'Model the vulnerability — say what\'s hard for YOU.' },
-      { v: 'switch',h: 'Switch modes',            s: '"Let\'s drop it in Slack instead — back to roadmap."' },
+      { v: 'share', h: 'Share your own first',    s: 'Model the vulnerability, say what\'s hard for YOU.' },
+      { v: 'switch',h: 'Switch modes',            s: '"Let\'s drop it in Slack instead, back to roadmap."' },
       { v: 'wait',  h: 'Sit in the silence',      s: 'Hold it. Someone will eventually fill the gap.' },
     ],
   },
@@ -184,13 +184,13 @@ async function generatePortrait(state: AppState): Promise<Portrait> {
     `You are a leadership coach building a personalized portrait of a first-time manager. Be warm, specific, slightly wry. NO corporate fluff.\n\nNAME: ${state.name || 'the manager'}\nCONTEXT: ${JSON.stringify(state.context)}\nTHEIR SWIPES:\n${swipeSummary}\nTHEIR SCENARIO CHOICES:\n${scenSummary}\n\nReturn ONLY a JSON object:\n{"archetype":"2-word punchy nickname","tagline":"one short sentence","traits":["3 specific traits"],"watchout":"one specific watchout in 1 sentence"}`,
     {
       archetype: 'The Builder',
-      tagline: 'Direct, structured, decision-forward — you don\'t waste a minute.',
+      tagline: 'Direct, structured, decision-forward, you don\'t waste a minute.',
       traits: [
         'Sets a tight agenda before the meeting starts',
         'Owns the call when the team splits',
         'Praises in private, fixes in public',
       ],
-      watchout: 'Your bias toward decisiveness can shut down dissent before it surfaces — build in two "do you all agree?" beats.',
+      watchout: 'Your bias toward decisiveness can shut down dissent before it surfaces, build in two "do you all agree?" beats.',
     }
   );
 }
@@ -213,14 +213,14 @@ async function generateMeeting(state: AppState): Promise<Meeting> {
       agenda: [
         { time: '0:00', duration: '1 min',  label: 'LAND',   title: 'Open the room',   say: 'Quick one today. One big topic. I\'ll keep us tight.',                                    note: 'Stand up. Don\'t sit until you\'ve named the agenda.' },
         { time: '0:01', duration: '12 min', label: 'FOCUS',  title: 'The one thing',   say: 'Priya, walk us through Linear forty-eight twenty-one. I\'m staying quiet for the first three.', note: 'You swiped "address it in the room." This is where that lives.' },
-        { time: '0:13', duration: '10 min', label: 'OPEN',   title: 'Round the room',  say: 'One thing each. Stuck, not solved.',                                                     note: 'Hard rule — no solutioning until everyone speaks.' },
-        { time: '0:23', duration: '5 min',  label: 'DECIDE', title: 'Pick the path',   say: 'Three paths on the board. We pick one by ten twenty-eight.',                             note: 'Your Closer move — own the call if it splits 3/3.' },
-        { time: '0:28', duration: '2 min',  label: 'CLOSE',  title: 'Close + thanks',  say: 'Decisions are in Linear. DMs welcome. Thanks team.',                                    note: 'You swiped "praise privately" — DM Priya in the next 30 min.' },
+        { time: '0:13', duration: '10 min', label: 'OPEN',   title: 'Round the room',  say: 'One thing each. Stuck, not solved.',                                                     note: 'Hard rule, no solutioning until everyone speaks.' },
+        { time: '0:23', duration: '5 min',  label: 'DECIDE', title: 'Pick the path',   say: 'Three paths on the board. We pick one by ten twenty-eight.',                             note: 'Your Closer move, own the call if it splits 3/3.' },
+        { time: '0:28', duration: '2 min',  label: 'CLOSE',  title: 'Close + thanks',  say: 'Decisions are in Linear. DMs welcome. Thanks team.',                                    note: 'You swiped "praise privately", DM Priya in the next 30 min.' },
       ],
       ifthen: [
-        { if: 'Jordan pushes back again',    then: '"Park it — let\'s hit that in a 1:1 today."' },
+        { if: 'Jordan pushes back again',    then: '"Park it, let\'s hit that in a 1:1 today."' },
         { if: 'Round-robin stalls',          then: '"Skip, come back. Nina, you\'re up."' },
-        { if: 'We\'re over time at :28',     then: '"Cutting. Decisions move to Slack — I\'ll start the thread."' },
+        { if: 'We\'re over time at :28',     then: '"Cutting. Decisions move to Slack, I\'ll start the thread."' },
       ],
       open: 'Thursday Sync. One topic. Tight.',
       close: 'Decisions are in Linear. DMs welcome. Thanks team.',
@@ -327,7 +327,7 @@ function SceneContext({ state, set, next, back }: { state: AppState; set: (p: Pa
 
   const coachNotes = [
     'Size shapes whether you run the meeting or facilitate it.',
-    'Different industries have different rhythms — we tune the script.',
+    'Different industries have different rhythms, we tune the script.',
     'We\'ll match patterns from managers in your role.',
     'Every meeting type has a different shape.',
     'Tool references go straight into the agenda.',
@@ -735,7 +735,7 @@ function SceneScenario({ state, set, next, back }: { state: AppState; set: (p: P
         </div>
 
         <div className="bubble" style={{ marginTop: 22, marginLeft: 20 }}>
-          Take a breath. No perfect answer — we're learning your instinct.
+          Take a breath. No perfect answer, we're learning your instinct.
         </div>
       </div>
 
@@ -821,7 +821,7 @@ function SceneProcessing({ state, set, next }: { state: AppState; set: (p: Parti
       <div>
         <Sun style={{ width: 100, height: 100, marginBottom: 24 }} />
         <h2 className="display" style={{ fontSize: 56, lineHeight: 0.92, margin: 0 }}>
-          One sec, {state.name || 'friend'} —<br />
+          One sec, {state.name || 'friend'}…<br />
           <span style={{ color: 'var(--terracotta)' }}>laying it out.</span>
         </h2>
 
@@ -1007,7 +1007,7 @@ function ScriptView({ meeting, portrait }: { meeting: Meeting; portrait: Portrai
         </div>
         <div className="card solid-ink" style={{ padding: 14, marginTop: 16 }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, marginBottom: 6 }}>Read it once aloud</div>
-          <div style={{ fontSize: 13, lineHeight: 1.45 }}>Don't memorize. Let the bones show — that's what makes it sound like you.</div>
+          <div style={{ fontSize: 13, lineHeight: 1.45 }}>Don't memorize. Let the bones show, that's what makes it sound like you.</div>
         </div>
       </div>
     </div>

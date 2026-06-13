@@ -2,12 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
 import Sparkles from '../../components/decor/Sparkles.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
 ---
 <BaseLayout
-  title="Reply in Thread — micro-guide"
-  description="A 60-second click-through that teaches one habit — reply in the thread, don't start a new message — in both Slack and Teams. Plus a reminder GIF you can post in any channel."
+  title="Reply in Thread · micro-guide"
+  description="A 60-second click-through for Slack and Teams that teaches one habit: reply in the thread, don't start a new message. Plus a reminder GIF you can post in any channel."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -19,18 +18,16 @@ import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
         Reply in the thread. <span class="italic text-primary-600">Not a new message.</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        It's the most common channel-hygiene problem at every company, and it's a 60-second fix — once people see what
-        a stray message does to a channel versus a tidy threaded reply. Here it is two ways: a click-through that lets
-        someone feel the difference in both Slack and Teams, and a drop-in GIF for the channel where the reminder keeps
-        not sticking.
+        The most common channel-hygiene problem at every company, and a 60-second fix once people see what a stray
+        message does to a channel. Built two ways: a click-through for Slack and Teams, and a drop-in GIF for the
+        channel where the reminder keeps not sticking.
       </p>
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
 
   <!-- Click-through -->
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-5xl mx-auto px-6">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-4">Option 1 · the click-through</p>
       <ReplyInThread client:load />
@@ -57,9 +54,9 @@ import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
             Drop it in the channel that needs it.
           </h2>
           <p class="mt-3 text-cocoa/75 leading-relaxed">
-            Same lesson, no clicks required — a six-second loop that shows the question getting buried under new
-            messages, then the calm version where the answer lives in a thread. Post it once when a channel gets noisy;
-            it does the nudging so you don't have to be the thread police.
+            Same lesson, no clicks. A six-second loop: the question gets buried under new messages, then the calm
+            version where the answer lives in a thread. Post it once when a channel gets noisy and it does the
+            nudging, so you don't have to be the thread police.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a

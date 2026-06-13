@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 /**
- * Reply in thread — a tiny click-through that teaches one habit: when you're
+ * Reply in thread, a tiny click-through that teaches one habit: when you're
  * answering someone, reply *in the thread* instead of starting a new message.
  * Works for both Slack and Teams (the gesture differs, the principle doesn't).
  *
@@ -28,8 +28,8 @@ const APPS: Record<AppId, {
     channel: '# q3-planning',
     rightLabel: 'Reply in thread',
     wrongLabel: 'Send to channel',
-    where: 'Hover the message you’re answering and click the speech-bubble “Reply in thread” icon. The big box at the bottom posts to the whole channel — a thread keeps it on the message.',
-    wrongWhy: 'Your answer is now floating in the channel, detached from the question. Three messages later, nobody can tell what it’s answering — and the next person asks Priya the same thing.',
+    where: 'Hover the message you’re answering and click the speech-bubble “Reply in thread” icon. The big box at the bottom posts to the whole channel, a thread keeps it on the message.',
+    wrongWhy: 'Your answer is now floating in the channel, detached from the question. Three messages later, nobody can tell what it’s answering, and the next person asks Priya the same thing.',
   },
   teams: {
     name: 'Teams',
@@ -59,7 +59,7 @@ export default function ReplyInThread() {
     <div className="rounded-3xl border border-cocoa/15 bg-paper overflow-hidden shadow-xl shadow-primary-900/5">
       {/* Header + app toggle */}
       <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-cocoa/10 bg-cream-50">
-        <p className="font-display font-semibold text-cocoa text-sm">Reply in thread — 60-second walkthrough</p>
+        <p className="font-display font-semibold text-cocoa text-sm">Reply in thread, 60-second walkthrough</p>
         <div className="inline-flex rounded-full border border-cocoa/15 bg-paper p-0.5 text-xs font-semibold">
           {(['slack', 'teams'] as AppId[]).map((id) => (
             <button
@@ -95,7 +95,7 @@ export default function ReplyInThread() {
             {step === 'wrong' && (
               <>
                 <Msg who="(you)" time="9:42 AM" accent={a.accent} highlight="bad"
-                  text="Here you go — Q3 came in at $4.2M, up 12% QoQ." />
+                  text="Here you go, Q3 came in at $4.2M, up 12% QoQ." />
                 <Msg who="Dev Shah" time="9:43 AM" accent={a.accent}
                   text="Reminder: standup moved to 10:30 today 👍" />
                 <Msg who="Mara Lin" time="9:44 AM" accent={a.accent}
@@ -116,7 +116,7 @@ export default function ReplyInThread() {
                 <div className={`border-l-2 pl-3 space-y-2.5 ${step === 'where' ? 'rounded-r-lg ring-2 ring-offset-2' : ''}`}
                   style={{ borderColor: a.accent, ...(step === 'where' ? { boxShadow: `0 0 0 2px ${a.accent}` } : {}) }}>
                   <Msg dense who="(you)" time="9:42 AM" accent={a.accent}
-                    text="Here you go — Q3 came in at $4.2M, up 12% QoQ. Full breakdown in the sheet 👇" />
+                    text="Here you go, Q3 came in at $4.2M, up 12% QoQ. Full breakdown in the sheet 👇" />
                   <Msg dense who="Priya Raman" time="9:43 AM" accent={a.accent}
                     text="Perfect, exactly what I needed. Thank you! 🙏" />
                 </div>
@@ -159,7 +159,7 @@ export default function ReplyInThread() {
         {/* Coaching rail */}
         <aside className="border-t lg:border-t-0 lg:border-l border-cocoa/10 bg-paper px-5 py-5 flex flex-col">
           {step === 'choose' && (
-            <Rail title="The one habit" body="When you’re answering someone, reply in the thread instead of starting a new message. Try it both ways — watch what happens to the channel.">
+            <Rail title="The one habit" body="When you’re answering someone, reply in the thread instead of starting a new message. Try it both ways, watch what happens to the channel.">
               <span className="text-xs text-cocoa/45">Pick an option to see the result →</span>
             </Rail>
           )}
@@ -189,7 +189,7 @@ export default function ReplyInThread() {
           )}
 
           {step === 'done' && (
-            <Rail title="That’s the whole lesson" tone="good" body="Reply in the thread, not a new message. It keeps channels scannable and context together — and it’s the same idea in Slack and Teams.">
+            <Rail title="That’s the whole lesson" tone="good" body="Reply in the thread, not a new message. It keeps channels scannable and context together, and it’s the same idea in Slack and Teams.">
               <div className="mt-1 flex flex-col gap-2">
                 <a href="#reminder-gif" className="inline-flex items-center gap-1.5 rounded-full text-cream px-4 py-2 text-sm font-semibold self-start" style={{ background: a.accent }}>
                   Get the reminder GIF ↓

@@ -6,7 +6,7 @@ const sampleStatements = [
       icon: "🚀",
       who: "Portfolio Visitor",
       action: "Started",
-      what: "EHR Simulator — Medication Order Task",
+      what: "EHR Simulator, Medication Order Task",
       when: "2 minutes ago",
       detail: null,
     },
@@ -24,7 +24,7 @@ const sampleStatements = [
         objectType: "Activity",
         id: "https://parkerclee.com/demos/ehr-simulator",
         definition: {
-          name: { "en-US": "EHR Simulator — Medication Order Task" },
+          name: { "en-US": "EHR Simulator, Medication Order Task" },
           description: {
             "en-US":
               "Learner opened the EHR simulator to practice medication ordering.",
@@ -108,7 +108,7 @@ const sampleStatements = [
       icon: "🏁",
       who: "Portfolio Visitor",
       action: "Completed",
-      what: "EHR Simulator — Full Patient Encounter",
+      what: "EHR Simulator, Full Patient Encounter",
       when: "Just now",
       detail: "Final score: 85% · Duration: 4m 22s · Passed",
     },
@@ -126,7 +126,7 @@ const sampleStatements = [
         objectType: "Activity",
         id: "https://parkerclee.com/demos/ehr-simulator",
         definition: {
-          name: { "en-US": "EHR Simulator — Full Patient Encounter" },
+          name: { "en-US": "EHR Simulator, Full Patient Encounter" },
           description: {
             "en-US":
               "Learner completed all tasks in the simulated EHR patient encounter.",
@@ -260,8 +260,8 @@ export default function XAPIStatementViewer() {
         </div>
         <p className="text-sm text-slate-500 leading-relaxed">
           Every interaction in the demo generates an{" "}
-          <span className="font-semibold text-slate-700">xAPI statement</span>{" "}
-          — a standardized record of what the learner did. These statements
+          <span className="font-semibold text-slate-700">xAPI statement</span>, a
+          standardized record of what the learner did. These statements
           flow to a Learning Record Store (LRS) for analysis.
         </p>
       </div>
@@ -290,7 +290,7 @@ export default function XAPIStatementViewer() {
         <p className="text-xs text-slate-500 leading-relaxed">
           <span className="font-semibold text-slate-700">Why this matters:</span>{" "}
           xAPI statements let us measure exactly how learners interact with
-          training — not just whether they finished, but what they struggled
+          training, not just whether they finished, but what they struggled
           with, how long each task took, and which paths they chose. This data
           drives the analytics dashboard and informs Kirkpatrick Level 2 & 3
           evaluation.

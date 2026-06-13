@@ -2,10 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DemoPlayer from '../../components/DemoPlayer.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 ---
 <BaseLayout
-  title="xAPI Sandbox — Crestline Health"
+  title="xAPI Sandbox, Crestline Health"
   description="A live xAPI statement sandbox. Watch a micro-lesson emit real xAPI statements into an in-browser mock LRS, with a mini dashboard aggregated off the same stream."
 >
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -26,7 +25,7 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
         Crestline Health · Live Demo
       </p>
       <h1 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
-        xAPI Sandbox — <span class="italic text-primary-600">allergy verification</span>
+        xAPI Sandbox, <span class="italic text-primary-600">allergy verification</span>
       </h1>
       <p class="mt-5 text-lg text-cocoa/70 leading-relaxed max-w-2xl">
         A three-step micro-lesson that emits real xAPI statements into an in-browser mock LRS. The feed on the right is the exact payload that would hit a production LRS; the dashboard below is aggregated off the same stream.
@@ -53,13 +52,12 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
 
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <DemoPlayer
         src="/demos/xapi-sandbox-app/index.html"
-        title="xAPI Sandbox — Allergy Verification Micro-check"
+        title="xAPI Sandbox, Allergy Verification Micro-check"
         ratio="16 / 11"
         minHeight={760}
       />
@@ -67,26 +65,26 @@ import WavyDivider from '../../components/decor/WavyDivider.astro';
       <div class="max-w-3xl mx-auto mt-12 text-cocoa/75 leading-relaxed">
         <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">How it works</h2>
         <p>
-          The left panel is a trimmed-down version of the allergy-verification moment from the EHR simulator — launch, decide, complete. Every action produces an xAPI 1.0.3 statement with a real actor, verb, and activity, and posts it to an in-browser mock LRS. The right panel is the raw statement feed; the dashboard at the bottom recomputes from that same stream every time a statement lands.
+          The left panel is a trimmed-down version of the allergy-verification moment from the EHR simulator, launch, decide, complete. Every action produces an xAPI 1.0.3 statement with a real actor, verb, and activity, and posts it to an in-browser mock LRS. The right panel is the raw statement feed; the dashboard at the bottom recomputes from that same stream every time a statement lands.
         </p>
 
         <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">What's happening under the hood</h3>
         <ul class="list-disc pl-5 space-y-1 mt-2">
-          <li><code>launched</code> fires when the learner starts — scoped with a <code>contextActivities.parent</code> pointing at the parent training.</li>
+          <li><code>launched</code> fires when the learner starts, scoped with a <code>contextActivities.parent</code> pointing at the parent training.</li>
           <li><code>answered</code> captures the raw response with a <code>duration</code> in ISO 8601.</li>
-          <li><code>passed</code> or <code>failed</code> is emitted right after, carrying <code>score.scaled</code> — the shape Kirkpatrick Level 2 reporting actually needs.</li>
+          <li><code>passed</code> or <code>failed</code> is emitted right after, carrying <code>score.scaled</code>, the shape Kirkpatrick Level 2 reporting actually needs.</li>
           <li><code>completed</code> closes the session with <code>completion: true</code>.</li>
         </ul>
 
         <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">Pointing it at a real LRS</h3>
         <p>
-          The mock is a five-line shim — same shape as a real POST to <code>/xapi/statements</code>. To run it against an actual conformant LRS, spin up <a href="https://github.com/yetanalytics/lrsql" class="text-primary-600 font-semibold underline underline-offset-2">Yet Analytics SQL LRS</a> with one Docker command, then swap <code>mockLRS.post()</code> for a <code>fetch</code> with Basic auth. The statement payload doesn't change.
+          The mock is a five-line shim, same shape as a real POST to <code>/xapi/statements</code>. To run it against an actual conformant LRS, spin up <a href="https://github.com/yetanalytics/lrsql" class="text-primary-600 font-semibold underline underline-offset-2">Yet Analytics SQL LRS</a> with one Docker command, then swap <code>mockLRS.post()</code> for a <code>fetch</code> with Basic auth. The statement payload doesn't change.
         </p>
 
         <h3 class="font-display font-semibold text-cocoa text-lg mt-8 mb-2">What's next</h3>
         <ul class="list-disc pl-5 space-y-1 mt-2">
           <li>Wire the EHR simulator's five-step flow to emit the same statement shape.</li>
-          <li>Add a cohort view — roll up statements across multiple learners to show real Level 2 reporting.</li>
+          <li>Add a cohort view, roll up statements across multiple learners to show real Level 2 reporting.</li>
           <li>Document the Docker + <code>xapi-js</code> setup as a standalone how-to in Resources.</li>
         </ul>
       </div>

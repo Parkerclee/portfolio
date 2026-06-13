@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 
 const allEntries = await getCollection('case-studies', ({ data }) => !data.draft);
 allEntries.sort((a, b) => a.data.order - b.data.order);
@@ -12,10 +11,9 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 <BaseLayout title="Home">
   <Hero />
 
-  <WavyDivider class="-mt-4 relative z-10" />
 
   <!-- What I Do Differently -->
-  <section class="bg-paper py-20 sm:py-24">
+  <section class="bg-paper py-20 sm:py-24 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in max-w-2xl mx-auto text-center mb-16">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
@@ -37,7 +35,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
           <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Code-Built Interactives</h3>
           <p class="text-sm text-cocoa/70 leading-relaxed">
             System simulators, branching scenarios, and interactive tools built with
-            real code — not locked into an authoring tool's limitations.
+            real code, not boxed into an authoring tool's limits.
           </p>
         </div>
 
@@ -70,17 +68,16 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
     </div>
   </section>
 
-  <WavyDivider flip={true} class="relative z-10" />
 
   <!-- Case Studies -->
-  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24">
+  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24 border-t border-cocoa/10">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
           Selected <span class="italic text-primary-600">case studies</span>
         </h2>
         <p class="mt-3 text-lg text-cocoa/70">
-          Real work from financial services operations L&D — anonymized, detailed, and built to show how decisions get made.
+          Real work from financial services operations L&D. Anonymized, detailed, built to show how the decisions got made.
         </p>
       </div>
 
@@ -103,7 +100,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 
       <div class="mt-10 text-center">
         <a href="/case-studies" class="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
-          View all case studies — including concept pieces
+          View all case studies, including concept pieces
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -139,7 +136,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
         Want to see the learning experiences in action?
       </h2>
       <p class="mt-3 text-cream/80 text-lg">
-        Try the live demos — an EHR simulator, branching scenarios, and more.
+        Shipped client courses and playable concept builds, in one place.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href="/demos"

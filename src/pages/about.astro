@@ -2,31 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 
 const values = [
   {
     num: '01',
     title: 'Learning is behavior change, not content delivery.',
-    body: 'Completion rates are flattering; behavior change is the job. Every project starts by naming the behavior the business actually needs, then working backwards to the smallest intervention that will move it.',
+    body: 'Completion rates look good in a status update and tell you almost nothing. What matters is whether anyone does the job differently afterward. So I start by naming that behavior, then work backward to the smallest thing that actually moves it.',
     color: 'terracotta',
   },
   {
     num: '02',
     title: 'Pick the right modality, even when it\'s harder.',
-    body: 'Rise is my default when content is linear. Code-built when interaction fidelity or data granularity matters. Blended when the behavior only transfers through practice with feedback. The modality is a design decision, not a department default.',
+    body: 'Rise is great when the content is mostly linear. When the interaction or the data matters, I build it in code. When the skill only sticks through practice, it goes blended. The format should follow the problem, not whatever the team already has a license for.',
     color: 'avocado',
   },
   {
     num: '03',
     title: 'AI is a power tool, not a shortcut.',
-    body: 'I use Cursor + Claude to compress weeks of scaffolding into days — scenario drafts, SCORM packaging, xAPI pipelines, UI prototypes. The judgment, the voice, and the final call are still mine. This portfolio is itself a proof of what that partnership makes possible on a small team budget.',
+    body: 'I use Cursor and Claude to get through the slow parts faster: scenario drafts, SCORM packaging, xAPI pipelines, rough UI. The judgment and the voice stay mine. This site is what that looks like in practice on a one-person budget.',
     color: 'mustard',
   },
   {
     num: '04',
     title: 'If you can\'t measure it, you can\'t defend it.',
-    body: 'Kirkpatrick 1-4 isn\'t an afterthought; it\'s baked in from Discovery. xAPI statements designed against the sponsor\'s dashboard, not the LMS\'s default report. The story the data tells is as important as the training itself.',
+    body: 'I plan evaluation during Discovery, not after launch. The xAPI gets designed against the question the sponsor will actually ask, not whatever the LMS reports by default. If you can\'t tell the story with data later, the next project is a harder sell.',
     color: 'terracotta',
   },
 ];
@@ -35,13 +34,14 @@ const tools = [
   { label: 'Design & authoring', items: ['Articulate Rise 360', 'Storyline 360', 'Illustrator', 'InDesign', 'Figma', 'Canva'] },
   { label: 'Video & motion', items: ['After Effects', 'Adobe Premiere', 'Google Vids', 'Camtasia'] },
   { label: 'Code & AI', items: ['Cursor', 'Claude', 'Astro', 'Tailwind', 'HTML / CSS / JS'] },
-  { label: 'Data & delivery', items: ['xAPI 1.0.3', 'SCORM 1.2 / 2004', 'SCORM Cloud', 'Looker', 'Bynder', 'Bridge LMS', 'Chart.js'] },
+  { label: 'LMS & delivery', items: ['Docebo', 'Continu', 'Bridge LMS', 'SCORM Cloud', 'xAPI 1.0.3', 'SCORM 1.2 / 2004'] },
+  { label: 'Data & reporting', items: ['Looker', 'Chart.js', 'Bynder'] },
   { label: 'Methodology', items: ['Action mapping', 'Competency-based design', 'Flipped classroom', 'Kirkpatrick L1–L4'] },
 ];
 ---
 <BaseLayout
   title="About"
-  description="Parker Lee — instructional designer using AI as a development partner to build learning experiences that move business outcomes."
+  description="Parker Lee, instructional designer using AI as a development partner to build learning that moves business outcomes."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -54,15 +54,14 @@ const tools = [
         I design learning that <span class="italic text-primary-600">moves the metric</span>.
       </h1>
       <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        I'm Parker Lee — senior learning experience designer at SoFi, working in fintech and financial services. My background spans financial services, retail, customer service, and manufacturing: whatever the industry, the job is the same. Figure out the actual gap, design the smallest intervention that closes it, and build something the learner's schedule can absorb. The last two years I've added AI-assisted development to the stack, which has quietly changed what a one-person L&D function can ship.
+        I'm a senior learning experience designer at SoFi. I've worked in financial services, retail, customer service, and manufacturing, and honestly the work is the same everywhere. Someone needs to do something differently, and most of the time the training people ask for isn't the real fix. My job is to find what is. The past couple of years I've leaned hard on AI for the building part, and it's changed how much one person can get out the door.
       </p>
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
 
   <!-- Story -->
-  <section class="bg-cream-50 py-16 sm:py-20">
+  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-3xl mx-auto px-6 space-y-8">
       <div>
         <h2 class="font-display font-semibold text-cocoa text-2xl sm:text-3xl mb-4 leading-tight">
@@ -70,16 +69,16 @@ const tools = [
         </h2>
         <div class="space-y-4 text-cocoa/80 leading-relaxed text-[1.02rem]">
           <p>
-            I started in the usual way — Rise modules, Storyline interactions, "make this policy into a course." The craft clicked immediately. It clicked a lot more when I could sit with subject matter experts and action-map the actual behavior we were trying to change. That's where I found my lane: sales enablement, customer service soft skills, compliance training, new-hire onboarding, and software simulators for systems nobody wanted to learn on live data.
+            I came up the normal way: Rise modules, Storyline, the occasional "can you turn this policy doc into a course." It got interesting when I started sitting in with the experts and mapping what people actually had to do differently, instead of just what they were supposed to know. That's the work I kept chasing: sales enablement, customer service, compliance, onboarding, and simulators for the systems nobody wanted new hires practicing on live.
           </p>
           <p>
-            I've built AI certification programs from scratch, administered LMSs with 80+ courses across multiple learning paths, and designed branded visual systems that SMEs actually want to use. At SoFi I've scaled curriculum architecture across six product lines, redesigned new hire programs with competency-based assessment gates, and built a needs-analysis methodology around real production data — agent communication signals, SOP coverage maps, rubric scoring — instead of just SME interviews. The throughline: <strong>design that respects the learner's time and moves a number the business cares about.</strong>
+            Since then I've stood up AI certification programs, run LMSs with 80-plus courses, and built brand systems the experts actually wanted to use. At SoFi I've scaled curriculum across six product lines, rebuilt new-hire onboarding around real competency gates, and grounded needs analysis in production data, things like agent communication signals and SOP coverage, instead of a round of SME interviews and a guess. The point is always the same: respect the learner's time, and move a number someone cares about.
           </p>
           <p>
-            Then AI tooling got genuinely useful. Not "write me a script" useful — <em>build me a working prototype of a branching scenario engine</em> useful. Cursor and Claude changed what I can ship alone. A code-built EHR simulator that used to need a developer-ID pairing is now a week with a well-scoped spec. A pilot analytics dashboard that used to require a BI team is a weekend of Chart.js.
+            Then AI tooling got good. Not "write me a script" good. More like "build me a working branching-scenario engine over a weekend" good. An EHR simulator that would have meant pairing with a developer is now a week of focused work. A pilot dashboard that used to need a BI team is an afternoon with Chart.js.
           </p>
           <p>
-            This portfolio is the proof. Every page — the case studies, the live simulator, the xAPI dashboard, this About page — was designed by me and built with an AI collaborator. The judgment is mine. The execution is shared. Let's work together if that's the kind of partner you want on your next program.
+            This whole site is the example. I designed every page and built it with AI sitting next to me. The thinking is mine; the typing is shared. If that sounds like the kind of person you want on your next project, get in touch.
           </p>
         </div>
       </div>
@@ -174,7 +173,7 @@ const tools = [
         Let's make something <span class="italic text-accent-500">that works</span>.
       </h2>
       <p class="text-cream/75 leading-relaxed mb-8 max-w-xl mx-auto">
-        If your team is stuck between "we need training" and "we don't know what'll actually move the number" — that's the conversation I love having.
+        If your team is stuck between "we need training" and "we don't know what'll actually move the number," that's the conversation I love having.
       </p>
       <a
         href="/contact"

@@ -2,12 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
-import WavyDivider from '../components/decor/WavyDivider.astro';
 import Dashboard from '../components/TeamPulse/Dashboard';
 ---
 <BaseLayout
   title="Manager Dashboard"
-  description="What an xAPI learning pipeline looks like to the person who has to act on it — a manager's view of one training assignment, plus AI that turns the statements into a follow-up plan and Slack coaching nudges."
+  description="A manager's view of one training assignment, with AI that turns the xAPI into a follow-up plan and Slack coaching nudges."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
@@ -20,10 +19,9 @@ import Dashboard from '../components/TeamPulse/Dashboard';
         The dashboard a <span class="italic text-primary-600">manager</span> actually opens.
       </h1>
       <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        Most learning dashboards bury managers in charts. This one leads with the four things they came to
-        find out — who's done, how they scored, who needs a nudge, and how long they've got — and then does the
-        part no completion report can: it reads the xAPI (the quiz scores <em>and</em> the open-text answers),
-        finds the real exposure, and hands back a follow-up plan and ready-to-send Slack coaching.
+        Most learning dashboards bury managers in charts. This one leads with the four things they came for:
+        who's done, how they scored, who needs a nudge, how long they've got. Then it does what a completion
+        report can't. It reads the raw xAPI, finds the exposure hiding in the answers, and drafts the follow-up.
       </p>
 
       <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-cocoa/15 bg-cream-50 px-4 py-1.5 text-xs font-semibold text-cocoa/70 font-display uppercase tracking-widest">
@@ -33,10 +31,9 @@ import Dashboard from '../components/TeamPulse/Dashboard';
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
 
   <!-- The dashboard itself -->
-  <section class="bg-cream-50 py-12 sm:py-16">
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
     <div class="max-w-5xl mx-auto px-6">
       <Dashboard client:load />
     </div>
@@ -52,13 +49,13 @@ import Dashboard from '../components/TeamPulse/Dashboard';
         <p class="text-cocoa/75 leading-relaxed mb-3">
           The team is fictional, but the data is shaped exactly like aggregated LRS output: one assignment, a roster
           of learners, per-person <span class="font-mono text-sm">launched / progressed / answered / passed / completed</span>
-          statements, quiz scores, and the free-text answers people actually typed. The completion rate looks healthy —
-          the risk is hiding in three of those answers. That's the whole point.
+          statements, quiz scores, and the free-text answers people actually typed. The completion rate looks healthy.
+          The risk is hiding in three of those answers. That's the whole point.
         </p>
         <p class="text-cocoa/75 leading-relaxed">
           The AI step calls a live model when one is available and falls back to authored output otherwise, so the
           analysis is reproducible here. In a real engagement it reads the same xAPI statements posted to a client LRS,
-          and the Slack messages go out through a webhook — the draft-and-approve flow stays exactly as shown.
+          and the Slack messages go out through a webhook. The draft-and-approve flow stays exactly as shown.
         </p>
       </div>
     </div>

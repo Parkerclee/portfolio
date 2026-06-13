@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MoonStar from '../../components/decor/MoonStar.astro';
 import Sparkles from '../../components/decor/Sparkles.astro';
-import WavyDivider from '../../components/decor/WavyDivider.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('case-studies', ({ data }) => !data.draft);
@@ -68,7 +67,7 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
           </svg>
           <span>
             <strong class="font-semibold text-cocoa">AI-generated concept piece.</strong>
-            {' '}This company is fictional. The methodology, artifacts, and architecture mirror approaches I've applied in real NDA-protected client work — built with AI as a development partner so I can show the thinking without exposing protected detail.
+            {' '}This company is fictional. The methodology, artifacts, and architecture mirror approaches I've applied in real NDA-protected client work, built with AI as a development partner so I can show the thinking without exposing protected detail.
           </span>
         </div>
       )}
@@ -141,10 +140,9 @@ const theme = colorMap[data.color] ?? colorMap.terracotta;
     </div>
   </section>
 
-  <WavyDivider class="-mt-2 relative z-10" />
 
   <!-- Body -->
-  <article class="bg-paper py-16 sm:py-20">
+  <article class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-3xl mx-auto px-6 prose prose-cocoa">
       <Content />
     </div>

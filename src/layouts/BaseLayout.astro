@@ -15,7 +15,7 @@ const {
   ogImage = "/og-default.svg",
 } = Astro.props;
 
-const fullTitle = `${title} | Parker Lee — Instructional Designer`;
+const fullTitle = `${title} | Parker Lee · Instructional Designer`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 ---
@@ -30,7 +30,7 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Parker Lee — Instructional Designer" />
+    <meta property="og:site_name" content="Parker Lee · Instructional Designer" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
