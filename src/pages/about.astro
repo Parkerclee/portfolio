@@ -3,32 +3,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MoonStar from '../components/decor/MoonStar.astro';
 import Sparkles from '../components/decor/Sparkles.astro';
 
-const values = [
+const LINKEDIN_URL = 'https://www.linkedin.com/in/parkerclee/';
+
+const experience = [
   {
-    num: '01',
-    title: 'Learning is behavior change, not content delivery.',
-    body: 'Completion rates look good in a status update and tell you almost nothing. What matters is whether anyone does the job differently afterward. So I start by naming that behavior, then work backward to the smallest thing that actually moves it.',
-    color: 'terracotta',
+    company: 'SoFi',
+    role: 'Senior Learning Experience Designer',
+    dates: 'Present',
+    summary: 'Learning design for a national fintech, across operations and customer-facing teams.',
+    points: [
+      'Scaled curriculum across six product lines, standardizing how new programs get built and measured.',
+      'Rebuilt new-hire onboarding around real competency gates instead of seat-time and completion.',
+      'Grounded needs analysis in production data, things like agent communication signals and SOP coverage, instead of a round of SME interviews and a guess.',
+      'Wired learning to xAPI so evaluation answers the question the sponsor will actually ask, not whatever the LMS reports by default.',
+    ],
   },
   {
-    num: '02',
-    title: 'Pick the right modality, even when it\'s harder.',
-    body: 'Rise is great when the content is mostly linear. When the interaction or the data matters, I build it in code. When the skill only sticks through practice, it goes blended. The format should follow the problem, not whatever the team already has a license for.',
-    color: 'avocado',
+    company: 'BENlabs',
+    role: 'Senior Learning Strategist',
+    dates: 'Prior',
+    summary: 'Stood up the learning function and its tooling from the ground up.',
+    points: [
+      'Led adoption and administration of a new LMS, then authored and curated 80-plus courses on it.',
+      'Designed and launched an internal AI certification program.',
+      'Built AI and marketing learning paths that produced measurable upskilling across the company.',
+    ],
   },
   {
-    num: '03',
-    title: 'AI is a power tool, not a shortcut.',
-    body: 'I use Cursor and Claude to get through the slow parts faster: scenario drafts, SCORM packaging, xAPI pipelines, rough UI. The judgment and the voice stay mine. This site is what that looks like in practice on a one-person budget.',
-    color: 'mustard',
-  },
-  {
-    num: '04',
-    title: 'If you can\'t measure it, you can\'t defend it.',
-    body: 'I plan evaluation during Discovery, not after launch. The xAPI gets designed against the question the sponsor will actually ask, not whatever the LMS reports by default. If you can\'t tell the story with data later, the next project is a harder sell.',
-    color: 'terracotta',
+    company: 'Purple',
+    role: 'Learning Experience Designer',
+    dates: 'Prior',
+    summary: 'Progressed from Email Associate to Training Specialist to Learning Experience Designer.',
+    points: [
+      'Owned new-hire training programs for Purple Customer Care.',
+      'Rebuilt training documentation into a system the team actually kept current.',
+      'Moved from the front line into design, which is why the work stays close to what reps actually do.',
+    ],
   },
 ];
+
+const education = {
+  school: 'Utah Valley University',
+  degree: 'B.S., Behavioral Science (Psychology emphasis)',
+  dates: '2011 – 2015',
+};
 
 const tools = [
   { label: 'Design & authoring', items: ['Articulate Rise 360', 'Storyline 360', 'Illustrator', 'InDesign', 'Figma', 'Canva'] },
@@ -41,105 +59,108 @@ const tools = [
 ---
 <BaseLayout
   title="About"
-  description="Parker Lee is a senior learning experience designer who helps companies implement AI in L&D and knowledge management, and build custom, company-specific AI training."
+  description="Parker Lee is a senior learning experience designer (SoFi, BENlabs, Purple) who helps companies implement AI in L&D and knowledge management, and build custom, company-specific AI training."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden bg-paper paper-bg">
     <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
     <Sparkles class="hidden md:block absolute bottom-8 right-8 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
 
-    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-28">
+    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-24">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">About</p>
       <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
-        I design learning that <span class="italic text-primary-600">moves the metric</span>.
+        Parker Lee
       </h1>
-      <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        I'm a senior learning experience designer at SoFi. I've worked in financial services, retail, customer service, and manufacturing, and honestly the work is the same everywhere. Someone needs to do something differently, and most of the time the training people ask for isn't the real fix. My job is to find what is. The past couple of years I've leaned hard on AI for the building part, and it's changed how much one person can get out the door.
+      <p class="mt-4 font-display text-lg sm:text-xl text-primary-600 font-semibold">
+        Senior Learning Experience Designer · American Fork, UT
       </p>
-    </div>
-  </section>
-
-
-  <!-- Story -->
-  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
-    <div class="max-w-3xl mx-auto px-6 space-y-8">
-      <div>
-        <h2 class="font-display font-semibold text-cocoa text-2xl sm:text-3xl mb-4 leading-tight">
-          How I got here
-        </h2>
-        <div class="space-y-4 text-cocoa/80 leading-relaxed text-[1.02rem]">
-          <p>
-            I came up the normal way: Rise modules, Storyline, the occasional "can you turn this policy doc into a course." It got interesting when I started sitting in with the experts and mapping what people actually had to do differently, instead of just what they were supposed to know. That's the work I kept chasing: sales enablement, customer service, compliance, onboarding, and simulators for the systems nobody wanted new hires practicing on live.
-          </p>
-          <p>
-            Since then I've stood up AI certification programs, run LMSs with 80-plus courses, and built brand systems the experts actually wanted to use. At SoFi I've scaled curriculum across six product lines, rebuilt new-hire onboarding around real competency gates, and grounded needs analysis in production data, things like agent communication signals and SOP coverage, instead of a round of SME interviews and a guess. The point is always the same: respect the learner's time, and move a number someone cares about.
-          </p>
-          <p>
-            Then AI tooling got good. Not "write me a script" good. More like "build me a working branching-scenario engine over a weekend" good. An EHR simulator that would have meant pairing with a developer is now a week of focused work. A pilot dashboard that used to need a BI team is an afternoon with Chart.js.
-          </p>
-          <p>
-            This whole site is the example. I designed every page and built it with AI sitting next to me. The thinking is mine; the typing is shared. If that sounds like the kind of person you want on your next project, get in touch.
-          </p>
-        </div>
+      <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        Ten years designing learning that moves a number someone cares about, across financial
+        services, retail, and customer operations. The last few years I've leaned hard on AI for
+        the building part, which is how one person can now ship a simulator or an analytics
+        dashboard that used to take a team.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-500 text-cream font-semibold retro-sheen hover:bg-primary-600 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.026-3.036-1.849-3.036-1.85 0-2.132 1.445-2.132 2.94v5.665H9.358V9h3.414v1.561h.046c.475-.9 1.637-1.85 3.37-1.85 3.6 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          View LinkedIn
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-cocoa/25 text-cocoa font-semibold hover:border-primary-500 hover:text-primary-600 transition-colors"
+        >
+          Get in touch
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Values -->
-  <section class="bg-paper border-t border-cocoa/10 py-16 sm:py-20">
+  <!-- Experience -->
+  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-4xl mx-auto px-6">
-      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3 text-center">What I believe</p>
-      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl text-center mb-12 leading-tight">
-        Four principles I hold onto
+      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-2">Experience</p>
+      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl mb-10 leading-tight">
+        Where I've worked
       </h2>
 
-      <div class="grid md:grid-cols-2 gap-5">
-        {values.map(v => {
-          const colorClass =
-            v.color === 'terracotta' ? 'text-primary-500' :
-            v.color === 'avocado' ? 'text-secondary-600' :
-            'text-accent-700';
-          return (
-            <article class="rounded-3xl border border-cocoa/15 bg-cream-50 p-6 sm:p-7 retro-sheen">
-              <p class={`font-display font-semibold text-4xl mb-3 ${colorClass} leading-none`}>
-                {v.num}
-              </p>
-              <h3 class="font-display font-semibold text-cocoa text-lg mb-2 leading-tight">
-                {v.title}
+      <div class="space-y-5">
+        {experience.map(job => (
+          <article class="rounded-3xl border border-cocoa/15 bg-paper p-6 sm:p-8 retro-sheen">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
+              <h3 class="font-display font-semibold text-cocoa text-xl sm:text-2xl leading-tight">
+                {job.role}
               </h3>
-              <p class="text-cocoa/75 leading-relaxed text-[0.96rem]">
-                {v.body}
-              </p>
-            </article>
-          );
-        })}
+              <span class="font-display text-sm uppercase tracking-widest text-cocoa/45">
+                {job.dates}
+              </span>
+            </div>
+            <p class="font-display font-semibold text-primary-600 mb-3">{job.company}</p>
+            <p class="text-cocoa/75 leading-relaxed text-[0.98rem] mb-4">{job.summary}</p>
+            <ul class="space-y-2">
+              {job.points.map(point => (
+                <li class="flex gap-3 text-cocoa/80 leading-relaxed text-[0.96rem]">
+                  <span class="mt-2 w-1.5 h-1.5 rounded-full bg-secondary-500 shrink-0"></span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Tools -->
-  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
+  <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
     <div class="max-w-4xl mx-auto px-6">
       <div class="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
         <div>
           <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3">The kit</p>
           <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl leading-tight">
-            Tools I reach for
+            Skills & tools
           </h2>
           <p class="mt-4 text-cocoa/70 leading-relaxed text-[0.96rem]">
-            Deep in some, comfortable in others. The list is less about mastery and more about the shape of work I can realistically own end-to-end.
+            Deep in some, comfortable in others. Less about a badge collection, more about the
+            shape of work I can own end to end.
           </p>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-5">
           {tools.map(group => (
-            <div class="rounded-2xl border border-cocoa/15 bg-paper p-5">
+            <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
               <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/50 mb-3">
                 {group.label}
               </p>
               <ul class="flex flex-wrap gap-1.5">
                 {group.items.map(item => (
-                  <li class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-cream-50 border border-cocoa/15 text-cocoa/80">
+                  <li class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-paper border border-cocoa/15 text-cocoa/80">
                     {item}
                   </li>
                 ))}
@@ -151,16 +172,23 @@ const tools = [
     </div>
   </section>
 
-  <!-- Beyond work -->
-  <section class="bg-paper border-t border-cocoa/10 py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="rounded-3xl border border-cocoa/15 bg-cream-50 p-7 sm:p-9">
-        <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
-          Outside of work
-        </h2>
-        <p class="text-cocoa/75 leading-relaxed">
-          I spend a lot of time outdoors, which is probably why the site ended up looking like a 70s national-parks guidebook. I read a lot about systems thinking, organizational design, and how small teams punch above their weight. I'm deeply interested in how AI changes what a single person can build, and in helping L&D functions get ahead of that curve rather than behind it.
-        </p>
+  <!-- Education -->
+  <section class="bg-cream-50 py-16 border-t border-cocoa/10">
+    <div class="max-w-4xl mx-auto px-6">
+      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-2">Education</p>
+      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl mb-8 leading-tight">
+        Background
+      </h2>
+      <div class="rounded-3xl border border-cocoa/15 bg-paper p-6 sm:p-8">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
+          <h3 class="font-display font-semibold text-cocoa text-xl leading-tight">
+            {education.school}
+          </h3>
+          <span class="font-display text-sm uppercase tracking-widest text-cocoa/45">
+            {education.dates}
+          </span>
+        </div>
+        <p class="text-cocoa/75 leading-relaxed">{education.degree}</p>
       </div>
     </div>
   </section>
