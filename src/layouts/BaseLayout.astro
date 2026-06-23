@@ -7,17 +7,55 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  bareTitle?: boolean; // use `title` verbatim instead of appending the brand suffix
 }
 
 const {
   title,
   description = "Instructional designer using AI as a development partner to build learning experiences that move business outcomes.",
   ogImage = "/og-default.png",
+  bareTitle = false,
 } = Astro.props;
 
 const fullTitle = `${title} | Parker Lee · Instructional Designer`;
+const pageTitle = bareTitle ? title : fullTitle;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const siteUrl = (Astro.site ?? new URL('https://parkerlee.work')).origin;
+
+// Site-wide structured data so Google understands who this is and what he does.
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Parker Lee",
+  url: siteUrl,
+  jobTitle: "Instructional Designer & AI Learning Consultant",
+  description:
+    "Helps companies put AI to work in their L&D and knowledge management, and builds custom, company-specific AI training.",
+  sameAs: [
+    "https://www.linkedin.com/in/parkerclee/",
+    "https://github.com/Parkerclee",
+  ],
+  knowsAbout: [
+    "AI in Learning and Development",
+    "AI for Knowledge Management",
+    "Custom AI training",
+    "Company-specific AI training",
+    "Instructional design",
+    "xAPI",
+    "Learning Record Store",
+    "Learning analytics",
+    "Scenario-based learning",
+    "SCORM",
+    "Articulate Rise 360",
+  ],
+};
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Parker Lee — Instructional Designer",
+  url: siteUrl,
+};
 ---
 <html lang="en">
   <head>
@@ -25,13 +63,17 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <title>{fullTitle}</title>
+    <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Parker Lee · Instructional Designer" />
-    <meta property="og:title" content={fullTitle} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
@@ -42,7 +84,7 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:image:alt" content="Parker Lee, Instructional Designer" />
