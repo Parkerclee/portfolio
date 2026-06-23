@@ -8,7 +8,11 @@ const allEntries = await getCollection('case-studies', ({ data }) => !data.draft
 allEntries.sort((a, b) => a.data.order - b.data.order);
 const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 ---
-<BaseLayout title="Home">
+<BaseLayout
+  title="Parker Lee — AI for L&D, Knowledge Management & Custom Training"
+  bareTitle
+  description="I help companies put AI to work in their L&D and knowledge management, and build custom AI training that changes how teams actually work."
+>
   <Hero />
 
 
@@ -17,11 +21,10 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in max-w-2xl mx-auto text-center mb-16">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
-          What I do <span class="italic text-primary-600">differently</span>
+          How I help teams put <span class="italic text-primary-600">AI to work</span>
         </h2>
         <p class="mt-4 text-lg text-cocoa/70 leading-relaxed">
-          I combine instructional design expertise with AI-assisted development
-          to build learning solutions that traditional authoring tools can't match.
+          Three ways companies bring me in to make AI useful in how their people learn and work.
         </p>
       </div>
 
@@ -32,10 +35,10 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Code-Built Interactives</h3>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">AI in your L&D</h3>
           <p class="text-sm text-cocoa/70 leading-relaxed">
-            System simulators, branching scenarios, and interactive tools built with
-            real code, not boxed into an authoring tool's limits.
+            AI-powered learning experiences built in real code: simulations, branching scenarios,
+            roleplay. Wired for xAPI, so you can see they changed behavior, not just completion.
           </p>
         </div>
 
@@ -45,10 +48,10 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
             </svg>
           </div>
-          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Data-Driven Evaluation</h3>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">AI for knowledge management</h3>
           <p class="text-sm text-cocoa/70 leading-relaxed">
-            Real xAPI data flowing into an LRS, visualized on a live dashboard.
-            Every learning experience is measurable.
+            Turn the SOPs and tribal knowledge nobody reads into something people use in the flow
+            of work, with AI surfacing the answers and the gaps made visible.
           </p>
         </div>
 
@@ -58,10 +61,10 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
             </svg>
           </div>
-          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">AI-Assisted Development</h3>
+          <h3 class="font-display font-semibold text-lg text-cocoa mb-2">Company-specific AI training</h3>
           <p class="text-sm text-cocoa/70 leading-relaxed">
-            This entire portfolio was vibe-coded in Cursor. I use AI as a
-            development partner, not a replacement for design thinking.
+            Custom training on your tools, your data, and your AI policies. Built for your context
+            instead of a generic course, and measurable from day one.
           </p>
         </div>
       </div>
