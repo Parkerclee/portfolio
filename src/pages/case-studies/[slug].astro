@@ -44,7 +44,15 @@ const colorMap: Record<string, { badge: string; logoBg: string; logoText: string
 
 const theme = colorMap[data.color] ?? colorMap.terracotta;
 ---
-<BaseLayout title={data.company} description={data.challenge}>
+<BaseLayout
+  title={data.company}
+  description={data.challenge}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Case Studies', url: '/case-studies' },
+    { name: data.company, url: `/case-studies/${entry.id}` },
+  ]}
+>
   <!-- Hero panel -->
   <section class={`${theme.panel} border-b-2 border-cocoa/15`}>
     <div class="relative max-w-4xl mx-auto px-6 py-14 sm:py-20">

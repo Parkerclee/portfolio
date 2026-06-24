@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   bareTitle?: boolean; // use `title` verbatim instead of appending the brand suffix
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "Instructional designer using AI as a development partner to build learning experiences that move business outcomes.",
   ogImage = "/og-default.png",
   bareTitle = false,
+  breadcrumbs,
 } = Astro.props;
 
 const fullTitle = `${title} | Parker Lee · Instructional Designer`;
@@ -23,31 +25,48 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 const siteUrl = (Astro.site ?? new URL('https://parkerlee.work')).origin;
 
+// Optional Google Search Console verification token (set PUBLIC_GSC_VERIFICATION in env).
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
+
 // Site-wide structured data so Google understands who this is and what he does.
 const personLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Parker Lee",
   url: siteUrl,
-  jobTitle: "Instructional Designer & AI Learning Consultant",
+  jobTitle: "Senior Instructional Designer",
+  email: "mailto:parkerclee@gmail.com",
   description:
-    "Helps companies put AI to work in their L&D and knowledge management, and builds custom, company-specific AI training.",
+    "Senior Instructional Designer building AI-augmented learning and custom, company-specific AI training across fraud, lending, and banking operations.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "American Fork",
+    addressRegion: "UT",
+    addressCountry: "US",
+  },
+  worksFor: { "@type": "Organization", name: "SoFi" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Utah Valley University" },
   sameAs: [
     "https://www.linkedin.com/in/parkerclee/",
     "https://github.com/Parkerclee",
   ],
+  knowsLanguage: ["English", "French"],
   knowsAbout: [
     "AI in Learning and Development",
     "AI for Knowledge Management",
     "Custom AI training",
     "Company-specific AI training",
     "Instructional design",
+    "Learning experience design",
+    "Operations training",
+    "Fraud, lending, and banking operations training",
     "xAPI",
     "Learning Record Store",
     "Learning analytics",
     "Scenario-based learning",
     "SCORM",
     "Articulate Rise 360",
+    "Articulate Storyline",
   ],
 };
 const websiteLd = {
@@ -56,12 +75,25 @@ const websiteLd = {
   name: "Parker Lee — Instructional Designer",
   url: siteUrl,
 };
+const breadcrumbLd = breadcrumbs && breadcrumbs.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.url, siteUrl).href,
+      })),
+    }
+  : null;
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="canonical" href={canonicalURL} />
     <title>{pageTitle}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -69,6 +101,7 @@ const websiteLd = {
     <!-- Structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+    {breadcrumbLd && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

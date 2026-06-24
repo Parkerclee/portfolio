@@ -35,7 +35,15 @@ const colorMap: Record<string, { badge: string; panel: string; italic: string }>
 
 const theme = colorMap[data.color] ?? colorMap.terracotta;
 ---
-<BaseLayout title={data.title} description={data.blurb}>
+<BaseLayout
+  title={data.title}
+  description={data.blurb}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Resources', url: '/resources' },
+    { name: data.title, url: `/resources/${entry.id}` },
+  ]}
+>
   <section class={`${theme.panel} border-b-2 border-cocoa/15`}>
     <div class="relative max-w-4xl mx-auto px-6 py-14 sm:py-20">
       <a href="/resources" class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-8">
