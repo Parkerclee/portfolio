@@ -1,6 +1,4 @@
 ---
-import MoonStar from './decor/MoonStar.astro';
-
 const navLinks = [
   { label: 'Case Studies', href: '/#case-studies' },
   { label: 'Process', href: '/process' },
@@ -13,13 +11,12 @@ const navLinks = [
 <header class="sticky top-0 z-50 bg-cream-50/85 backdrop-blur-lg border-b border-cocoa/10">
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo / Name -->
-    <a href="/" class="flex items-center gap-2 group relative">
-      <span class="w-9 h-9 rounded-xl bg-primary-500 retro-sheen flex items-center justify-center text-cream font-display font-bold text-base
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="w-9 h-9 rounded-lg bg-primary-500 flex items-center justify-center text-cream font-display font-bold text-base
                    group-hover:bg-primary-600 transition-colors">
         PL
       </span>
       <span class="font-display font-semibold text-cocoa text-lg hidden sm:block">Parker Lee</span>
-      <MoonStar class="hidden sm:block absolute -top-2 -right-3 w-5 h-5 opacity-90 pointer-events-none" />
     </a>
 
     <!-- Desktop nav -->

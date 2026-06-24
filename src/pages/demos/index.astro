@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoonStar from '../../components/decor/MoonStar.astro';
 
 const available = [
   {
@@ -121,8 +120,7 @@ const theme: Record<string, { tag: string; ring: string; initialsBg: string; ini
   title="Live Demos"
   description="Shipped client courses plus code-built concept demos: simulations, branching scenarios, and AI roleplay."
 >
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+  <section class="bg-cream-50">
     <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-24 text-center">
       <h1 class="font-display font-semibold text-4xl sm:text-5xl text-cocoa tracking-tight">
         Live <span class="italic text-primary-600">demos</span>

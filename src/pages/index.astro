@@ -17,9 +17,9 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 
 
   <!-- What I Do Differently -->
-  <section class="bg-paper py-20 sm:py-24 border-t border-cocoa/10">
+  <section class="bg-paper py-14 sm:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in max-w-2xl mx-auto text-center mb-16">
+      <div class="fade-in max-w-2xl mx-auto text-center mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
           How I help teams put <span class="italic text-primary-600">AI to work</span>
         </h2>
@@ -73,7 +73,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 
 
   <!-- Case Studies -->
-  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24 border-t border-cocoa/10">
+  <section id="case-studies" class="bg-cream-50 py-14 sm:py-20 border-t-2 border-cocoa/15">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
@@ -113,27 +113,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
   </section>
 
   <!-- CTA Banner -->
-  <section class="bg-espresso py-16 relative overflow-hidden">
-    <!-- Mustard sun-ray burst behind the heading -->
-    <svg
-      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20 pointer-events-none"
-      viewBox="0 0 200 200"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <g stroke="#D9A441" stroke-width="1.25" stroke-linecap="round" fill="none">
-        {Array.from({ length: 36 }).map((_, i) => {
-          const angle = (i * 10 * Math.PI) / 180;
-          const x1 = 100 + Math.cos(angle) * 22;
-          const y1 = 100 + Math.sin(angle) * 22;
-          const x2 = 100 + Math.cos(angle) * 95;
-          const y2 = 100 + Math.sin(angle) * 95;
-          return <line x1={x1} y1={y1} x2={x2} y2={y2} />;
-        })}
-      </g>
-      <circle cx="100" cy="100" r="18" stroke="#D9A441" stroke-width="1.5" fill="none" />
-    </svg>
-
+  <section class="bg-espresso py-16">
     <div class="max-w-4xl mx-auto px-6 text-center relative">
       <h2 class="font-display font-semibold text-2xl sm:text-3xl text-cream">
         Want to see the learning experiences in action?

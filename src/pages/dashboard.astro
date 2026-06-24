@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MoonStar from '../components/decor/MoonStar.astro';
-import Sparkles from '../components/decor/Sparkles.astro';
 import Dashboard from '../components/TeamPulse/Dashboard';
 ---
 <BaseLayout
@@ -9,9 +7,7 @@ import Dashboard from '../components/TeamPulse/Dashboard';
   description="A manager's view of one training assignment, with AI that turns the xAPI into a follow-up plan and Slack coaching nudges."
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <Sparkles class="hidden md:block absolute bottom-10 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+  <section class="bg-cream-50">
 
     <div class="relative max-w-5xl mx-auto px-6 py-16 sm:py-20">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">From statements to a decision</p>

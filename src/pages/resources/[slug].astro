@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoonStar from '../../components/decor/MoonStar.astro';
 import DemoPlayer from '../../components/DemoPlayer.astro';
 
 export async function getStaticPaths() {
@@ -16,20 +15,20 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const data = entry.data;
 
-const colorMap: Record<string, { badge: string; ring: string; italic: string }> = {
+const colorMap: Record<string, { badge: string; panel: string; italic: string }> = {
   terracotta: {
     badge: 'bg-primary-100 text-primary-700 border-primary-200',
-    ring:  'from-primary-200/40 via-accent-400/20 to-cream-50',
+    panel: 'bg-primary-50',
     italic: 'text-primary-600',
   },
   avocado: {
     badge: 'bg-secondary-100 text-secondary-700 border-secondary-200',
-    ring:  'from-secondary-200/40 via-accent-400/20 to-cream-50',
+    panel: 'bg-secondary-50',
     italic: 'text-secondary-600',
   },
   mustard: {
     badge: 'bg-accent-400/25 text-accent-700 border-accent-500/40',
-    ring:  'from-accent-400/40 via-primary-200/30 to-cream-50',
+    panel: 'bg-accent-300',
     italic: 'text-accent-700',
   },
 };
@@ -37,9 +36,8 @@ const colorMap: Record<string, { badge: string; ring: string; italic: string }> 
 const theme = colorMap[data.color] ?? colorMap.terracotta;
 ---
 <BaseLayout title={data.title} description={data.blurb}>
-  <section class={`relative overflow-hidden bg-gradient-to-br ${theme.ring} paper-bg`}>
-    <MoonStar class="absolute top-8 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-24">
+  <section class={`${theme.panel} border-b-2 border-cocoa/15`}>
+    <div class="relative max-w-4xl mx-auto px-6 py-14 sm:py-20">
       <a href="/resources" class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-8">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />

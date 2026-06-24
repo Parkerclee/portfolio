@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoonStar from '../../components/decor/MoonStar.astro';
 
 const all = (await getCollection('resources', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
@@ -28,8 +27,7 @@ function theme(type: string) {
   title="Free Resources"
   description="Free instructional design frameworks, prompts, and templates: the tools I actually use, shared as I build them."
 >
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
+  <section class="bg-cream-50">
     <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-24">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">Free resources</p>
       <h1 class="font-display font-semibold text-4xl sm:text-5xl text-cocoa tracking-tight leading-tight">
