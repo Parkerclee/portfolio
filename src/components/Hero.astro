@@ -1,67 +1,58 @@
 ---
-import MoonStar from './decor/MoonStar.astro';
-import Sparkles from './decor/Sparkles.astro';
+// Bold, flat hero — solid color, no gradients, orbs, or decorative SVGs.
 ---
-<section class="relative overflow-hidden bg-paper paper-bg">
-  <!-- Soft gradient orbs -->
-  <div class="absolute -top-44 -right-32 w-[520px] h-[520px] rounded-full bg-accent-400/25 blur-3xl"></div>
-  <div class="absolute -bottom-48 -left-40 w-[440px] h-[440px] rounded-full bg-secondary-300/25 blur-3xl"></div>
-
-  <!-- Celestial accents -->
-  <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-  <Sparkles class="hidden md:block absolute bottom-16 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
-
-  <div class="relative max-w-6xl mx-auto px-6 py-24 sm:py-32 lg:py-40">
+<section class="bg-cream-50 border-b-4 border-cocoa">
+  <div class="max-w-6xl mx-auto px-6 py-16 sm:py-24 lg:py-28">
     <div class="max-w-3xl">
       <!-- Badge -->
-      <div class="hero-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-400/20 border border-accent-500/40 text-cocoa text-xs font-semibold mb-6">
-        <span class="w-2 h-2 rounded-full bg-secondary-500"></span>
+      <div class="hero-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-500 text-cocoa text-xs font-bold uppercase tracking-wide mb-6">
+        <span class="w-2 h-2 rounded-full bg-cocoa"></span>
         AI for L&D · Knowledge Management · Custom Training
       </div>
 
       <!-- Heading -->
-      <h1 class="hero-animate hero-delay-1 font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+      <h1 class="hero-animate hero-delay-1 font-display font-bold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-tight">
         I build learning experiences
-        <span class="italic text-primary-600">that go beyond slides.</span>
+        <span class="text-primary-600">that go beyond slides.</span>
       </h1>
 
       <!-- Subheading -->
-      <p class="hero-animate hero-delay-2 mt-6 text-lg sm:text-xl text-cocoa/70 leading-relaxed max-w-2xl">
+      <p class="hero-animate hero-delay-2 mt-5 text-base sm:text-lg text-cocoa/80 leading-relaxed max-w-2xl">
         I help companies put AI to work in their L&D and knowledge management, and build custom
         training for their own tools and workflows. The kind that proves it changed behavior, not
         just that someone clicked through.
       </p>
 
       <!-- CTAs -->
-      <div class="hero-animate hero-delay-3 mt-10 flex flex-wrap gap-4">
+      <div class="hero-animate hero-delay-3 mt-8 flex flex-wrap gap-3">
         <a href="/#case-studies"
            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-500 text-cream font-semibold retro-sheen
-                  hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-600/30">
+                  hover:bg-primary-600 transition-colors">
           View Case Studies
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </a>
         <a href="/demos"
-           class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cocoa/25 text-cocoa font-semibold
-                  hover:border-primary-500 hover:text-primary-600 transition-all">
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-cocoa text-cocoa font-semibold
+                  hover:bg-cocoa hover:text-cream transition-colors">
           Try Live Demos
         </a>
       </div>
 
       <!-- Quick stats -->
-      <div class="hero-animate hero-delay-4 mt-16 flex flex-wrap gap-8 sm:gap-14">
-        <div>
-          <p class="font-display font-semibold text-3xl text-primary-600">6</p>
-          <p class="text-sm text-cocoa/60 mt-1">Real Case Studies</p>
+      <div class="hero-animate hero-delay-4 mt-12 grid grid-cols-3 gap-4 max-w-lg">
+        <div class="border-t-4 border-primary-500 pt-3">
+          <p class="font-display font-bold text-3xl sm:text-4xl text-cocoa">6</p>
+          <p class="text-xs sm:text-sm text-cocoa/60 mt-1">Real case studies</p>
         </div>
-        <div>
-          <p class="font-display font-semibold text-3xl text-secondary-600">4+</p>
-          <p class="text-sm text-cocoa/60 mt-1">Live Demos</p>
+        <div class="border-t-4 border-secondary-500 pt-3">
+          <p class="font-display font-bold text-3xl sm:text-4xl text-cocoa">4+</p>
+          <p class="text-xs sm:text-sm text-cocoa/60 mt-1">Live demos</p>
         </div>
-        <div>
-          <p class="font-display font-semibold text-3xl text-accent-600">3</p>
-          <p class="text-sm text-cocoa/60 mt-1">Free Resources</p>
+        <div class="border-t-4 border-accent-500 pt-3">
+          <p class="font-display font-bold text-3xl sm:text-4xl text-cocoa">3</p>
+          <p class="text-xs sm:text-sm text-cocoa/60 mt-1">Free resources</p>
         </div>
       </div>
     </div>
@@ -74,15 +65,19 @@ import Sparkles from './decor/Sparkles.astro';
     transform: translateY(20px);
     animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-  .hero-delay-1 { animation-delay: 0.15s; }
-  .hero-delay-2 { animation-delay: 0.3s; }
-  .hero-delay-3 { animation-delay: 0.45s; }
-  .hero-delay-4 { animation-delay: 0.6s; }
+  .hero-delay-1 { animation-delay: 0.12s; }
+  .hero-delay-2 { animation-delay: 0.24s; }
+  .hero-delay-3 { animation-delay: 0.36s; }
+  .hero-delay-4 { animation-delay: 0.48s; }
 
   @keyframes heroFadeIn {
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate { animation: none; opacity: 1; transform: none; }
   }
 </style>

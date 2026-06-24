@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MoonStar from '../components/decor/MoonStar.astro';
-import Sparkles from '../components/decor/Sparkles.astro';
 
 const phases = [
   {
@@ -131,11 +129,8 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
   description="The five-phase methodology behind every project: Discovery, Design, Development, Delivery, Evaluation."
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <Sparkles class="hidden md:block absolute bottom-10 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
-
-    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-28">
+  <section class="bg-cream-50 border-b-2 border-cocoa/15">
+    <div class="relative max-w-4xl mx-auto px-6 py-14 sm:py-20">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">How I work</p>
       <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
         A five-phase <span class="italic text-primary-600">methodology</span>, tuned for AI-assisted L&amp;D.
@@ -240,7 +235,6 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
 
   <!-- CTA back to case studies -->
   <section class="bg-espresso py-16 text-cream relative overflow-hidden">
-    <Sparkles class="absolute top-10 right-10 w-20 h-auto opacity-40 text-cream" />
     <div class="relative max-w-3xl mx-auto px-6 text-center">
       <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4">
         See the framework <span class="italic text-accent-500">in action</span>

@@ -7,6 +7,70 @@ import CaseStudyCard from '../components/CaseStudyCard.astro';
 const allEntries = await getCollection('case-studies', ({ data }) => !data.draft);
 allEntries.sort((a, b) => a.data.order - b.data.order);
 const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
+
+// Bite-size craft previews — earlier production work, shown as quick "A → B" cards.
+const craft = [
+  {
+    label: 'E-Learning',
+    move: 'Skill gap → confident reps',
+    blurb: 'Rise & Storyline courses and interactive software simulators — from a B2B mattress-sales course to a safe order-management sandbox built because the real system had none.',
+    tools: ['Storyline', 'Rise 360'],
+    image: '/work/elearning-purple-mattresses.webp',
+    alt: 'Rise course interface for a Purple mattress sales-enablement training',
+    fit: 'cover',
+    link: 'https://rise.articulate.com/share/BGBwMTQOWH1Pm_yojY-ZvBI-DBFDfszr',
+    linkLabel: 'View a live course',
+    tile: '',
+  },
+  {
+    label: 'Animation',
+    move: 'Flat content → branded motion',
+    blurb: 'An animated identity for the L&D team, plus reusable motion-graphic templates (lower thirds, title cards) and a Six Sigma 5S manufacturing series.',
+    tools: ['After Effects', 'Illustrator'],
+    image: '/work/animation-ld-logo.webp',
+    alt: 'Animated Purple Learning & Development logo',
+    fit: 'contain',
+    link: '',
+    linkLabel: '',
+    tile: '',
+  },
+  {
+    label: 'Branding',
+    move: 'Scattered look → one system',
+    blurb: 'Visual identity systems for learning programs and internal campaigns — including a set of achievement patches for an internal AI bootcamp.',
+    tools: ['Illustrator'],
+    image: '/work/branding-ai-patches.webp',
+    alt: 'Illustrated achievement patches designed for an internal AI bootcamp',
+    fit: 'contain',
+    link: '',
+    linkLabel: '',
+    tile: '',
+  },
+  {
+    label: 'Job Aid Design',
+    move: 'Long doc → one-glance aid',
+    blurb: 'Print and digital job aids that put the right information in front of someone at the moment they need it — like a sales customer-persona card built with input from the floor.',
+    tools: ['InDesign', 'Illustrator', 'Canva'],
+    image: '/work/jobaid-persona-card.webp',
+    alt: 'Customer persona service card job aid for sales professionals',
+    fit: 'contain',
+    link: '',
+    linkLabel: '',
+    tile: '',
+  },
+  {
+    label: 'Video',
+    move: 'Dry memo → watchable',
+    blurb: 'Knowledge-base walkthroughs, a learning podcast with a senior data scientist, conference sizzle reels, and an employee tuition-reimbursement featurette — shot and cut in-house.',
+    tools: ['Premiere', 'After Effects'],
+    image: '',
+    alt: '',
+    fit: '',
+    link: '',
+    linkLabel: '',
+    tile: 'bg-primary-500',
+  },
+];
 ---
 <BaseLayout
   title="Parker Lee — AI for L&D, Knowledge Management & Custom Training"
@@ -17,9 +81,9 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 
 
   <!-- What I Do Differently -->
-  <section class="bg-paper py-20 sm:py-24 border-t border-cocoa/10">
+  <section class="bg-paper py-14 sm:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="fade-in max-w-2xl mx-auto text-center mb-16">
+      <div class="fade-in max-w-2xl mx-auto text-center mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
           How I help teams put <span class="italic text-primary-600">AI to work</span>
         </h2>
@@ -73,7 +137,7 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
 
 
   <!-- Case Studies -->
-  <section id="case-studies" class="bg-cream-50 py-20 sm:py-24 border-t border-cocoa/10">
+  <section id="case-studies" class="bg-cream-50 py-14 sm:py-20 border-t-2 border-cocoa/15">
     <div class="max-w-6xl mx-auto px-6">
       <div class="fade-in mb-12">
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-cocoa tracking-tight">
@@ -112,28 +176,62 @@ const featuredEntries = allEntries.filter(e => !e.data.aiGenerated).slice(0, 3);
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="bg-espresso py-16 relative overflow-hidden">
-    <!-- Mustard sun-ray burst behind the heading -->
-    <svg
-      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-20 pointer-events-none"
-      viewBox="0 0 200 200"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <g stroke="#D9A441" stroke-width="1.25" stroke-linecap="round" fill="none">
-        {Array.from({ length: 36 }).map((_, i) => {
-          const angle = (i * 10 * Math.PI) / 180;
-          const x1 = 100 + Math.cos(angle) * 22;
-          const y1 = 100 + Math.sin(angle) * 22;
-          const x2 = 100 + Math.cos(angle) * 95;
-          const y2 = 100 + Math.sin(angle) * 95;
-          return <line x1={x1} y1={y1} x2={x2} y2={y2} />;
-        })}
-      </g>
-      <circle cx="100" cy="100" r="18" stroke="#D9A441" stroke-width="1.5" fill="none" />
-    </svg>
+  <!-- Craft & range (bite-size previews) -->
+  <section id="craft" class="bg-paper py-14 sm:py-20 border-t-2 border-cocoa/15">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="fade-in mb-10">
+        <span class="block-rule bg-accent-500 mb-4"></span>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-cocoa tracking-tight">
+          Beyond the case studies — <span class="text-primary-600">craft &amp; range</span>
+        </h2>
+        <p class="mt-3 text-lg text-cocoa/70 max-w-2xl">
+          Before the strategy decks, I came up making things. A quick look at the range —
+          video, motion, brand, and interactive courses — and how each one went from a problem to a finished piece.
+        </p>
+      </div>
 
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {craft.map((item, i) => (
+          <article class={`fade-in fade-in-delay-${(i % 3) + 1} flex flex-col rounded-2xl border-2 border-cocoa/15 bg-cream-50 overflow-hidden`}>
+            {item.image ? (
+              <img
+                src={item.image}
+                alt={item.alt}
+                loading="lazy"
+                class={`w-full h-40 border-b-2 border-cocoa/15 ${item.fit === 'contain' ? 'object-contain bg-cream-100 p-3' : 'object-cover object-top'}`}
+              />
+            ) : (
+              <div class={`h-40 ${item.tile} flex items-center justify-center border-b-2 border-cocoa/15`}>
+                <span class="font-display font-bold text-2xl text-cream/95 tracking-tight">{item.label}</span>
+              </div>
+            )}
+            <div class="flex flex-col flex-1 p-5">
+              <h3 class="font-display font-bold text-lg text-cocoa">{item.label}</h3>
+              <p class="mt-1 text-xs font-semibold uppercase tracking-wide text-primary-600">{item.move}</p>
+              <p class="mt-2 text-sm text-cocoa/70 leading-relaxed flex-1">{item.blurb}</p>
+              <div class="mt-4 flex flex-wrap items-center gap-1.5">
+                {item.tools.map(t => (
+                  <span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold bg-paper border border-cocoa/15 text-cocoa/70">{t}</span>
+                ))}
+              </div>
+              {item.link && (
+                <a href={item.link} target="_blank" rel="noopener"
+                   class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">
+                  {item.linkLabel}
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="bg-espresso py-16">
     <div class="max-w-4xl mx-auto px-6 text-center relative">
       <h2 class="font-display font-semibold text-2xl sm:text-3xl text-cream">
         Want to see the learning experiences in action?

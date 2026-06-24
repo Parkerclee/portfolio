@@ -1,8 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoonStar from '../../components/decor/MoonStar.astro';
-import Sparkles from '../../components/decor/Sparkles.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('case-studies', ({ data }) => !data.draft);
@@ -17,13 +15,13 @@ const { Content } = await render(entry);
 const data = entry.data;
 
 // Map the forest palette per case study theme
-const colorMap: Record<string, { badge: string; logoBg: string; logoText: string; logoBorder: string; ring: string; headingItalic: string }> = {
+const colorMap: Record<string, { badge: string; logoBg: string; logoText: string; logoBorder: string; panel: string; headingItalic: string }> = {
   terracotta: {
     badge: 'bg-primary-100 text-primary-700 border-primary-200',
     logoBg: 'bg-primary-100',
     logoText: 'text-primary-700',
     logoBorder: 'border-primary-300',
-    ring: 'from-primary-200/40 via-accent-400/25 to-cream-50',
+    panel: 'bg-primary-50',
     headingItalic: 'text-primary-600',
   },
   avocado: {
@@ -31,7 +29,7 @@ const colorMap: Record<string, { badge: string; logoBg: string; logoText: string
     logoBg: 'bg-secondary-100',
     logoText: 'text-secondary-700',
     logoBorder: 'border-secondary-300',
-    ring: 'from-secondary-200/40 via-accent-400/20 to-cream-50',
+    panel: 'bg-secondary-50',
     headingItalic: 'text-secondary-600',
   },
   mustard: {
@@ -39,20 +37,25 @@ const colorMap: Record<string, { badge: string; logoBg: string; logoText: string
     logoBg: 'bg-accent-400/25',
     logoText: 'text-accent-700',
     logoBorder: 'border-accent-500/40',
-    ring: 'from-accent-400/40 via-primary-200/30 to-cream-50',
+    panel: 'bg-accent-300',
     headingItalic: 'text-accent-700',
   },
 };
 
 const theme = colorMap[data.color] ?? colorMap.terracotta;
 ---
-<BaseLayout title={data.company} description={data.challenge}>
+<BaseLayout
+  title={data.company}
+  description={data.challenge}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Case Studies', url: '/case-studies' },
+    { name: data.company, url: `/case-studies/${entry.id}` },
+  ]}
+>
   <!-- Hero panel -->
-  <section class={`relative overflow-hidden bg-gradient-to-br ${theme.ring} paper-bg`}>
-    <MoonStar class="absolute top-8 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <Sparkles class="hidden md:block absolute bottom-10 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
-
-    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-28">
+  <section class={`${theme.panel} border-b-2 border-cocoa/15`}>
+    <div class="relative max-w-4xl mx-auto px-6 py-14 sm:py-20">
       <a href="/#case-studies" class="inline-flex items-center gap-1 text-sm font-semibold text-cocoa/70 hover:text-primary-600 transition-colors mb-8">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />

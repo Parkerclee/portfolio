@@ -1,6 +1,4 @@
 ---
-import Sparkles from './decor/Sparkles.astro';
-
 const currentYear = new Date().getFullYear();
 ---
 <style>
@@ -13,17 +11,13 @@ const currentYear = new Date().getFullYear();
     }
   }
 </style>
-<footer class="site-footer text-cream/70 mt-auto relative overflow-hidden">
-  <!-- Subtle sparkle accents -->
-  <Sparkles class="absolute top-2 right-6 w-20 h-auto opacity-50 pointer-events-none" />
-  <Sparkles class="absolute bottom-2 left-6 w-20 h-auto opacity-40 pointer-events-none scale-x-[-1]" />
-
+<footer class="site-footer text-cream/70 mt-auto">
   <div class="max-w-6xl mx-auto px-6 py-12 relative">
     <div class="flex flex-col md:flex-row justify-between items-start gap-8">
       <!-- Left: branding -->
       <div>
         <div class="flex items-center gap-2 mb-3">
-          <span class="w-9 h-9 rounded-xl bg-primary-500 retro-sheen flex items-center justify-center text-cream font-display font-bold text-base">
+          <span class="w-9 h-9 rounded-lg bg-primary-500 flex items-center justify-center text-cream font-display font-bold text-base">
             PL
           </span>
           <span class="font-display font-semibold text-cream text-lg">Parker Lee</span>

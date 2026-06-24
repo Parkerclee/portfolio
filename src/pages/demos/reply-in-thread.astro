@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoonStar from '../../components/decor/MoonStar.astro';
-import Sparkles from '../../components/decor/Sparkles.astro';
 import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
 ---
 <BaseLayout
@@ -9,9 +7,7 @@ import ReplyInThread from '../../components/ReplyInThread/ReplyInThread';
   description="A 60-second click-through for Slack and Teams that teaches one habit: reply in the thread, don't start a new message. Plus a reminder GIF you can post in any channel."
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <Sparkles class="hidden md:block absolute bottom-8 right-10 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+  <section class="bg-cream-50">
     <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-20">
       <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">Micro-guide · adoption nudge</p>
       <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">

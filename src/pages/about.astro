@@ -1,38 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MoonStar from '../components/decor/MoonStar.astro';
-import Sparkles from '../components/decor/Sparkles.astro';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/parkerclee/';
 
 const experience = [
   {
     company: 'SoFi',
-    role: 'Senior Learning Experience Designer',
-    dates: 'Present',
-    summary: 'Learning design for a national fintech, across operations and customer-facing teams.',
+    role: 'Senior Instructional Designer',
+    dates: 'Aug 2024 – Present',
+    summary: 'Learning design for a national fintech — building training for 20+ operations teams across fraud, lending, banking, and investments.',
     points: [
-      'Scaled curriculum across six product lines, standardizing how new programs get built and measured.',
-      'Rebuilt new-hire onboarding around real competency gates instead of seat-time and completion.',
-      'Grounded needs analysis in production data, things like agent communication signals and SOP coverage, instead of a round of SME interviews and a guess.',
-      'Wired learning to xAPI so evaluation answers the question the sponsor will actually ask, not whatever the LMS reports by default.',
+      'Led the design and launch of SoFi’s first Fraud Operations training program — a template-driven curriculum architecture that scaled across 6 product lines, lifting compliance pass rates 14.7% and NPS 25.9%.',
+      'Own training for Lending Originations and cross-functional system rollouts.',
+      'Pioneer AI-augmented instructional design with Cursor, Gemini, and NotebookLM — accelerating content development, automating SOP-to-training analysis, and building interactive HTML learning.',
+      'Manage team knowledge base content and change-management communications, coordinating SOP updates with downstream training impacts across business units.',
     ],
   },
   {
     company: 'BENlabs',
     role: 'Senior Learning Strategist',
-    dates: 'Prior',
+    dates: 'Apr 2023 – Jul 2024',
     summary: 'Stood up the learning function and its tooling from the ground up.',
     points: [
-      'Led adoption and administration of a new LMS, then authored and curated 80-plus courses on it.',
+      'Spearheaded adoption and administration of a new LMS, then authored and curated 80+ courses on it.',
       'Designed and launched an internal AI certification program.',
       'Built AI and marketing learning paths that produced measurable upskilling across the company.',
+      'Designed a strategic training program that cut labor cost by roughly two-thirds for key teams.',
     ],
   },
   {
     company: 'Purple',
     role: 'Learning Experience Designer',
-    dates: 'Prior',
+    dates: '2018 – 2023',
     summary: 'Progressed from Email Associate to Training Specialist to Learning Experience Designer.',
     points: [
       'Owned new-hire training programs for Purple Customer Care.',
@@ -42,79 +41,109 @@ const experience = [
   },
 ];
 
+const earlier = 'Earlier: Ancestry — Social Media Community Manager (2M+ followers, 7,600+ public responses) and French-speaking customer solutions.';
+
 const education = {
   school: 'Utah Valley University',
   degree: 'B.S., Behavioral Science (Psychology emphasis)',
   dates: '2011 – 2015',
 };
 
+const extras = [
+  { label: 'Languages', value: 'English · French (fluent)' },
+  { label: 'Certification', value: 'LinkedIn AI Academy' },
+];
+
 const tools = [
   { label: 'Design & authoring', items: ['Articulate Rise 360', 'Storyline 360', 'Illustrator', 'InDesign', 'Figma', 'Canva'] },
   { label: 'Video & motion', items: ['After Effects', 'Adobe Premiere', 'Google Vids', 'Camtasia'] },
-  { label: 'Code & AI', items: ['Cursor', 'Claude', 'Astro', 'Tailwind', 'HTML / CSS / JS'] },
+  { label: 'Code & AI', items: ['Cursor', 'Claude', 'Gemini', 'NotebookLM', 'MCP', 'Astro', 'Tailwind', 'HTML / CSS / JS'] },
   { label: 'LMS & delivery', items: ['Docebo', 'Continu', 'Bridge LMS', 'SCORM Cloud', 'xAPI 1.0.3', 'SCORM 1.2 / 2004'] },
   { label: 'Data & reporting', items: ['Looker', 'Chart.js', 'Bynder'] },
-  { label: 'Methodology', items: ['Action mapping', 'Competency-based design', 'Flipped classroom', 'Kirkpatrick L1–L4'] },
+  { label: 'Methodology', items: ['Action mapping', 'Competency-based design', 'Change management', 'Knowledge management', 'Sales enablement', 'Kirkpatrick L1–L4'] },
 ];
 ---
 <BaseLayout
   title="About"
-  description="Parker Lee is a senior learning experience designer (SoFi, BENlabs, Purple) who helps companies implement AI in L&D and knowledge management, and build custom, company-specific AI training."
+  description="Parker Lee is a Senior Instructional Designer at SoFi (lending, fraud & banking operations) who builds AI-augmented learning and custom, company-specific AI training."
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-paper paper-bg">
-    <MoonStar class="absolute top-10 left-6 sm:left-12 w-10 sm:w-14 h-auto opacity-90 hidden sm:block" />
-    <Sparkles class="hidden md:block absolute bottom-8 right-8 w-28 lg:w-36 h-auto opacity-80 pointer-events-none" />
+  <section class="bg-cream-50 border-b-4 border-cocoa">
+    <div class="max-w-5xl mx-auto px-6 py-14 sm:py-20">
+      <div class="grid lg:grid-cols-[1.5fr_1fr] gap-10 items-start">
+        <div>
+          <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3">About</p>
+          <h1 class="font-display font-bold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-tight">
+            Parker Lee
+          </h1>
+          <p class="mt-3 font-display text-lg sm:text-xl text-primary-600 font-semibold">
+            Senior Instructional Designer — Lending, Fraud &amp; Banking Operations
+          </p>
+          <p class="mt-4 text-base sm:text-lg text-cocoa/80 leading-relaxed max-w-2xl">
+            Ten years designing learning that moves a number someone cares about, across financial
+            services, retail, and customer operations. The last few years I’ve leaned hard on AI for
+            the building part — which is how one person can now ship a simulator or an analytics
+            dashboard that used to take a team.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-500 text-cream font-semibold retro-sheen hover:bg-primary-600 transition-colors"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.026-3.036-1.849-3.036-1.85 0-2.132 1.445-2.132 2.94v5.665H9.358V9h3.414v1.561h.046c.475-.9 1.637-1.85 3.37-1.85 3.6 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              View LinkedIn
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-cocoa text-cocoa font-semibold hover:bg-cocoa hover:text-cream transition-colors"
+            >
+              Get in touch
+            </a>
+          </div>
+        </div>
 
-    <div class="relative max-w-4xl mx-auto px-6 py-20 sm:py-24">
-      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">About</p>
-      <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
-        Parker Lee
-      </h1>
-      <p class="mt-4 font-display text-lg sm:text-xl text-primary-600 font-semibold">
-        Senior Learning Experience Designer · American Fork, UT
-      </p>
-      <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        Ten years designing learning that moves a number someone cares about, across financial
-        services, retail, and customer operations. The last few years I've leaned hard on AI for
-        the building part, which is how one person can now ship a simulator or an analytics
-        dashboard that used to take a team.
-      </p>
-      <div class="mt-7 flex flex-wrap gap-3">
-        <a
-          href={LINKEDIN_URL}
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-500 text-cream font-semibold retro-sheen hover:bg-primary-600 transition-colors"
-        >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.026-3.036-1.849-3.036-1.85 0-2.132 1.445-2.132 2.94v5.665H9.358V9h3.414v1.561h.046c.475-.9 1.637-1.85 3.37-1.85 3.6 0 4.268 2.37 4.268 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-          View LinkedIn
-        </a>
-        <a
-          href="/contact"
-          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-cocoa/25 text-cocoa font-semibold hover:border-primary-500 hover:text-primary-600 transition-colors"
-        >
-          Get in touch
-        </a>
+        <!-- Solid fact panel (carries the visual weight in place of a photo) -->
+        <aside class="bg-cocoa text-cream rounded-2xl p-6 sm:p-7">
+          <dl class="space-y-4">
+            <div>
+              <dt class="font-display text-[11px] uppercase tracking-widest text-accent-400 mb-1">Now</dt>
+              <dd class="text-sm leading-relaxed text-cream/90">Senior Instructional Designer at <strong class="text-cream">SoFi</strong></dd>
+            </div>
+            <div>
+              <dt class="font-display text-[11px] uppercase tracking-widest text-accent-400 mb-1">Based in</dt>
+              <dd class="text-sm text-cream/90">American Fork, Utah</dd>
+            </div>
+            <div>
+              <dt class="font-display text-[11px] uppercase tracking-widest text-accent-400 mb-1">Focus</dt>
+              <dd class="text-sm text-cream/90">AI for L&amp;D · Knowledge management · Custom AI training</dd>
+            </div>
+            <div>
+              <dt class="font-display text-[11px] uppercase tracking-widest text-accent-400 mb-1">Languages</dt>
+              <dd class="text-sm text-cream/90">English · French (fluent)</dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </div>
   </section>
 
   <!-- Experience -->
-  <section class="bg-cream-50 py-16 sm:py-20 border-t border-cocoa/10">
-    <div class="max-w-4xl mx-auto px-6">
-      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-2">Experience</p>
-      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl mb-10 leading-tight">
-        Where I've worked
+  <section class="bg-paper py-14 sm:py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="block-rule bg-primary-500 mb-4"></span>
+      <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl mb-8 leading-tight">
+        Where I’ve worked
       </h2>
 
       <div class="space-y-5">
         {experience.map(job => (
-          <article class="rounded-3xl border border-cocoa/15 bg-paper p-6 sm:p-8 retro-sheen">
+          <article class="rounded-2xl border-2 border-cocoa/15 bg-cream-50 p-6 sm:p-8">
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
-              <h3 class="font-display font-semibold text-cocoa text-xl sm:text-2xl leading-tight">
+              <h3 class="font-display font-bold text-cocoa text-xl sm:text-2xl leading-tight">
                 {job.role}
               </h3>
               <span class="font-display text-sm uppercase tracking-widest text-cocoa/45">
@@ -127,24 +156,26 @@ const tools = [
               {job.points.map(point => (
                 <li class="flex gap-3 text-cocoa/80 leading-relaxed text-[0.96rem]">
                   <span class="mt-2 w-1.5 h-1.5 rounded-full bg-secondary-500 shrink-0"></span>
-                  <span>{point}</span>
+                  <span set:html={point}></span>
                 </li>
               ))}
             </ul>
           </article>
         ))}
       </div>
+
+      <p class="mt-6 text-sm text-cocoa/55 leading-relaxed">{earlier}</p>
     </div>
   </section>
 
   <!-- Tools -->
-  <section class="bg-paper py-16 sm:py-20 border-t border-cocoa/10">
-    <div class="max-w-4xl mx-auto px-6">
+  <section class="bg-cream-50 py-14 sm:py-20 border-t-2 border-cocoa/15">
+    <div class="max-w-5xl mx-auto px-6">
       <div class="grid md:grid-cols-[1fr_2fr] gap-10 items-start">
         <div>
-          <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3">The kit</p>
-          <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl leading-tight">
-            Skills & tools
+          <span class="block-rule bg-secondary-500 mb-4"></span>
+          <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl leading-tight">
+            Skills &amp; tools
           </h2>
           <p class="mt-4 text-cocoa/70 leading-relaxed text-[0.96rem]">
             Deep in some, comfortable in others. Less about a badge collection, more about the
@@ -154,13 +185,13 @@ const tools = [
 
         <div class="grid sm:grid-cols-2 gap-5">
           {tools.map(group => (
-            <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+            <div class="rounded-2xl border-2 border-cocoa/15 bg-paper p-5">
               <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/50 mb-3">
                 {group.label}
               </p>
               <ul class="flex flex-wrap gap-1.5">
                 {group.items.map(item => (
-                  <li class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-paper border border-cocoa/15 text-cocoa/80">
+                  <li class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-cream-50 border border-cocoa/15 text-cocoa/80">
                     {item}
                   </li>
                 ))}
@@ -173,35 +204,44 @@ const tools = [
   </section>
 
   <!-- Education -->
-  <section class="bg-cream-50 py-16 border-t border-cocoa/10">
-    <div class="max-w-4xl mx-auto px-6">
-      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-2">Education</p>
-      <h2 class="font-display font-semibold text-cocoa text-3xl sm:text-4xl mb-8 leading-tight">
+  <section class="bg-paper py-14 border-t-2 border-cocoa/15">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="block-rule bg-accent-500 mb-4"></span>
+      <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl mb-8 leading-tight">
         Background
       </h2>
-      <div class="rounded-3xl border border-cocoa/15 bg-paper p-6 sm:p-8">
-        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
-          <h3 class="font-display font-semibold text-cocoa text-xl leading-tight">
-            {education.school}
-          </h3>
-          <span class="font-display text-sm uppercase tracking-widest text-cocoa/45">
-            {education.dates}
-          </span>
+      <div class="grid sm:grid-cols-[2fr_1fr] gap-5">
+        <div class="rounded-2xl border-2 border-cocoa/15 bg-cream-50 p-6 sm:p-8">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
+            <h3 class="font-display font-bold text-cocoa text-xl leading-tight">
+              {education.school}
+            </h3>
+            <span class="font-display text-sm uppercase tracking-widest text-cocoa/45">
+              {education.dates}
+            </span>
+          </div>
+          <p class="text-cocoa/75 leading-relaxed">{education.degree}</p>
         </div>
-        <p class="text-cocoa/75 leading-relaxed">{education.degree}</p>
+        <div class="rounded-2xl border-2 border-cocoa/15 bg-cream-50 p-6 sm:p-8 space-y-4">
+          {extras.map(x => (
+            <div>
+              <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/45 mb-1">{x.label}</p>
+              <p class="text-cocoa/80 text-sm">{x.value}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="bg-espresso py-16 text-cream relative overflow-hidden">
-    <Sparkles class="absolute top-10 right-10 w-20 h-auto opacity-40 text-cream" />
-    <div class="relative max-w-3xl mx-auto px-6 text-center">
-      <h2 class="font-display font-semibold text-3xl sm:text-4xl mb-4">
-        Let's make something <span class="italic text-accent-500">that works</span>.
+  <section class="bg-espresso py-16 text-cream">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-4">
+        Let’s make something <span class="text-accent-500">that works</span>.
       </h2>
       <p class="text-cream/75 leading-relaxed mb-8 max-w-xl mx-auto">
-        If your team is stuck between "we need training" and "we don't know what'll actually move the number," that's the conversation I love having.
+        If your team is stuck between &ldquo;we need training&rdquo; and &ldquo;we don’t know what’ll actually move the number,&rdquo; that’s the conversation I love having.
       </p>
       <a
         href="/contact"
