@@ -25,8 +25,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
 const siteUrl = (Astro.site ?? new URL('https://parkerlee.work')).origin;
 
-// Optional Google Search Console verification token (set PUBLIC_GSC_VERIFICATION in env).
-const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
+// Google Search Console verification token (public by design). Overridable via env.
+const gscVerification =
+  import.meta.env.PUBLIC_GSC_VERIFICATION ?? "MJTIcExX0mZY6hxBsjyGk5tH79aTx26XgHOGqE5nARE";
 
 // Site-wide structured data so Google understands who this is and what he does.
 const personLd = {
