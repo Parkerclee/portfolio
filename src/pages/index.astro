@@ -17,6 +17,7 @@ const craft = [
     tools: ['Storyline', 'Rise 360'],
     image: '/work/elearning-purple-mattresses.webp',
     alt: 'Rise course interface for a Purple mattress sales-enablement training',
+    fit: 'cover',
     link: 'https://rise.articulate.com/share/BGBwMTQOWH1Pm_yojY-ZvBI-DBFDfszr',
     linkLabel: 'View a live course',
     tile: '',
@@ -28,6 +29,31 @@ const craft = [
     tools: ['After Effects', 'Illustrator'],
     image: '/work/animation-ld-logo.webp',
     alt: 'Animated Purple Learning & Development logo',
+    fit: 'contain',
+    link: '',
+    linkLabel: '',
+    tile: '',
+  },
+  {
+    label: 'Branding',
+    move: 'Scattered look → one system',
+    blurb: 'Visual identity systems for learning programs and internal campaigns — including a set of achievement patches for an internal AI bootcamp.',
+    tools: ['Illustrator'],
+    image: '/work/branding-ai-patches.webp',
+    alt: 'Illustrated achievement patches designed for an internal AI bootcamp',
+    fit: 'contain',
+    link: '',
+    linkLabel: '',
+    tile: '',
+  },
+  {
+    label: 'Job Aid Design',
+    move: 'Long doc → one-glance aid',
+    blurb: 'Print and digital job aids that put the right information in front of someone at the moment they need it — like a sales customer-persona card built with input from the floor.',
+    tools: ['InDesign', 'Illustrator', 'Canva'],
+    image: '/work/jobaid-persona-card.webp',
+    alt: 'Customer persona service card job aid for sales professionals',
+    fit: 'contain',
     link: '',
     linkLabel: '',
     tile: '',
@@ -39,31 +65,10 @@ const craft = [
     tools: ['Premiere', 'After Effects'],
     image: '',
     alt: '',
+    fit: '',
     link: '',
     linkLabel: '',
     tile: 'bg-primary-500',
-  },
-  {
-    label: 'Branding',
-    move: 'Scattered look → one system',
-    blurb: 'Visual identity systems for learning programs and internal campaigns, so a growing library of content reads as one coherent brand.',
-    tools: ['Illustrator'],
-    image: '',
-    alt: '',
-    link: '',
-    linkLabel: '',
-    tile: 'bg-secondary-500',
-  },
-  {
-    label: 'Job Aid Design',
-    move: 'Long doc → one-glance aid',
-    blurb: 'Print and digital job aids that put the right step in front of someone at the exact moment they need it — no scrolling through a manual.',
-    tools: ['InDesign', 'Illustrator', 'Canva'],
-    image: '',
-    alt: '',
-    link: '',
-    linkLabel: '',
-    tile: 'bg-accent-600',
   },
 ];
 ---
@@ -193,7 +198,7 @@ const craft = [
                 src={item.image}
                 alt={item.alt}
                 loading="lazy"
-                class="w-full h-40 object-cover object-top border-b-2 border-cocoa/15"
+                class={`w-full h-40 border-b-2 border-cocoa/15 ${item.fit === 'contain' ? 'object-contain bg-cream-100 p-3' : 'object-cover object-top'}`}
               />
             ) : (
               <div class={`h-40 ${item.tile} flex items-center justify-center border-b-2 border-cocoa/15`}>
