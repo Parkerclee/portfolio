@@ -56,12 +56,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Solid color blocks (bold, flat — no texture) ─ */
-/* .paper-bg is retired; sections now use clean solid fills.
-   Kept as an inert no-op so any stray references do nothing. */
-.paper-bg { background-image: none; }
-
-/* Bordered accent rule used to anchor block sections */
+/* ── Bordered accent rule used to anchor block sections ─ */
 .block-rule {
   width: 3.5rem;
   height: 0.375rem;
