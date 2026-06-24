@@ -9,6 +9,11 @@ import react from '@astrojs/react';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://parkerlee.work',
+  redirects: {
+    // The Process page and the old Resources library were folded into the Toolkit.
+    '/process': '/toolkit',
+    '/resources': '/toolkit',
+  },
   integrations: [sitemap(), react()],
   vite: {
     plugins: [tailwindcss()],

@@ -19,7 +19,7 @@ aiGenerated: true
 
 > **Note:** Crestline Health is a fictional company. The simulator approach, xAPI integration pattern, and evaluation structure reflect methods I've used in real client projects.
 
-> **Methodology:** This project used the five-phase framework outlined on the [Process page](/process). This case study focuses on the Crestline-specific decisions, particularly the choice to code-build rather than author.
+> **Methodology:** This project used the five-phase framework outlined in the [AI-in-L&D toolkit](/toolkit). This case study focuses on the Crestline-specific decisions, particularly the choice to code-build rather than author.
 
 ## Situation
 

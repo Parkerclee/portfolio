@@ -19,7 +19,7 @@ aiGenerated: true
 
 > **Note:** Meridian Financial is a fictional company. The methodology, artifacts, and outcomes reflect patterns I've applied in real client work.
 
-> **Methodology:** This project used the five-phase framework outlined on the [Process page](/process), Discover, Design, Build, Deliver, Measure. This case study focuses on the decisions that were specific to Meridian, not the framework itself.
+> **Methodology:** This project used the five-phase framework outlined in the [AI-in-L&D toolkit](/toolkit), Discover, Design, Build, Deliver, Measure. This case study focuses on the decisions that were specific to Meridian, not the framework itself.
 
 ## Situation
 

@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/parkerclee/';
 const GITHUB_URL = 'https://github.com/Parkerclee';
-const CONTACT_EMAIL = 'hello@parkerlee.work';
 ---
 <BaseLayout
   title="Contact"
@@ -56,28 +55,13 @@ const CONTACT_EMAIL = 'hello@parkerlee.work';
         </div>
       </a>
 
-      <!-- Secondary: email + github -->
-      <div class="grid sm:grid-cols-2 gap-5 mt-5">
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
-          class="group rounded-3xl border border-cocoa/15 bg-paper p-6 hover:border-primary-400 transition-colors"
-        >
-          <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/50 mb-2">
-            Prefer email?
-          </p>
-          <span class="font-display font-semibold text-cocoa text-lg group-hover:text-primary-600 transition-colors break-all">
-            {CONTACT_EMAIL}
-          </span>
-          <p class="mt-2 text-sm text-cocoa/65 leading-relaxed">
-            Works just as well. The more context you share, the more useful my first reply.
-          </p>
-        </a>
-
+      <!-- Secondary: github -->
+      <div class="mt-5">
         <a
           href={GITHUB_URL}
           target="_blank"
           rel="noopener"
-          class="group rounded-3xl border border-cocoa/15 bg-paper p-6 hover:border-primary-400 transition-colors"
+          class="group block rounded-3xl border border-cocoa/15 bg-paper p-6 hover:border-primary-400 transition-colors"
         >
           <p class="font-display text-[11px] uppercase tracking-widest text-cocoa/50 mb-2">
             See the code

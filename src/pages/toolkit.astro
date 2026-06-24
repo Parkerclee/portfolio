@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// The AI tools I actually open during L&D work — not an exhaustive list.
+const tools = [
+  {
+    name: 'Claude',
+    maker: 'Anthropic',
+    use: 'My default thinking partner — synthesizing SME interviews, drafting scenarios, and building interactive HTML learning. Skills and MCP let it work against my own files and tools.',
+    accent: 'bg-primary-500',
+  },
+  {
+    name: 'Cursor',
+    maker: 'AI code editor',
+    use: 'Where the code-built courses and simulators actually get made. AI pair-programming turns a build that used to need a team into something one designer can ship.',
+    accent: 'bg-secondary-500',
+  },
+  {
+    name: 'NotebookLM',
+    maker: 'Google',
+    use: 'Drop in the SOPs and source docs, then interrogate them. Fast grounding, and a quick read on where the documentation actually has gaps.',
+    accent: 'bg-accent-600',
+  },
+  {
+    name: 'Gemini',
+    maker: 'Google',
+    use: 'Long-context document analysis and quick multimodal drafts when I need to reason across a big pile of source material at once.',
+    accent: 'bg-primary-500',
+  },
+  {
+    name: 'Articulate Rise 360 & Storyline',
+    maker: 'Authoring',
+    use: 'Still the right call for rapid linear builds and polished interactions when hand-built code would be overkill. The job picks the tool, not the other way around.',
+    accent: 'bg-secondary-500',
+  },
+  {
+    name: 'SCORM Cloud & an LRS',
+    maker: 'xAPI / measurement',
+    use: 'Where the xAPI lands so I can show behavior changed — not just that someone reached the last slide.',
+    accent: 'bg-accent-600',
+  },
+];
+
+// The five-phase method, distilled — the "process" now lives here as part of the kit.
+const phases = [
+  {
+    num: '01',
+    short: 'Discover',
+    line: 'Find the real gap before promising what training can fix. Sometimes the honest answer is "this isn\'t a training problem."',
+  },
+  {
+    num: '02',
+    short: 'Design',
+    line: 'Make the hard structural calls on paper — objectives, modality, and the assessment — before a single screen gets built.',
+  },
+  {
+    num: '03',
+    short: 'Build',
+    line: 'Prototype the riskiest interaction first, not the intro screen. AI scaffolding in Cursor and Claude compresses weeks into days.',
+  },
+  {
+    num: '04',
+    short: 'Deliver',
+    line: 'Treat launch as a rollout, not a file transfer. Managers are the biggest variable in whether it sticks — build for them too.',
+  },
+  {
+    num: '05',
+    short: 'Measure',
+    line: 'Prove it landed against the metric agreed in Discovery. Wire xAPI through to the business number, not what\'s easy to count.',
+  },
+];
+
+// Signature moves — the handful of habits that make AI genuinely useful here.
+const moves = [
+  {
+    title: 'Decide what to build before you build it',
+    body: 'AI made producing something that looks like training trivial. The constraint moved upstream — to deciding what\'s worth building and whether training is even the fix.',
+  },
+  {
+    title: 'Design the assessment first',
+    body: 'Write the thing that would prove the objective was met before writing any content. It keeps the build honest and the scope tight.',
+  },
+  {
+    title: 'Turn a SME brain-dump into a scenario',
+    body: 'A messy subject-matter interview becomes a decision-based scenario, not a wall of bullets. AI does the first pass; judgment does the edit.',
+  },
+  {
+    title: 'Wire xAPI so you can prove behavior changed',
+    body: 'Completion is not evidence. Statements from real interactions, tied to the operational system, are how the next project gets funded.',
+  },
+];
+---
+<BaseLayout
+  title="The AI-in-L&D Toolkit"
+  description="The AI tools, five-phase method, and working habits I actually use to put AI to work in learning and development — a recommended toolkit from Parker Lee."
+>
+  <!-- Hero -->
+  <section class="bg-cream-50 border-b-4 border-cocoa">
+    <div class="max-w-5xl mx-auto px-6 py-14 sm:py-20">
+      <span class="block-rule bg-primary-500 mb-4"></span>
+      <p class="font-display text-xs uppercase tracking-widest text-cocoa/50 mb-3">A recommended toolkit</p>
+      <h1 class="font-display font-bold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-tight">
+        The AI-in-L&amp;D <span class="text-primary-600">toolkit</span>
+      </h1>
+      <p class="mt-5 text-base sm:text-lg text-cocoa/80 leading-relaxed max-w-2xl">
+        Less a link dump, more the actual kit I reach for: the AI tools I open every week, the
+        method I run projects through, and the few habits that decide whether AI makes the work
+        better or just faster. Take what's useful.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tools I reach for -->
+  <section class="bg-paper py-14 sm:py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="block-rule bg-secondary-500 mb-4"></span>
+      <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl leading-tight">Tools I reach for</h2>
+      <p class="mt-3 text-cocoa/70 leading-relaxed max-w-2xl">
+        Not exhaustive — the ones that actually earn their place in the week. The job picks the
+        tool; AI just changed what one person can build.
+      </p>
+
+      <div class="mt-8 grid sm:grid-cols-2 gap-5">
+        {tools.map(t => (
+          <article class="flex gap-4 rounded-2xl border-2 border-cocoa/15 bg-cream-50 p-5 sm:p-6">
+            <span class={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${t.accent}`}></span>
+            <div>
+              <div class="flex flex-wrap items-baseline gap-x-2">
+                <h3 class="font-display font-bold text-cocoa text-lg leading-tight">{t.name}</h3>
+                <span class="text-[11px] font-semibold uppercase tracking-wide text-cocoa/45">{t.maker}</span>
+              </div>
+              <p class="mt-1.5 text-sm text-cocoa/75 leading-relaxed">{t.use}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="mt-6 text-sm text-cocoa/55 leading-relaxed max-w-2xl">
+        A standing rule with all of it: client and learner data only goes where the contract and
+        the privacy posture allow. Powerful is not the same as appropriate.
+      </p>
+    </div>
+  </section>
+
+  <!-- The method (process, folded in) -->
+  <section class="bg-cream-50 py-14 sm:py-20 border-t-2 border-cocoa/15">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="block-rule bg-accent-500 mb-4"></span>
+      <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl leading-tight">The method I run it through</h2>
+      <p class="mt-3 text-cocoa/70 leading-relaxed max-w-2xl">
+        Five phases, borrowed from ADDIE and Kirkpatrick and kept deliberately boring. AI changes
+        the build; it doesn't change the fact that the decisions have to be made on purpose.
+      </p>
+
+      <ol class="mt-8 space-y-4">
+        {phases.map(p => (
+          <li class="flex gap-5 rounded-2xl border-2 border-cocoa/15 bg-paper p-5 sm:p-6">
+            <span class="font-display font-bold text-3xl sm:text-4xl leading-none text-primary-600 shrink-0">{p.num}</span>
+            <div>
+              <h3 class="font-display font-bold text-cocoa text-lg leading-tight">{p.short}</h3>
+              <p class="mt-1 text-sm text-cocoa/75 leading-relaxed">{p.line}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Signature moves -->
+  <section class="bg-paper py-14 sm:py-20 border-t-2 border-cocoa/15">
+    <div class="max-w-5xl mx-auto px-6">
+      <span class="block-rule bg-primary-500 mb-4"></span>
+      <h2 class="font-display font-bold text-cocoa text-3xl sm:text-4xl leading-tight">What makes AI actually useful here</h2>
+      <p class="mt-3 text-cocoa/70 leading-relaxed max-w-2xl">
+        The tools are commodity now. These habits are the difference between AI that improves the
+        work and AI that just makes more of it.
+      </p>
+
+      <div class="mt-8 grid sm:grid-cols-2 gap-5">
+        {moves.map(m => (
+          <article class="rounded-2xl border-2 border-cocoa/15 bg-cream-50 p-6">
+            <h3 class="font-display font-bold text-cocoa text-lg leading-tight">{m.title}</h3>
+            <p class="mt-2 text-sm text-cocoa/75 leading-relaxed">{m.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-espresso py-16 text-cream">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl mb-4">
+        Putting AI to work in your <span class="text-accent-500">L&amp;D</span>?
+      </h2>
+      <p class="text-cream/75 leading-relaxed mb-8 max-w-xl mx-auto">
+        This is the conversation I love having — what to build, what to skip, and how to prove it
+        worked. If that's where your team is, let's talk.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-espresso font-semibold retro-sheen hover:bg-accent-400 transition-colors"
+      >
+        Get in touch
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

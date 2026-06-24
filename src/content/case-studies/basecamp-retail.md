@@ -19,7 +19,7 @@ aiGenerated: true
 
 > **Note:** Basecamp Retail is a fictional company. The curriculum architecture, facilitator approach, and evaluation framework reflect practices I've led in real retail L&D engagements.
 
-> **Methodology:** This project used the five-phase framework outlined on the [Process page](/process). This case study focuses on the Basecamp-specific decisions, particularly the refusal to ship a pure eLearning solution.
+> **Methodology:** This project used the five-phase framework outlined in the [AI-in-L&D toolkit](/toolkit). This case study focuses on the Basecamp-specific decisions, particularly the refusal to ship a pure eLearning solution.
 
 ## Situation
 
