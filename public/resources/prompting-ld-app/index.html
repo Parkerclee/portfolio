@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompting AI for L&D — Field Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #FEFAF4; --paper-2: #F5EDE0; --ink: #2C1A0E; --ink-2: #553824; --ink-3: #8B6B52;
+      --line: #E2D5C3; --line-2: #D0C0AB; --canvas-bg: #EDE3D4;
+      --mustard: #E8B752; --terracotta: #D87854; --avocado: #9DB35E; --teal: #67A6A8; --plum: #B26C84;
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--canvas-bg); color: var(--ink); line-height: 1.55; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 28px 18px 60px; }
+    header.hero { text-align: center; padding: 26px 12px 20px; }
+    header.hero h1 { font-family: 'Bagel Fat One', cursive; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.1; }
+    header.hero h1 em { font-style: normal; color: var(--terracotta); }
+    header.hero p { max-width: 560px; margin: 12px auto 0; color: var(--ink-2); font-size: 1.02rem; }
+
+    nav.tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 22px 0 26px; }
+    nav.tabs button {
+      font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: .86rem; cursor: pointer;
+      border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
+      padding: 9px 16px; border-radius: var(--r-xl); box-shadow: 2px 2px 0 var(--ink); transition: all .12s;
+    }
+    nav.tabs button:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+    nav.tabs button.on { background: var(--ink); color: var(--paper); }
+
+    section.panel { display: none; }
+    section.panel.on { display: block; animation: fadeUp .25s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .card { background: var(--paper); border: 2px solid var(--ink); border-radius: var(--r-lg); padding: 22px; box-shadow: 4px 4px 0 var(--ink); margin-bottom: 18px; }
+    .card h2 { font-family: 'Bagel Fat One', cursive; font-size: 1.35rem; margin-bottom: 10px; }
+    .card h3 { font-size: 1.02rem; margin: 14px 0 6px; }
+    .card p, .card li { color: var(--ink-2); font-size: .95rem; }
+    .card ul { padding-left: 20px; margin: 8px 0; }
+    .tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 3px 10px; border-radius: var(--r-xl); border: 1.5px solid var(--ink); margin-bottom: 10px; }
+    .t-terra { background: var(--terracotta); color: var(--paper); }
+    .t-avo { background: var(--avocado); color: var(--ink); }
+    .t-must { background: var(--mustard); color: var(--ink); }
+    .t-teal { background: var(--teal); color: var(--paper); }
+
+    /* Reality check rows */
+    .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    @media (max-width: 640px) { .versus { grid-template-columns: 1fr; } }
+    .versus .v { border: 2px dashed var(--line-2); border-radius: var(--r-md); padding: 14px; }
+    .versus .v.win { border: 2px solid var(--avocado); background: #f4f7e9; }
+    .versus .v .lbl { font-family: 'Space Mono', monospace; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* Builder */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
+    .chips button {
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer;
+      border: 2px solid var(--ink); background: var(--paper-2); padding: 7px 14px; border-radius: var(--r-xl); transition: all .12s;
+    }
+    .chips button.sel { background: var(--mustard); box-shadow: 2px 2px 0 var(--ink); }
+    .promptbox { background: var(--ink); color: #F3E8D8; font-family: 'Space Mono', monospace; font-size: .8rem; border-radius: var(--r-md); padding: 16px; white-space: pre-wrap; min-height: 120px; }
+    .promptbox .dim { color: #8B6B52; }
+    .score { margin-top: 10px; font-weight: 700; font-size: .9rem; }
+
+    /* Scenario deck */
+    .scenario { margin-bottom: 18px; }
+    .scenario .situ { font-size: 1rem; font-weight: 700; color: var(--ink); }
+    .flip { display: flex; gap: 8px; margin: 10px 0; }
+    .flip button { font-weight: 700; font-size: .8rem; cursor: pointer; border: 2px solid var(--ink); border-radius: var(--r-xl); padding: 6px 14px; background: var(--paper-2); }
+    .flip button.on { background: var(--ink); color: var(--paper); }
+    .pv { display: none; }
+    .pv.on { display: block; }
+    .copybtn { margin-top: 10px; font-family: 'Space Mono', monospace; font-size: .72rem; font-weight: 700; cursor: pointer; border: 2px solid var(--ink); border-radius: var(--r-xl); padding: 6px 14px; background: var(--mustard); box-shadow: 2px 2px 0 var(--ink); }
+    .copybtn:active { transform: translate(2px,2px); box-shadow: none; }
+    .why { margin-top: 10px; font-size: .86rem; color: var(--ink-2); border-left: 4px solid var(--avocado); padding-left: 10px; }
+
+    /* Tricks */
+    .trick { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1.5px dashed var(--line-2); }
+    .trick:last-child { border-bottom: none; }
+    .trick .num { font-family: 'Bagel Fat One', cursive; font-size: 1.3rem; color: var(--terracotta); min-width: 34px; }
+    .trick b { display: block; color: var(--ink); }
+    .foot { text-align: center; margin-top: 26px; font-size: .8rem; color: var(--ink-3); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Prompting AI <em>for L&amp;D</em></h1>
+      <p>A field guide for instructional designers with real deadlines. Written by someone who builds training with AI daily, not someone selling you a prompt pack.</p>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-t="real" class="on">The real world</button>
+      <button data-t="anatomy">Anatomy of a prompt</button>
+      <button data-t="deck">Scenario deck</button>
+      <button data-t="tricks">Tricks of the trade</button>
+    </nav>
+
+    <!-- THE REAL WORLD -->
+    <section class="panel on" id="p-real">
+      <div class="card">
+        <span class="tag t-terra">Start here</span>
+        <h2>You have three hours, not three weeks.</h2>
+        <p>Every prompting guide assumes you're doing a tidy needs analysis first. You're not. The SME sent a 40-page SOP at 4pm, the launch is Friday, and "do ADDIE properly" is not on the menu. Good news: AI is most valuable exactly when the process is compressed, <em>if</em> you prompt it like a colleague instead of a search bar.</p>
+        <h3>The one rule that matters</h3>
+        <p><strong>Context in, quality out.</strong> The model doesn't know your audience, your constraints, or what "good" looks like at your company. Every prompt that disappoints is usually missing one of those three. Everything else in this guide is that rule, applied.</p>
+        <div class="versus">
+          <div class="v">
+            <span class="lbl">Vending machine</span>
+            <p>"Write a training outline about data privacy."</p>
+            <p style="margin-top:8px; font-size:.84rem;">Generic outline, corporate voice, ten modules nobody asked for.</p>
+          </div>
+          <div class="v win">
+            <span class="lbl">Colleague</span>
+            <p>"Here's our SOP (pasted), the audience (new fraud agents, week 2), the deadline (Friday), and the behavior that must change (agents exporting data to spreadsheets). What's the smallest training that moves that behavior?"</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="tag t-avo">Mindset</span>
+        <h2>When you can't do ADDIE, do this instead</h2>
+        <p>Compressed timeline triage, in one prompt each:</p>
+        <ul>
+          <li><strong>No time for analysis?</strong> Have AI interview <em>you</em> for five minutes: "Ask me one question at a time until you can tell me whether this is a training problem." You'll surface more than most kickoff meetings.</li>
+          <li><strong>No time for design?</strong> Ask for three outline options at different sizes (15 min / 45 min / half day) with a recommendation. Pick, don't create.</li>
+          <li><strong>No time for evaluation planning?</strong> One line: "What single question would tell us in 30 days whether this worked?" Put that in the plan before you build anything.</li>
+        </ul>
+        <p style="margin-top:10px;">The phases don't disappear. They shrink to the size of the time you actually have — and a model makes shrunk phases survivable.</p>
+      </div>
+    </section>
+
+    <!-- ANATOMY -->
+    <section class="panel" id="p-anatomy">
+      <div class="card">
+        <span class="tag t-must">Interactive</span>
+        <h2>Build the prompt, watch it improve</h2>
+        <p>Toggle the ingredients and watch a mediocre request become one that gets a usable first draft. This is the same request, fed better.</p>
+        <div class="chips" id="chips">
+          <button data-k="audience">+ Audience</button>
+          <button data-k="source">+ Source material</button>
+          <button data-k="constraints">+ Constraints</button>
+          <button data-k="format">+ Output format</button>
+          <button data-k="bar">+ Quality bar</button>
+        </div>
+        <div class="promptbox" id="pbox"></div>
+        <p class="score" id="pscore"></p>
+      </div>
+      <div class="card">
+        <h2>Why each ingredient earns its place</h2>
+        <ul>
+          <li><strong>Audience</strong> kills the generic corporate voice. "New fraud agents in week 2" writes differently than "employees."</li>
+          <li><strong>Source material</strong> is the biggest single upgrade. Paste the ugly SOP, the SME transcript, the policy doc. The model grounds itself in your reality instead of inventing one.</li>
+          <li><strong>Constraints</strong> (time, tool, length) prevent the ten-module monster nobody will build.</li>
+          <li><strong>Output format</strong> means you get something you can paste into Rise or a storyboard, not an essay about learning.</li>
+          <li><strong>Quality bar</strong> tells it what good looks like: "scenario-first, no bullet lectures, every section ends in a decision."</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SCENARIO DECK -->
+    <section class="panel" id="p-deck">
+      <div class="card">
+        <span class="tag t-teal">Five real Tuesdays</span>
+        <h2>The scenario deck</h2>
+        <p>Situations pulled from actual L&D life. Flip each between the prompt that wastes an hour and the one that works, then steal it.</p>
+      </div>
+      <div id="deck"></div>
+    </section>
+
+    <!-- TRICKS -->
+    <section class="panel" id="p-tricks">
+      <div class="card">
+        <span class="tag t-terra">Hard-won</span>
+        <h2>Tricks of the trade</h2>
+        <div class="trick"><span class="num">01</span><p><b>Make it interview you first.</b> "Before you write anything, ask me questions one at a time until you have what you need." Five minutes of answering beats five rounds of bad drafts.</p></div>
+        <div class="trick"><span class="num">02</span><p><b>Paste the ugly source.</b> Don't summarize the SOP for the model. The typos, the weird exceptions, the buried step 7b — that's where the real training need lives.</p></div>
+        <div class="trick"><span class="num">03</span><p><b>Ask for options, not answers.</b> "Give me three approaches at different levels of effort, with what each trades away." You stay the designer; it does the drafting.</p></div>
+        <div class="trick"><span class="num">04</span><p><b>Make it disagree with you.</b> "What's weak about this outline? What would a skeptical ops manager say?" Models flatter by default. Invite the red pen.</p></div>
+        <div class="trick"><span class="num">05</span><p><b>Give it your rubric.</b> If you'd judge scenarios on realism, decision density, and voice, say so — then ask it to score its own draft against that rubric before showing you.</p></div>
+        <div class="trick"><span class="num">06</span><p><b>Stay in one conversation per project.</b> Context accumulates. The tenth ask in a thread that has your SOP, audience, and constraints beats a fresh, amnesiac chat every time.</p></div>
+        <div class="trick"><span class="num">07</span><p><b>Keep a prompt library.</b> When a prompt works, save it with a note about when to use it. Your library becomes your personal authoring tool inside a quarter.</p></div>
+        <div class="trick"><span class="num">08</span><p><b>The last 20% is yours.</b> AI gets you a strong draft fast. The judgment — what to cut, what your org will actually tolerate, what the SME got wrong — is the job. That part was never the model's.</p></div>
+      </div>
+    </section>
+
+    <p class="foot">Built by Parker Lee · parkerlee.work · steal anything useful</p>
+  </div>
+
+  <script>
+    // Tabs
+    const tabs = document.getElementById('tabs');
+    tabs.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      tabs.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'p-' + b.dataset.t));
+    });
+
+    // Prompt builder
+    const PARTS = {
+      base: 'Draft training on our data-handling policy.',
+      audience: 'Audience: new fraud-ops agents, week 2 of onboarding. They know the systems, not the boundaries.',
+      source: 'Source: the SOP pasted below — treat it as the truth, flag anything ambiguous.\n[paste the SOP]',
+      constraints: 'Constraints: one 20-minute Rise module, ships Friday. No video budget.',
+      format: 'Format: outline with section titles, one realistic scenario per section, and a 5-question final check.',
+      bar: 'Quality bar: scenario-first. No bullet-point lectures. Every section ends with a decision the agent has to make.',
+    };
+    const sel = new Set();
+    const chips = document.getElementById('chips');
+    const pbox = document.getElementById('pbox');
+    const pscore = document.getElementById('pscore');
+    const SCORES = ['Vending-machine prompt. Expect generic.', 'Better — it knows who it\'s writing for.', 'Now it\'s grounded in your reality.', 'This gets a usable first draft.', 'This gets a draft you\'d show your manager.', 'Chef\'s kiss. This is how the pros feed it.'];
+    function renderPrompt() {
+      let txt = PARTS.base;
+      ['audience','source','constraints','format','bar'].forEach(k => { if (sel.has(k)) txt += '\n\n' + PARTS[k]; });
+      pbox.textContent = txt;
+      pscore.textContent = '→ ' + SCORES[sel.size];
+      pscore.style.color = sel.size >= 4 ? '#5C8A2E' : sel.size >= 2 ? '#8B6B52' : '#D87854';
+    }
+    chips.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      const k = b.dataset.k;
+      sel.has(k) ? sel.delete(k) : sel.add(k);
+      b.classList.toggle('sel');
+      renderPrompt();
+    });
+    renderPrompt();
+
+    // Scenario deck
+    const SCENARIOS = [
+      {
+        tag: 'The 4pm SOP dump', color: 't-terra',
+        situ: 'An SME sends a 40-page SOP and says "make this a course" — due in a week.',
+        weak: 'Turn this SOP into a training course.',
+        strong: 'You\'re an instructional designer. Below is a 40-page SOP. Before designing anything:\n1) List the 5 tasks in it people actually perform, ranked by risk if done wrong.\n2) For each, tell me what\'s trainable vs what should just be a job aid.\n3) Recommend the smallest training that covers the risky parts, sized for 20 minutes.\nThen wait — don\'t write content until I confirm the scope.\n\n[paste SOP]',
+        why: 'It forces the analysis conversation the deadline stole, and the "wait" keeps you in charge of scope instead of receiving ten generic modules.'
+      },
+      {
+        tag: 'The "make it a course" reflex', color: 't-avo',
+        situ: 'A stakeholder wants a course. You suspect the real problem isn\'t training.',
+        weak: 'Write a course about meeting etiquette.',
+        strong: 'A VP asked for "meeting etiquette training" because meetings run long and nothing gets decided. Play a skeptical performance consultant: list plausible non-training causes, what evidence would confirm each, and the 3 questions I should ask the VP before agreeing to build anything. Then draft the email that asks them, in a tone that says "I\'m taking you seriously," not "I\'m refusing work."',
+        why: 'The model becomes your prep partner for the pushback conversation — the highest-leverage move in the job — instead of an accomplice to a course nobody needs.'
+      },
+      {
+        tag: 'SME transcript → scenario', color: 't-must',
+        situ: 'You have a messy 30-minute SME call recording and need branching scenarios.',
+        weak: 'Write some branching scenarios about customer escalations.',
+        strong: 'Below is a raw SME interview transcript about customer escalations. From ONLY what\'s in it:\n1) Pull out every real example, mistake, and "what people get wrong" the SME mentioned.\n2) Turn the best 3 into branching scenarios: realistic setup, a decision point with 3 plausible choices (no obvious throwaway option), and consequence text that shows the outcome rather than saying "incorrect."\nKeep the SME\'s vocabulary — agents should recognize their own world.\n\n[paste transcript]',
+        why: '"From ONLY what\'s in it" stops invention; mining the mistakes first is what makes the wrong answers plausible — the thing that separates real scenarios from quiz filler.'
+      },
+      {
+        tag: 'Assessments that aren\'t trivia', color: 't-teal',
+        situ: 'You need a final check that measures judgment, not recall of the module.',
+        weak: 'Write 10 quiz questions about this content.',
+        strong: 'Write 5 assessment items for the content below. Rules:\n- Every stem is a realistic situation, never "which of the following is true."\n- Wrong options must be things a reasonable person actually does (pull them from the common mistakes in the content).\n- For each item, tell me which behavior it measures and what a wrong answer would tell a manager.\nIf the content doesn\'t support 5 judgment items, say so and tell me what\'s missing.\n\n[paste content]',
+        why: 'The last line is the trick: the model tells you when your content can\'t support real assessment — which is a content problem you want to hear about now, not after launch.'
+      },
+      {
+        tag: 'The deck that should be micro', color: 't-plum',
+        situ: 'Someone hands you a 60-slide deck that "just needs to go online."',
+        weak: 'Convert this presentation into elearning.',
+        strong: 'Below are the speaker notes from a 60-slide deck. The ask is "put it online," but nobody will sit through 60 slides.\n1) Identify what\'s actually load-bearing: decisions people must make differently after this.\n2) Propose a 3-part microlearning series (5 min each) around those decisions, and list which slides die in the fire.\n3) Draft part 1 in full.\nGive me the pitch back to the deck\'s owner too — two sentences on why smaller is better, in their language.\n\n[paste notes]',
+        why: 'It converts a format request into a scoping decision, and hands you the stakeholder pitch — because the hard part was never the conversion.'
+      },
+    ];
+    const deck = document.getElementById('deck');
+    deck.innerHTML = SCENARIOS.map((s, i) => `
+      <div class="card scenario">
+        <span class="tag ${s.color}">${s.tag}</span>
+        <p class="situ">${s.situ}</p>
+        <div class="flip" data-i="${i}">
+          <button data-v="weak" class="on">The prompt that wastes an hour</button>
+          <button data-v="strong">The one that works</button>
+        </div>
+        <div class="pv on" id="pv-${i}-weak"><div class="promptbox">${s.weak}</div></div>
+        <div class="pv" id="pv-${i}-strong">
+          <div class="promptbox">${s.strong}</div>
+          <button class="copybtn" data-copy="${i}">Copy prompt</button>
+          <p class="why">${s.why}</p>
+        </div>
+      </div>`).join('');
+    deck.addEventListener('click', (e) => {
+      const f = e.target.closest('.flip button');
+      if (f) {
+        const wrap = f.closest('.flip'); const i = wrap.dataset.i;
+        wrap.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === f));
+        document.getElementById(`pv-${i}-weak`).classList.toggle('on', f.dataset.v === 'weak');
+        document.getElementById(`pv-${i}-strong`).classList.toggle('on', f.dataset.v === 'strong');
+      }
+      const c = e.target.closest('.copybtn');
+      if (c) {
+        navigator.clipboard.writeText(SCENARIOS[c.dataset.copy].strong).then(() => {
+          c.textContent = 'Copied ✓'; setTimeout(() => (c.textContent = 'Copy prompt'), 1600);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

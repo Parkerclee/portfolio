@@ -8,7 +8,7 @@ embedUrl: "/resources/claude-guide-app/index.html"
 embedMinHeight: "820px"
 color: avocado
 featured: true
-order: 1
+order: 2
 draft: false
 ---
 
