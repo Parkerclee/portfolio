@@ -12,6 +12,15 @@ const available = [
     href: '/demos/practice-room',
   },
   {
+    slug: 'skill-check',
+    title: 'Skill Check · Adaptive Assessment',
+    company: 'Compliance · measurement',
+    blurb: 'A knowledge check that interviews instead of quizzing: open answers scored on substance, the last question spent on your weakest competency, mastery streamed as xAPI.',
+    tag: 'AI assessment · xAPI',
+    color: 'avocado',
+    href: '/demos/skill-check',
+  },
+  {
     slug: 'reply-in-thread',
     title: 'Reply in Thread · micro-guide',
     company: 'Adoption · Slack & Teams',
@@ -177,7 +186,7 @@ const theme: Record<string, { tag: string; ring: string; initialsBg: string; ini
     <div class="max-w-6xl mx-auto px-6">
       <div class="mb-8">
         <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-2">Concept builds &amp; interactive demos</p>
-        <p class="text-cocoa/65 max-w-xl">Prototype pieces I built to show the methodology and the tech. Poke at them, take a wrong turn, restart.</p>
+        <p class="text-cocoa/65 max-w-xl">Prototype pieces I built to show the methodology and the tech. The AI demos run against a live model when one is connected. Poke at them, take a wrong turn, restart.</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {available.map((d) => {

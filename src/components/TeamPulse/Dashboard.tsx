@@ -1,4 +1,5 @@
 import { Fragment, useMemo, useState } from 'react';
+import { aiJSON } from '../../lib/ai';
 
 /**
  * Team Pulse, a manager-facing view of one training assignment, the way it
@@ -96,20 +97,13 @@ function useMetrics() {
 }
 
 // ── AI plumbing ────────────────────────────────────────────────────
+// Preview surface or the /api/claude proxy; authored fallback otherwise.
 async function callJSON<T>(prompt: string, fallback: T): Promise<T> {
-  const claude = (window as any).claude;
-  if (!claude?.complete) {
+  const out = await aiJSON(prompt, fallback);
+  if (out === fallback) {
     await new Promise((r) => setTimeout(r, 900)); // let the "analyzing" state read as real
-    return fallback;
   }
-  try {
-    const txt = await claude.complete({ messages: [{ role: 'user', content: prompt }] });
-    const m = txt.match(/\{[\s\S]*\}/);
-    if (!m) throw new Error('no json');
-    return JSON.parse(m[0]) as T;
-  } catch {
-    return fallback;
-  }
+  return out;
 }
 
 function rosterForPrompt() {

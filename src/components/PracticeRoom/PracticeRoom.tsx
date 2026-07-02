@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { aiAvailable, aiJSON } from '../../lib/ai';
 
 /**
  * Practice Room, an AI roleplay where a leader works through a real
@@ -248,20 +249,8 @@ interface Debrief {
 }
 
 // ── AI plumbing ────────────────────────────────────────────────────
-function hasAI() {
-  return typeof window !== 'undefined' && !!(window as any).claude?.complete;
-}
-async function callJSON<T>(prompt: string, fallback: T): Promise<T> {
-  const claude = (window as any).claude;
-  if (!claude?.complete) return fallback;
-  try {
-    const txt = await claude.complete({ messages: [{ role: 'user', content: prompt }] });
-    const m = txt.match(/\{[\s\S]*\}/);
-    return m ? (JSON.parse(m[0]) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
+// Preview surface or the /api/claude proxy; authored fallback otherwise.
+const callJSON = aiJSON;
 
 // ── Component ──────────────────────────────────────────────────────
 type Phase = 'brief' | 'live' | 'debrief';
@@ -277,7 +266,10 @@ export default function PracticeRoom() {
   const [freeText, setFreeText] = useState('');
   const [debrief, setDebrief] = useState<Debrief | null>(null);
   const [debriefLoading, setDebriefLoading] = useState(false);
-  const aiLive = useMemo(() => hasAI(), []);
+  const [aiLive, setAiLive] = useState(false);
+  useEffect(() => {
+    aiAvailable().then(setAiLive);
+  }, []);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {

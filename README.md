@@ -1,43 +1,29 @@
-# Astro Starter Kit: Minimal
+# parkerlee.work
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Parker Lee's instructional design portfolio. Astro 6 + React 19 + Tailwind v4, deployed on Vercel.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command           | Action                                    |
+| :---------------- | :---------------------------------------- |
+| `npm install`     | Install dependencies                      |
+| `npm run dev`     | Dev server at `localhost:4321`            |
+| `npm run build`   | Production build to `./dist/`             |
+| `npm run preview` | Preview the production build locally      |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Live AI demos
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+The AI demos (Practice Room, Skill Check, TeamPulse dashboard, ManagerCoach) call a server-side
+proxy at `/api/claude` (`src/pages/api/claude.ts`). The proxy holds the Anthropic API key, validates
+payloads, and rate-limits per IP. Without a key configured, every demo falls back to its authored
+guided experience, so the site is fully playable either way.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+To turn on live AI, set these in Vercel → Project → Settings → Environment Variables:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Variable            | Required | Notes                                        |
+| :------------------ | :------- | :------------------------------------------- |
+| `ANTHROPIC_API_KEY` | yes      | From console.anthropic.com                   |
+| `CLAUDE_MODEL`      | no       | Defaults to `claude-opus-4-8`                |
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Shared client plumbing lives in `src/lib/ai.ts`: it prefers the Claude preview surface
+(`window.claude`) when present, then the proxy, then signals components to use their fallbacks.

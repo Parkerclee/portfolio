@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { aiJSON } from '../../lib/ai';
 
 // ── Types ──────────────────────────────────────────────────────
 
@@ -155,18 +156,8 @@ function deriveMeters(swipes: Record<string, string>) {
 
 // ── AI helpers ─────────────────────────────────────────────────
 
-async function callJSON<T>(prompt: string, fallback: T): Promise<T> {
-  const claude = (window as any).claude;
-  if (!claude?.complete) return fallback;
-  try {
-    const txt = await claude.complete({ messages: [{ role: 'user', content: prompt }] });
-    const m = txt.match(/\{[\s\S]*\}/);
-    if (!m) throw new Error('no json');
-    return JSON.parse(m[0]) as T;
-  } catch {
-    return fallback;
-  }
-}
+// Preview surface or the /api/claude proxy; authored fallback otherwise.
+const callJSON = aiJSON;
 
 async function generatePortrait(state: AppState): Promise<Portrait> {
   const swipeSummary = SWIPE_CARDS
