@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SkillCheck from '../../components/SkillCheck/SkillCheck';
+---
+<BaseLayout
+  title="Skill Check · Adaptive AI Assessment"
+  description="An AI knowledge check that interviews instead of quizzing: open questions scored on substance, the last question spent on the weakest competency, and a mastery profile streamed to the LRS as xAPI."
+>
+  <!-- Hero -->
+  <section class="bg-cream-50">
+    <div class="relative max-w-4xl mx-auto px-6 py-16 sm:py-20">
+      <p class="font-display text-sm uppercase tracking-widest text-cocoa/50 mb-3">What AI unlocks · adaptive assessment</p>
+      <h1 class="font-display font-semibold text-cocoa text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight">
+        A quiz measures recall. This one <span class="italic text-primary-600">measures judgment</span>.
+      </h1>
+      <p class="mt-5 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
+        Multiple choice can't tell you whether someone would actually handle customer data safely on a Tuesday
+        afternoon. An interviewer can. This check asks open questions, scores the substance of the answer, and spends
+        its final question wherever you looked weakest. What lands in the LRS is a mastery profile per competency.
+      </p>
+    </div>
+  </section>
+
+  <!-- The experience -->
+  <section class="bg-cream-50 py-12 sm:py-16 border-t border-cocoa/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <SkillCheck client:load />
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="bg-paper border-t border-cocoa/10 py-14">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">Open answers, real signal</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">Recognition is cheap; recall under a realistic scenario is the skill. Free-text answers scored on substance separate "picked the right option" from "would do the right thing."</p>
+        </div>
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">Adaptive by design</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">Fixed quizzes spend questions evenly, on strengths and weaknesses alike. This one watches the mastery bars and puts its last question where the risk is.</p>
+        </div>
+        <div class="rounded-2xl border border-cocoa/15 bg-cream-50 p-5">
+          <p class="font-display font-semibold text-cocoa mb-1.5">Feeds the dashboard</p>
+          <p class="text-sm text-cocoa/70 leading-relaxed">Each answer is an xAPI statement with a scaled score per competency. That's the learner-side instrument behind the <a href="/dashboard" class="text-primary-600 font-semibold hover:underline">manager dashboard</a>: gaps by theme, not completion rates.</p>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-cocoa/55 max-w-3xl">
+        When a model is connected you answer in your own words and it scores what you actually said; otherwise it runs
+        as a guided version off the same design, fully playable either way.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
