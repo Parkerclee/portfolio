@@ -9,18 +9,17 @@ const phases = [
     color: 'terracotta',
     pitch: 'Learn what the business actually needs before promising what training can deliver.',
     activities: [
-      'Stakeholder interviews with sponsors, managers, and target learners',
-      'Performance analysis: where exactly is the gap between what people do and what the business needs?',
-      'Root-cause check: is this a knowledge problem, a skill problem, or a system problem?',
-      'Success metrics agreed before any content decisions happen'
+      'Interview sponsors, managers, and learners',
+      'Find the gap between what people do and what the business needs',
+      'Root-cause check: knowledge, skill, or system problem?',
+      'Agree on success metrics before any content decisions'
     ],
     outputs: [
-      'A one-page problem statement signed off by the sponsor',
+      'One-page problem statement, signed off by the sponsor',
       'Baseline metrics (the numbers we\'re moving)',
-      'Learner profile and context map',
       'Go/no-go recommendation; sometimes the answer is "this isn\'t a training problem"'
     ],
-    heuristic: '"No training" is a legitimate recommendation. If it\'s a process problem, say so on page one. The sponsor will respect you for it later.'
+    heuristic: '"No training" is a legitimate recommendation. If it\'s a process problem, say so on page one.'
   },
   {
     num: '02',
@@ -29,38 +28,36 @@ const phases = [
     color: 'avocado',
     pitch: 'Make the hard structural decisions on paper before a single screen gets built.',
     activities: [
-      'Write measurable terminal objectives (Mager-style) tied to the business metrics',
-      'Pick a modality against a checklist (classroom, blended, code-built, Rise, microlearning) using evidence, not taste',
-      'Storyboard scenarios and branching with realistic detours, not only happy paths',
-      'Design the assessment before the content: what would prove the objective was met?'
+      'Write measurable objectives tied to the business metrics',
+      'Pick the modality on evidence, not taste',
+      'Storyboard scenarios with realistic detours, not only happy paths',
+      'Design the assessment before the content'
     ],
     outputs: [
-      'Design document covering objectives, modality rationale, assessment strategy',
+      'Design doc: objectives, modality rationale, assessment strategy',
       'Scenario map with branching logic',
-      'Rough wireframes or click-through sketches',
       'Risk list: what\'s most likely to break in build?'
     ],
-    heuristic: 'The modality decision is where most projects fail. A "just make a Rise module" instinct is usually a design problem dressed as a tooling problem.'
+    heuristic: 'The modality decision is where most projects fail. "Just make a Rise module" is usually a design problem dressed as a tooling problem.'
   },
   {
     num: '03',
     short: 'Build',
     title: 'Development',
     color: 'mustard',
-    pitch: 'Prototype early, iterate in small loops, and pick tools based on what the learner needs, not the department license.',
+    pitch: 'Prototype early, iterate in small loops, pick tools for the learner rather than the license.',
     activities: [
-      'Prototype the highest-risk interaction first (the scenario engine, the simulator, the branching module), not the intro screen',
-      'Rise 360 for linear rapid build; code-built HTML/CSS/JS when the interaction matters or data fidelity is required',
-      'AI-assisted scaffolding in Cursor and Claude for code-built work, compressing weeks into days',
-      'Two rounds of learner testing before handoff, cheaper than fixing it after launch'
+      'Prototype the highest-risk interaction first, not the intro screen',
+      'Rise for linear builds; code when the interaction or data matters',
+      'AI-assisted builds in Cursor and Claude, compressing weeks into days',
+      'Two rounds of learner testing before handoff'
     ],
     outputs: [
-      'Working prototype of the riskiest piece, shown to stakeholders in week 2',
-      'Production build against the agreed modality',
-      'Accessibility audit (target: WCAG 2.1 AA)',
+      'Working prototype of the riskiest piece by week 2',
+      'Production build with accessibility audit (WCAG 2.1 AA)',
       'Facilitator and IT deployment notes'
     ],
-    heuristic: 'If the first demo is a polished intro screen, you built the wrong thing first. Show the hardest part working, or don\'t show anything.'
+    heuristic: 'If the first demo is a polished intro screen, you built the wrong thing first. Show the hardest part working.'
   },
   {
     num: '04',
@@ -69,15 +66,15 @@ const phases = [
     color: 'terracotta',
     pitch: 'Treat the launch as a rollout project, not a file transfer.',
     activities: [
-      'LMS or host deployment and smoke test',
-      'Train-the-trainer where people facilitate, SME briefings where they don\'t',
-      'Communications plan with managers, so people know why this exists and when they\'re expected to finish it',
-      'Support channel for the first 30 days so early friction gets fixed fast'
+      'LMS deployment and smoke test',
+      'Train-the-trainer or SME briefings, whichever fits',
+      'Manager comms so people know why this exists and when it\'s due',
+      'Support channel for the first 30 days'
     ],
     outputs: [
-      'Deployed experience with access pathways verified',
-      'Manager toolkit (email copy, talking points, completion tracking)',
-      'Clear escalation path for issues in the first 30 days'
+      'Deployed experience, access verified',
+      'Manager toolkit (email copy, talking points, tracking)',
+      'Escalation path for the first 30 days'
     ],
     heuristic: 'Managers are the single biggest variable in whether training sticks. Build for them, too.'
   },
@@ -86,20 +83,19 @@ const phases = [
     short: 'Measure',
     title: 'Evaluation',
     color: 'avocado',
-    pitch: 'Prove the work landed by measuring against the metrics agreed in Discovery, not what\'s easy to count.',
+    pitch: 'Measure against the metrics agreed in Discovery, not what\'s easy to count.',
     activities: [
-      'Level 1, reaction: surveys, kept short and pointed',
-      'Level 2, learning: xAPI statements from interactions, scenario outcomes, and assessments',
-      'Level 3, behavior: change measured in the operational system (help desk tickets, error rates, cycle times)',
-      'Level 4, results: tied back to the sponsor\'s business metric'
+      'Level 1, reaction: short, pointed surveys',
+      'Level 2, learning: xAPI from interactions and assessments',
+      'Level 3, behavior: change in the operational system (tickets, error rates, cycle times)',
+      'Level 4, results: the sponsor\'s business metric'
     ],
     outputs: [
-      'xAPI statement schema and LRS pipeline (SCORM Cloud or client LRS)',
-      'Dashboards for L&D + business partners',
-      '30/60/90-day review of behavior-change data',
-      'Lessons-learned doc to feed the next project'
+      'xAPI schema and LRS pipeline',
+      'Dashboards for L&D and business partners',
+      '30/60/90-day review of behavior-change data'
     ],
-    heuristic: 'Kirkpatrick 4 is where the story lives. If you can\'t connect the training to a business outcome, the next project will be a harder sell.'
+    heuristic: 'If you can\'t connect the training to a business outcome, the next project is a harder sell.'
   }
 ];
 
@@ -136,7 +132,7 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
         A five-phase <span class="italic text-primary-600">methodology</span>, tuned for AI-assisted L&amp;D.
       </h1>
       <p class="mt-6 text-lg text-cocoa/75 leading-relaxed max-w-3xl">
-        Every project in the case studies uses the same framework. It borrows from ADDIE and Kirkpatrick and leans on Mager for objectives. What's new is the development phase: AI tooling makes hand-built interactions and client-grade data pipelines practical on a small-team budget.
+        Every case study uses the same framework, built on ADDIE and Kirkpatrick. What's new is the build phase: AI tooling makes hand-built interactions and real data pipelines practical on a small-team budget.
       </p>
 
       <div class="mt-10 flex flex-wrap gap-2">
@@ -159,10 +155,10 @@ const colorMap: Record<string, { bg: string; border: string; num: string; tag: s
     <div class="max-w-3xl mx-auto px-6">
       <div class="rounded-3xl border border-cocoa/15 bg-paper p-7 sm:p-9 retro-sheen">
         <h2 class="font-display font-semibold text-cocoa text-2xl mb-3">
-          Why the framework matters, especially now
+          Why the framework matters now
         </h2>
         <p class="text-cocoa/75 leading-relaxed">
-          AI tooling has made it easy to produce <em>something</em> that looks like training. The constraint has moved. The hard part isn't generating content anymore. It's deciding what to build, how to measure whether it worked, and whether training is even the right fix. This framework is where those decisions get made on purpose.
+          AI makes it easy to produce something that looks like training. The hard part is deciding what to build, how to measure it, and whether training is even the right fix. This framework is where those decisions get made on purpose.
         </p>
       </div>
     </div>
