@@ -15,7 +15,10 @@ export const prerender = false;
  *   CLAUDE_MODEL       (optional, defaults to claude-opus-4-8)
  */
 
-const MODEL = import.meta.env.CLAUDE_MODEL || 'claude-opus-4-8';
+// Read at request time from the serverless runtime env. import.meta.env is
+// baked at build time and misses vars added in the Vercel dashboard.
+const env = (key: string): string | undefined =>
+  (typeof process !== 'undefined' ? process.env?.[key] : undefined) ?? (import.meta.env as any)[key];
 const MAX_TOKENS_CAP = 1500;
 const MAX_MESSAGES = 40;
 const MAX_CHARS_PER_MESSAGE = 8000;
@@ -59,11 +62,11 @@ const json = (body: unknown, status = 200) =>
 // Health check: lets the client know whether live AI is configured without
 // spending tokens.
 export const GET: APIRoute = () => {
-  return json({ live: Boolean(import.meta.env.ANTHROPIC_API_KEY) });
+  return json({ live: Boolean(env('ANTHROPIC_API_KEY')) });
 };
 
 export const POST: APIRoute = async ({ request, url, clientAddress }) => {
-  const apiKey = import.meta.env.ANTHROPIC_API_KEY;
+  const apiKey = env('ANTHROPIC_API_KEY');
   if (!apiKey) return json({ error: 'not_configured' }, 503);
   if (!sameOrigin(request, url)) return json({ error: 'forbidden' }, 403);
 
@@ -104,7 +107,7 @@ export const POST: APIRoute = async ({ request, url, clientAddress }) => {
   const client = new Anthropic({ apiKey });
   try {
     const response = await client.messages.create({
-      model: MODEL,
+      model: env('CLAUDE_MODEL') || 'claude-opus-4-8',
       max_tokens: Math.min(Number(max_tokens) || 1024, MAX_TOKENS_CAP),
       ...(system ? { system } : {}),
       messages,
